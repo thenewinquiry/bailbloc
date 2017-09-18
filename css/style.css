@@ -1,0 +1,122 @@
+@font-face {
+    font-family: Neutra2Display-Tilting;
+    src: url("../fonts/Neutra2Display-Tilting.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Neutra2Display-Light;
+    src: url("../fonts/Neutra2Display-Light.otf") format("opentype");
+}
+
+@font-face {
+    font-family: GothamHTF-Medium;
+    src: url("../fonts/GothamHTF-Medium.otf") format("opentype");
+}
+
+.bb-nav-container {
+  max-width:570px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  color:#aaa;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
+.navbar a {
+    font-family: Neutra2Display-Tilting;
+    color:#000 !important;
+    font-size:1.6em;
+}
+
+.row {
+  margin:0;
+}
+
+.bb-logo {
+  margin-top: 58px;
+  margin-bottom:20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-image: url(../images/logo.png);
+    height: 53px;
+    display: block;
+}
+
+@media screen and (max-width: 575px)  
+{
+    .bb-logo {
+      margin-top:0px;
+    }
+}
+
+#content {
+  margin-left:100px;
+  margin-right:100px;
+}
+
+h1 {
+  font-family: Neutra2Display-Tilting;
+  font-size:2em;
+}
+
+h2 {
+  font-family: Neutra2Display-Light;
+  font-size: 2.5em;
+  margin-top:36px;
+  margin-bottom:36px;
+}
+
+p {
+  font-family: GothamHTF-Medium;
+}
+
+a {
+  color: #b2db2e;
+}
+
+a:hover {
+  color:#b2db2e;
+  /*text-decoration: none;*/
+}
+
+.os-text {
+  font-family: Neutra2Display-Tilting;
+}
+
+.inner {
+  background-color:#b2db2e;
+  height:200px;
+  /*margin-right:20px;*/
+}
+
+.row  .row {
+    margin: 0px -15px;
+}
+
+.bb-hr {
+    display:block;
+    border:0px;
+    height:10px;
+    width:100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: 16px;
+}
+
+.bl4 {
+  background-image:url(../images/dots-4bl.png);
+}
+
+.gr4 {
+  background-image:url(../images/dots-4gr.png);
+  margin-top:48px;
+}
+
+.bump-120 {
+  margin-bottom: 120px;
+}
