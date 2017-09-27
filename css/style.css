@@ -14,7 +14,11 @@
 }
 
 .bb-nav-container {
-  max-width:570px;
+  max-width: 100% !important;
+}
+
+.nav-link {
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -24,6 +28,7 @@
 
 .navbar .navbar-collapse {
   text-align: center;
+
 }
 
 .navbar a {

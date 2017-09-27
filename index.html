@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light">
+    <nav class="navbar navbar-expand-md navbar-light">
         <div class="container bb-nav-container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar10">
                 <span class="navbar-toggler-icon"></span>
@@ -24,15 +24,13 @@
         </div>
     </nav>
     <row class="bb-logo">
-        <!-- <div class=".col-md-3">
-      </div>
-      <div class=".col-md-6 bb-logo">
-
-      </div>
-      <div class=".col-md-3">
-      </div> -->
+      
     </row>
-    <nav class="navbar navbar-expand-sm navbar-light">
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+    <nav class="navbar navbar-expand-md navbar-light">
         <div class="container bb-nav-container">
             <div class="navbar-collapse collapse" id="navbar10">
                 <ul class="navbar-nav nav-fill w-100">
@@ -48,10 +46,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#idea">Idea</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#partners">Partners</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    </div>
+    <div class="col-1"></div>
+    </div>
     <!-- <div id="content"> -->
     <div style="margin-bottom:40px;">
     </div>
@@ -109,7 +113,7 @@
             <p>Specifically, Bail Bloc runs mining software for a cryptocurrency called Monero, which has strong privacy features and requires less computational resources than competing currencies like BitCoin and Ethereum.</p>
             <p>With 5,000 active participants running Bail Bloc in the background of their computers for 8 hours per day, we project to generate $10,400 every 30 days.</p>
             <div class="bump-80"></div>
-            <h1> <a name="bailbloc"> THE PLAN </a> </h1>
+            <h1> <a name="plan"> THE PLAN </a> </h1>
             <div class="bb-hr bl4"></div>
             <div class="row">
                 <div class="col-sm-12">
@@ -117,7 +121,7 @@
                 </div>
             </div>
             <div class="bump-80"></div>
-            <h1> <a name="bailbloc"> OUR PARTNERS </a> </h1>
+            <h1> <a name="partners"> OUR PARTNERS </a> </h1>
             <div class="bb-hr bl4"></div>
             <div class="row">
                 <div class="col-md-3">
@@ -134,7 +138,7 @@
             <h1> <a name="bailbloc"> TEAM </a> </h1>
             <div class="bb-hr bl4"></div>
             <script>
-            // lol ive always wanted to do this
+
             var names = ["Grayson Earle", "JB Rubinovitz", "Maya Binyam", "Francis Tseng", "Sam Lavigne", "Rachel Rosenfelt"];
 
             function shuffle(a) {
@@ -146,7 +150,7 @@
                     a[j] = x;
                 }
             }
-            shuffle(names);
+            // shuffle(names);
             for(var i = 0; i < names.length-1; i++) {
                 document.write(names[i] + ", ");
             }
