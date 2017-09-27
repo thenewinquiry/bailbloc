@@ -73,6 +73,7 @@ h2 {
 
 p {
   font-family: GothamHTF-Medium;
+  margin-bottom:24px;
 }
 
 a {
@@ -117,6 +118,20 @@ a:hover {
   margin-top:48px;
 }
 
+.bump-40 {
+  margin-bottom: 40px;
+}
+
+.bump-80 {
+  margin-bottom: 80px;
+}
+
 .bump-120 {
   margin-bottom: 120px;
+}
+
+.partner-image {
+  opacity:.3;
+  max-height:50px;
+  /*max-width:100px;*/
 }
