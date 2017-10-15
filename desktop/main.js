@@ -38,11 +38,11 @@ let defaultSettings = {
 };
 
 if (platform === 'darwin') {
-  activeTrayImage = path.join(__dirname, 'assets', 'icon.png');
-  passiveTrayImage = path.join(__dirname, 'assets', 'fade_icon.png');
+  activeTrayImage = path.join(__dirname, 'assets', 'macos-icon.png');
+  passiveTrayImage = path.join(__dirname, 'assets', 'macos-fade_icon.png');
 } else if (platform === 'win32') {
-  activeTrayImage = path.join(__dirname, 'assets', 'icon.png');
-  passiveTrayImage = path.join(__dirname, 'assets', 'fade_icon.png');
+  activeTrayImage = path.join(__dirname, 'assets', 'win-icon.png');
+  passiveTrayImage = path.join(__dirname, 'assets', 'win-fade_icon.png');
 }
 
 function toggleMiner(e) {
