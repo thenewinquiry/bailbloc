@@ -1,19 +1,49 @@
 <html>
+
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>Bail Bloc Settings</title>
-  <link rel="stylesheet" href="style.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Bail Bloc Settings</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div id="container">
+      <center>
+            <img src="assets/pages/logo.png" width="50%">
 
-  <h1>Bail Bloc</h1>
-  <p>Version: <span id="version"></span>
-  <p>UUID: <span id="uuid"></span>
+            <h1>BAIL BLOC</h1>
+              version <span id="version"></span>
+              
+          </center>
+              
+        
+        
+        <p>
+            <a href="about.html">Visit Bail Bloc website.</a>
+        </p>
+        <p class="uuid">UUID: <span id="uuid"></span>
+            <div class="partners-holder">
+                <div class="partners">
+                    <img src="assets/pages/tni.png">
+                    <img src="assets/pages/bff.png">
+                    <img src="assets/pages/columbia.png">
+                </div>
+            </div>
+    </div>
+    <script>
+    const { remote } = require('electron');
+    const $ = require('./jquery.min.js');
+    const shell = require('electron').shell;
 
-  <script>
-    const {remote} = require('electron');
     document.querySelector('#version').textContent = remote.getCurrentWindow().version;
     document.querySelector('#uuid').textContent = remote.getCurrentWindow().uuid;
-  </script>
+
+    // assuming $ is jQuery
+    $(document).on('click', 'a[href^="http"]', function(event) {
+        event.preventDefault();
+        shell.openExternal(this.href);
+    });
+    </script>
 </body>
+
 </html>

@@ -38,8 +38,8 @@ let defaultSettings = {
 };
 
 if (platform === 'darwin') {
-  activeTrayImage = path.join(__dirname, 'assets', 'macos-icon.png');
-  passiveTrayImage = path.join(__dirname, 'assets', 'macos-fade_icon.png');
+  activeTrayImage = path.join(__dirname, 'assets', 'mac-icon.png');
+  passiveTrayImage = path.join(__dirname, 'assets', 'mac-fade_icon.png');
 } else if (platform === 'win32') {
   activeTrayImage = path.join(__dirname, 'assets', 'win-icon.png');
   passiveTrayImage = path.join(__dirname, 'assets', 'win-fade_icon.png');
@@ -206,7 +206,13 @@ app.on('ready', () => {
     {
       label: 'About',
       click() {
-        let aboutWindow = makeWindow('about.html');
+        let aboutWindow = makeWindow('about.html', {
+          width: 580,
+          height: 400,
+          resizable: false,
+          minimizable: false,
+          maximizable: false
+        });
         aboutWindow.version = app.getVersion();
         aboutWindow.uuid = mySettings.uuid;
       }
