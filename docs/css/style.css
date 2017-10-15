@@ -18,6 +18,10 @@ a:hover {
   color: #fff;
 }
 
+a.no-hover:hover {
+  background: none;
+}
+
 .container {
   max-width: 650px;
   margin: auto;

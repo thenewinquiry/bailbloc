@@ -20,7 +20,7 @@
 
       <div class="header-col">
         <h1>
-          <a href="#">Install the App</a>
+          <a href="https://github.com/thenewinquiry/bailbloc/releases/latest" id="install-the-app">Install the App</a>
           <br> Bail Someone Out of Jail
         </h1>
 
@@ -31,8 +31,8 @@
     </header>
 
     <div class="download-area">
-      <p><a href="#" class="big-button">Download Bail Bloc for Mac</a></p>
-      <p><a class="alt-link" href="#">Other platforms</a></p>
+      <p><a href="https://github.com/thenewinquiry/bailbloc/releases/latest" id="download-button" class="big-button">Download Bail Bloc</a></p>
+      <p><a class="alt-link" id="other-platforms" href="https://github.com/thenewinquiry/bailbloc/releases/latest">Other platforms</a></p>
     </div>
 
 
@@ -42,15 +42,13 @@
         Bail Bloc is a computer program that bails people out of jail.
       </p>
 
-      <!-- <p>Bail effects the poor far more than the rich, and is yet another example of how our criminal justice system punishes poverty.</p> -->
+      <p>Bail Bloc uses a small portion of your computer's processing power to mine <a href="https://getmonero.org/">Monero</a>, a relatively new cryptocurrency that has strong privacy features and is much easier and faster to mine than BitCoin or Ethereum.</p>
 
-      <p>Bail Bloc uses a small portion of your computer's processing power to mine Monero, a relatively new cryptocurrency that has strong privacy features and is much easier and faster to mine than BitCoin or Ethereum.</p>
-
-      <p>All earnings go into a single wallet controlled by the Bronx Freedom Fund, the largest bail fund in the US. At the end of every month, the earned Monero are exchanged for US dollars and contributed directly to the bail fund.</p>
+      <p>All earnings go into a single wallet controlled by the <a href="http://www.thebronxfreedomfund.org/">Bronx Freedom Fund</a>, a nonprofit revolving bail fund based in the South Bronx. At the end of every month, the earned Monero are exchanged for US dollars and contributed directly to the bail fund.</p>
 
       <p>Most users can expect to generate around $3 to $5 per month. Individually it isn't much, but it adds up quickly. And, because bail funds roll over, even a small contribution can have a lasting effect.</p>
 
-      <p>The code is fully open source, and we welcome all contributions.</p>
+      <p>The code is <a href="https://github.com/thenewinquiry/bailbloc">open source</a>, and we welcome all contributions.</p>
 
 
 
@@ -59,16 +57,18 @@
       <p>Bail Bloc is by <span id="credits">Grayson Earle, JB Rubinovitz, Maya Binyam, Francis Tseng, Sam Lavigne, Rachel Rosenfelt.</span></p>
 
       <div class="partners-holder">
-        <h2>Partners</h2>
+        <h3>Partners</h3>
         <div class="partners">
-          <img src="images/tni.png">
-          <img src="images/bff.png">
-          <img src="images/columbia.png">
+          <a class="no-hover" href="https://thenewinquiry.com/"><img src="images/tni.png"></a>
+          <a class="no-hover" href="http://www.thebronxfreedomfund.org/"><img src="images/bff.png"></a>
+          <a class="no-hover" href="https://journalism.columbia.edu/"><img src="images/columbia.png"></a>
         </div>
       </div>
 
     </div>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
 
     <script>
       var names = ["Grayson Earle", "JB Rubinovitz", "Maya Binyam", "Francis Tseng", "Sam Lavigne", "Rachel Rosenfelt"];
@@ -88,7 +88,7 @@
 
       names = shuffle(names);
 
-      document.querySelector('#credits').textContent = names.join(', ');
+      $('#credits').text(names.join(', '));
     </script>
 
 </body>
