@@ -207,8 +207,8 @@ app.on('ready', () => {
       label: 'About',
       click() {
         let aboutWindow = makeWindow('about.html', {
-          width: 580,
-          height: 400,
+          width: 300,
+          height: 270,
           resizable: false,
           minimizable: false,
           maximizable: false

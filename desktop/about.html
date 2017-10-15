@@ -4,31 +4,27 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Bail Bloc Settings</title>
     <link rel="stylesheet" href="style.css">
+    <script src="social.js"></script>
 </head>
 
 <body>
     <div id="container">
-      <center>
+        <center>
             <img src="assets/pages/logo.png" width="50%">
-
             <h1>BAIL BLOC</h1>
-              version <span id="version"></span>
-              
-          </center>
-              
-        
-        
+            <p class="greytext">version <span id="version"></span></p>
+            
+        </center>
         <p>
-            <a href="about.html">Visit Bail Bloc website.</a>
+            Bail Bloc was created by <a href="//thenewinquiry.com/">The New Inquiry.</a>
         </p>
-        <p class="uuid">UUID: <span id="uuid"></span>
-            <div class="partners-holder">
-                <div class="partners">
-                    <img src="assets/pages/tni.png">
-                    <img src="assets/pages/bff.png">
-                    <img src="assets/pages/columbia.png">
-                </div>
-            </div>
+        <p>
+            Please <a href="https://www.facebook.com/dialog/feed?app_id=140586622674265&link=www.bailbloc.com&name=BAIL%20BLOC&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html">share on Facebook</a> and
+            <a href="https://twitter.com/intent/tweet?text=Bail people out of jail with a computer program %23BAILBLOC&url=http://www.bailbloc.com">Twitter.</a>
+        </p>
+        <p>
+                <a href="//bailbloc.com">www.bailbloc.com</a>
+            </p>
     </div>
     <script>
     const { remote } = require('electron');
@@ -36,7 +32,7 @@
     const shell = require('electron').shell;
 
     document.querySelector('#version').textContent = remote.getCurrentWindow().version;
-    document.querySelector('#uuid').textContent = remote.getCurrentWindow().uuid;
+    // document.querySelector('#uuid').textContent = remote.getCurrentWindow().uuid;
 
     // assuming $ is jQuery
     $(document).on('click', 'a[href^="http"]', function(event) {

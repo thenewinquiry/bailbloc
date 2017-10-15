@@ -5,6 +5,7 @@
 a {
     color: red;
     text-decoration: none;
+
 }
 
 a:hover {
@@ -17,9 +18,17 @@ body {
     padding: 20px;
     background-color: #fff;
     color: #333;
-    font: 16px 'Lato', sans-serif;
+    font: 13px 'Lato', sans-serif;
 }
 
+p {
+	text-align: center;
+}
+
+.greytext {
+	margin-top:0;
+	color:#aaa;
+}
 #container {
 	height:100%;
 }
@@ -35,7 +44,6 @@ body {
 }
 #left {
   flex: 1;
-  
   background-image: url(assets/pages/logo.png);
   background-size:contain;
   background-repeat: no-repeat;
@@ -67,5 +75,5 @@ h1 {
 }
 
 .uuid {
-	display:none;
+	/*display:none;*/
 }
