@@ -18,6 +18,10 @@ a:hover {
   color: #fff;
 }
 
+a.no-hover:hover {
+  background: none;
+}
+
 .container {
   max-width: 650px;
   margin: auto;
@@ -51,8 +55,6 @@ header {
 }
 
 #money-raised-holder {
-  /* background-color: #000; */
-  /* color: #fff; */
   padding: 5px 10px;
   text-transform: uppercase;
   font-size: 17px;
@@ -65,12 +67,6 @@ header {
   font-size: 24px;
   font-weight: bold;
 }
-
-/* #money-raised::before { */
-/*   content: '\2192'; */
-/*   margin-right: 10px; */
-/* } */
-
 
 .download-area {
   text-align: center;
