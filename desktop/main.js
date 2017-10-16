@@ -9,6 +9,7 @@ const log = require('electron-log');
 const isCharging = require('is-charging');
 const batteryLevel = require('battery-level');
 const uuidv4 = require('uuid/v4');
+const Positioner = require('electron-positioner');
 const Miner = require('./miner.js');
 
 const UPDATE_CHECK = 12 * 60 * 60 * 1000;
@@ -34,7 +35,8 @@ let defaultSettings = {
   maxUsage: 25,
   autostart: true,
   pauseOnLowPower: true,
-  uuid: undefined
+  uuid: undefined,
+  showWelcome: true
 };
 
 if (platform === 'darwin') {
@@ -248,7 +250,22 @@ app.on('ready', () => {
   tray.setContextMenu(contextMenu);
 
   mySettings = getSettings();
+
   app.setLoginItemSettings({openAtLogin: mySettings.autostart});
+
+  if (mySettings.showWelcome === true) {
+    let welcomeWindow = makeWindow('welcome.html', {
+      alwaysOnTop: true,
+      frame: false,
+      transparent: true,
+      width: 400,
+      height: 300
+    });
+    let positioner = new Positioner(welcomeWindow);
+    positioner.move('trayCenter', tray.getBounds());
+    welcomeWindow.trayBounds = tray.getBounds();
+    updateSettings({showWelcome: false});
+  }
 
   checkUpdates();
 

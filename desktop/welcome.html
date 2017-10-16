@@ -1,0 +1,112 @@
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <title>Bail Bloc</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+     :root {
+      --bg: rgba(230, 230, 230, .9);
+      --fg: #333;
+      --r: -15px;
+    }
+
+    body {
+      background: transparent;
+    }
+
+    .arrow-box {
+      position: relative;
+      background: var(--bg);
+      color: var(--fg);
+      padding: 3px;
+      border-radius: 10px;
+      margin: 5px;
+      transition: 1s all;
+      opacity: 0;
+    }
+
+    .arrow-box:after {
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-width: calc(-1*var(--r));
+      border-color: rgba(136, 183, 213, 0);
+    }
+
+    .arrow-box.top:after {
+      bottom: 100%;
+      left: 50%;
+      border-bottom-color: var(--bg);
+      margin-left: var(--r);
+    }
+
+    .arrow-box.right:after {
+      left: 100%;
+      top: 50%;
+      border-left-color: var(--bg);
+      margin-top: var(--r);
+    }
+
+    .arrow-box.bottom:after {
+      top: 100%;
+      left: 50%;
+      border-top-color: var(--bg);
+      margin-left: var(--r);
+    }
+
+    .arrow-box.left:after {
+      right: 100%;
+      top: 50%;
+      border-right-color: var(--bg);
+      margin-top: var(--r);
+    }
+
+    .visible {
+      opacity: 1;
+    }
+
+    button {
+      margin-left: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="welcome-container" class="arrow-box">
+    <p>Bail Bloc is now installed and running. <button onClick="window.close();">OK</button>
+    </p>
+  </div>
+
+  <script>
+    const electron = require('electron')
+    const {remote} = require('electron');
+    const r = 0.8;
+
+    let trayBounds = remote.getCurrentWindow().trayBounds;
+    let screenSize = electron.screen.getPrimaryDisplay().workAreaSize;
+
+    let trayOrientation = 'right';
+
+    if (trayBounds.x < screenSize.width * (1 - r)) {
+      trayOrientation = 'left';
+    } else if (trayBounds.y < screenSize.height * (1 - r)) {
+      trayOrientation = 'top';
+    } else if (trayBounds.y > screenSize.height * r) {
+      trayOrientation = 'bottom';
+    }
+
+    document.querySelector('#welcome-container').classList.add(trayOrientation);
+
+    setTimeout(function() {
+      document.querySelector('#welcome-container').classList.add('visible');
+    }, 1000);
+  </script>
+</body>
+
+</html>
