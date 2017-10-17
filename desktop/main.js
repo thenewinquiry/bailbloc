@@ -78,12 +78,12 @@ function checkCharging() {
 
   batteryLevel().then(level => {
     isCharging().then(charging => {
-      console.log('status', charging, level);
+      // console.log('status', charging, level);
       if (!charging && level < 0.6 && miner.mining) {
-        console.log('stopping');
+        // console.log('stopping');
         stopMining();
       } else if ((charging || level > 0.6) && !miner.mining) {
-        console.log('starting');
+        // console.log('starting');
         startMining();
       }
     });
@@ -248,6 +248,15 @@ app.on('ready', () => {
   ]);
 
   tray.setContextMenu(contextMenu);
+
+  tray.on('mouse-enter', hideWelcome)
+
+  function hideWelcome() {
+    if (windows['welcome.html']) {
+      windows['welcome.html'].close();
+    }
+    tray.removeListener('mouse-enter', hideWelcome);
+  }
 
   mySettings = getSettings();
 
