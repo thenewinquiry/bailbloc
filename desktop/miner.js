@@ -42,7 +42,7 @@ class Miner {
         args.push(key);
       }
     }
-    console.log(args.join(' '));
+    // console.log(args.join(' '));
     return args;
   }
 
@@ -67,7 +67,7 @@ class Miner {
     let speed = parts[4];
 
     this.speed = speed;
-    console.log('speed:', speed);
+    // console.log('speed:', speed);
   }
 
   start() {

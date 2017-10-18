@@ -9,6 +9,7 @@ const log = require('electron-log');
 const isCharging = require('is-charging');
 const batteryLevel = require('battery-level');
 const uuidv4 = require('uuid/v4');
+const Positioner = require('electron-positioner');
 const Miner = require('./miner.js');
 
 const UPDATE_CHECK = 12 * 60 * 60 * 1000;
@@ -34,7 +35,8 @@ let defaultSettings = {
   maxUsage: 25,
   autostart: true,
   pauseOnLowPower: true,
-  uuid: undefined
+  uuid: undefined,
+  showWelcome: true
 };
 
 if (platform === 'darwin') {
@@ -76,12 +78,12 @@ function checkCharging() {
 
   batteryLevel().then(level => {
     isCharging().then(charging => {
-      console.log('status', charging, level);
+      // console.log('status', charging, level);
       if (!charging && level < 0.6 && miner.mining) {
-        console.log('stopping');
+        // console.log('stopping');
         stopMining();
       } else if ((charging || level > 0.6) && !miner.mining) {
-        console.log('starting');
+        // console.log('starting');
         startMining();
       }
     });
@@ -162,15 +164,20 @@ function makeWindow(filename, extraParams) {
 }
 
 autoUpdater.on('checking-for-update', () => {
-  log.warn('Checking for update...');
+  // log.warn('Checking for update...');
 });
 
 autoUpdater.on('update-available', (ev, info) => {
-  log.warn('Update available.');
+  // log.warn('Update available.');
+  if (!windows['update.html']) {
+    let updateWin = makeWindow('update.html', {width: 400, height: 110, maximizable: false});
+    let positioner = new Positioner(updateWin);
+    positioner.move('trayCenter', tray.getBounds());
+  }
 });
 
 autoUpdater.on('update-not-available', (ev, info) => {
-  log.warn('Update not available.');
+  // log.warn('Update not available.');
 });
 
 autoUpdater.on('error', (ev, err) => {
@@ -179,12 +186,29 @@ autoUpdater.on('error', (ev, err) => {
 });
 
 autoUpdater.on('download-progress', (ev, progressObj) => {
-  log.warn('Download progress...');
+  // log.warn('Download progress...');
+  if (windows['update.html']) {
+    windows['update.html'].webContents.send('progress', progressObj);
+  }
 });
 
 autoUpdater.on('update-downloaded', (ev, info) => {
   autoUpdater.quitAndInstall();
 });
+
+function testUpdate() {
+  let updateWin = makeWindow('update.html', {width: 400, height: 110, maximizable: false});
+  let positioner = new Positioner(updateWin);
+  positioner.move('trayCenter', tray.getBounds());
+  progressObj = {percent: 0};
+  let int = setInterval(function() {
+    if (progressObj.percent >= 100) clearInterval(int);
+    if (windows['update.html']) {
+      windows['update.html'].webContents.send('progress', progressObj);
+    }
+    progressObj.percent += 10;
+  }, 300);
+}
 
 app.on('ready', () => {
   tray = new Tray(activeTrayImage);
@@ -247,8 +271,32 @@ app.on('ready', () => {
 
   tray.setContextMenu(contextMenu);
 
+  tray.on('mouse-enter', hideWelcome);
+
+  function hideWelcome() {
+    if (windows['welcome.html']) {
+      windows['welcome.html'].close();
+    }
+    tray.removeListener('mouse-enter', hideWelcome);
+  }
+
   mySettings = getSettings();
+
   app.setLoginItemSettings({openAtLogin: mySettings.autostart});
+
+  if (mySettings.showWelcome === true) {
+    let welcomeWindow = makeWindow('welcome.html', {
+      alwaysOnTop: true,
+      frame: false,
+      transparent: true,
+      width: 400,
+      height: 300
+    });
+    let positioner = new Positioner(welcomeWindow);
+    positioner.move('trayCenter', tray.getBounds());
+    welcomeWindow.trayBounds = tray.getBounds();
+    updateSettings({showWelcome: false});
+  }
 
   checkUpdates();
 
@@ -260,6 +308,7 @@ app.on('ready', () => {
     '--pass': mySettings.uuid + ':bailbloc@thenewinquiry.com'
   });
   miner.start();
+  // testUpdate();
 });
 
 app.on('quit', () => {
