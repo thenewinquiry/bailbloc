@@ -245,7 +245,7 @@ app.on('ready', () => {
       label: 'Settings',
       click() {
         let settingsWin = makeWindow('settings.html', {
-          width: 400,
+          width: 204,
           height: 200,
           resizable: false,
           minimizable: false,
