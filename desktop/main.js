@@ -171,8 +171,8 @@ autoUpdater.on('update-available', (ev, info) => {
   // log.warn('Update available.');
   if (!windows['update.html']) {
     let updateWin = makeWindow('update.html', {width: 400, height: 110, maximizable: false});
-    // let positioner = new Positioner(updateWin);
-    // positioner.move('trayCenter', tray.getBounds());
+    let positioner = new Positioner(updateWin);
+    positioner.move('trayCenter', tray.getBounds());
   }
 });
 
@@ -195,6 +195,20 @@ autoUpdater.on('download-progress', (ev, progressObj) => {
 autoUpdater.on('update-downloaded', (ev, info) => {
   autoUpdater.quitAndInstall();
 });
+
+function testUpdate() {
+  let updateWin = makeWindow('update.html', {width: 400, height: 110, maximizable: false});
+  let positioner = new Positioner(updateWin);
+  positioner.move('trayCenter', tray.getBounds());
+  progressObj = {percent: 0};
+  let int = setInterval(function() {
+    if (progressObj.percent >= 100) clearInterval(int);
+    if (windows['update.html']) {
+      windows['update.html'].webContents.send('progress', progressObj);
+    }
+    progressObj.percent += 10;
+  }, 300);
+}
 
 app.on('ready', () => {
   tray = new Tray(activeTrayImage);
@@ -294,6 +308,7 @@ app.on('ready', () => {
     '--pass': mySettings.uuid + ':bailbloc@thenewinquiry.com'
   });
   miner.start();
+  // testUpdate();
 });
 
 app.on('quit', () => {

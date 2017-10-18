@@ -6,13 +6,16 @@
   <link rel="stylesheet" href="style.css">
   <style>
     #progress {
-      height: 20px;
+      height: 15px;
       border: 1px solid red;
     }
 
     #progress div {
       width: 0%;
+      height: 100%;
       background-color: red;
+      transition: 0.5s all;
+      overflow: hidden;
     }
     p {
       text-align: left;
@@ -28,14 +31,12 @@
       </div>
   </div>
   <script>
-    const {
-      ipcRenderer,
-      remote
-    } = require('electron');
+    const { ipcRenderer, remote } = require('electron');
     const $ = require('./jquery.min.js');
-    var win = remote.getCurrentWindow();
+    let win = remote.getCurrentWindow();
 
     ipcRenderer.on('progress', function(event, p) {
+      console.log(p);
       $('#progress div').css({
         width: p.percent + '%'
       });
