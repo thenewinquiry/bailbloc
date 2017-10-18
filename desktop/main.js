@@ -164,15 +164,20 @@ function makeWindow(filename, extraParams) {
 }
 
 autoUpdater.on('checking-for-update', () => {
-  log.warn('Checking for update...');
+  // log.warn('Checking for update...');
 });
 
 autoUpdater.on('update-available', (ev, info) => {
-  log.warn('Update available.');
+  // log.warn('Update available.');
+  if (!windows['update.html']) {
+    let updateWin = makeWindow('update.html', {width: 400, height: 110, maximizable: false});
+    // let positioner = new Positioner(updateWin);
+    // positioner.move('trayCenter', tray.getBounds());
+  }
 });
 
 autoUpdater.on('update-not-available', (ev, info) => {
-  log.warn('Update not available.');
+  // log.warn('Update not available.');
 });
 
 autoUpdater.on('error', (ev, err) => {
@@ -181,7 +186,10 @@ autoUpdater.on('error', (ev, err) => {
 });
 
 autoUpdater.on('download-progress', (ev, progressObj) => {
-  log.warn('Download progress...');
+  // log.warn('Download progress...');
+  if (windows['update.html']) {
+    windows['update.html'].webContents.send('progress', progressObj);
+  }
 });
 
 autoUpdater.on('update-downloaded', (ev, info) => {
@@ -249,7 +257,7 @@ app.on('ready', () => {
 
   tray.setContextMenu(contextMenu);
 
-  tray.on('mouse-enter', hideWelcome)
+  tray.on('mouse-enter', hideWelcome);
 
   function hideWelcome() {
     if (windows['welcome.html']) {
