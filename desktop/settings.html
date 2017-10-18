@@ -2,29 +2,35 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-  <title>Bail Bloc Settings</title>
+  <title>Settings</title>
   <link rel="stylesheet" href="style.css">
   
 </head>
 <body>
 
   <div id="app">
-    <h1>Settings</h1>
+    <h1>SETTINGS</h1>
     <form>
       <div class="form-element">
         <label for="max-usage">Max CPU usage:</label>
         <input v-model="maxUsage" @change="update"  id="max-usage" type="range" min="10" max="100" step="1">
-        <span>{{maxUsage}}%</span>
+        <span id="slider-percentage">{{maxUsage}}%</span>
       </div>
 
       <div class="form-element">
-        <input v-model="autostart" @change="update"  id="autostart" type="checkbox">
-        <label for="autostart">Start Bail Bloc on login</label>
+        <label for="autostart" class="control control-checkbox">
+          Start Bail Bloc on login
+          <input v-model="autostart" @change="update" id="autostart" type="checkbox">
+          <div class="control_indicator"></div>
+        </label>
       </div>
 
       <div class="form-element">
-        <input v-model="pauseOnLowPower" @change="update" id="should-pause" type="checkbox">
-        <label for="should-pause">Pause when on battery</label>
+        <label for="should-pause" class="control control-checkbox">
+          Pause when on battery
+          <input v-model="pauseOnLowPower" @change="update" id="should-pause" type="checkbox">
+          <div class="control_indicator"></div>
+        </label>
       </div>
       <button @click="close">Done</button>
     </form>
