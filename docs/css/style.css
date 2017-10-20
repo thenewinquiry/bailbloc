@@ -1,134 +1,193 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  font: 16px 'Lato', sans-serif;
-  margin: 40px 20px;
-  color: #333;
+    font: 16px 'Lato', sans-serif;
+    margin: 40px 20px;
+    color: #333;
 }
 
 a {
-  color: red;
-  text-decoration: none;
+    color: red;
+    text-decoration: none;
 }
 
 a:hover {
-  background-color: red;
-  color: #fff;
+    background-color: red;
+    color: #fff;
 }
 
 a.no-hover:hover {
-  background: none;
+    background: none;
 }
 
 .container {
-  max-width: 650px;
-  margin: auto;
+    max-width: 650px;
+    margin: auto;
 }
 
 header {
-  display: flex;
+    display: flex;
 }
 
-#logo img{
-  width: 100%;
-  display: block;
+#logo img {
+    width: 100%;
 }
 
 #logo:hover {
-  background: none;
+    background: none;
 }
 
 .header-col {
-  padding: 20px;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+    padding: 20px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
 
 .header-col h1 {
-  font-size: 32px;
-  flex: 1;
-  margin: 0;
-  text-transform: uppercase;
+    font-size: 32px;
+    flex: 1;
+    margin: 0;
+    text-transform: uppercase;
 }
 
 #money-raised-holder {
-  padding: 5px 10px;
-  text-transform: uppercase;
-  font-size: 17px;
-  display: inline-block;
-  border: 1px dashed red;
-  border-width: 1px 0;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-size: 17px;
+    display: inline-block;
+    border: 1px dashed red;
+    border-width: 1px 0;
 }
 
 #money-raised {
-  font-size: 24px;
-  font-weight: bold;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .download-area {
-  text-align: center;
-  text-transform: uppercase;
-  margin: 60px 0;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 60px 0;
 }
 
 .download-area a {
-  display: inline-block;
+    display: inline-block;
 }
 
 .download-area .alt-link {
-  font-size: .8em;
+    font-size: .8em;
 }
 
 .alt-link {
-  color: #000;
-  text-decoration: underline;
+    color: #000;
+    text-decoration: underline;
 }
 
 .alt-link:hover {
-  color: #fff;
-  background-color: #000;
+    color: #fff;
+    background-color: #000;
 }
 
 .big-button {
-  background-color: red;
-  color: #fff;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px 20px;
-  text-transform: uppercase;
+    background-color: red;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-transform: uppercase;
 }
 
-.main p, .about p {
-  font-size: 22px;
-  line-height: 1.4;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+.main p,
+.about p {
+    font-size: 22px;
+    line-height: 1.4;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
 }
 
 .about p {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 #money-raised {
-  /* border: 2px dashed red; */
+    /* border: 2px dashed red; */
 }
 
 .partners-holder {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .partners {
-  display: flex;
-  opacity: 0.8;
-  justify-content: space-between;
+    display: flex;
+    opacity: 0.8;
+    justify-content: space-between;
 }
 
 .partners img {
-  height: 40px;
+    height: 40px;
+}
+
+@media only screen and (min-width: 655px) {
+      .mobile {
+      display:none;
+    }
+}
+
+/* MOBILE */
+
+@media only screen and (max-width: 654px) {
+    header {
+    display: block;
+}
+
+.center-col {
+  text-align: center;
+}
+
+#logo img {
+  width: 80%;
+}
+
+    .partners {
+        display: block;
+        opacity: 0.8;
+        text-align: center;
+    }
+    .partners a {
+        display: block;
+        margin-bottom: 24px;
+    }
+    .partners img {
+        width: 100%;
+        height: auto;
+    }
+    .main p,
+    .about p {
+        /*font-size: 18px;*/
+    }
+
+    .header-col h1 {
+      text-align: center;
+    }
+
+    .download-area {
+      margin:20px 0px;
+    }
+
+    .desktop {
+      display:none;
+    }
+
+    #money-raised-holder {
+      text-align: center;
+    }
+    #money-raised-holder::after { 
+    content: " so far";
+}
 }
