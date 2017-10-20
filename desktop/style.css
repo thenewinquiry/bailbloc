@@ -86,11 +86,11 @@ h1 {
 }
 
 form {
-  margin-bottom:0;
+    margin-bottom: 0;
 }
 
 .form-element {
-  width:200px;
+    width: 200px;
 }
 
 input[type="range"] {
@@ -110,6 +110,7 @@ input[type="range"] {
 }
 
 
+
 /*
  * 1. Set to 0 height and width, and remove border for a slider without a thumb
  */
@@ -124,15 +125,6 @@ input[type="range"] {
     border: 1px solid #f00;
 }
 
-#slider-percentage {
-    position: relative;
-    left: -162px;
-    top: -4px;
-    pointer-events: none;
-    font-weight: bold;
-    color: #fff;
-}
-
 button {
     margin-top: 2px;
     border: 1px solid #ddd;
@@ -143,28 +135,29 @@ button {
 }
 
 button:hover {
-    background-color: #f00;  
+    background-color: #f00;
     border: 1px solid #f00;
-    color:#fff;
+    color: #fff;
 }
+
+
+
 
 
 .control {
+    font-family: arial;
     display: block;
     position: relative;
     padding-left: 25px;
-    margin-bottom: 5px;
-    padding-top: 5px;
+    margin-bottom: 6px;
+    padding-top: 3px;
     cursor: pointer;
-    /*font-size: 16px;*/
 }
-
-.control input {
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
-}
-
+    .control input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+    }
 .control_indicator {
     position: absolute;
     top: 2px;
@@ -174,52 +167,45 @@ button:hover {
     background: #e6e6e6;
     border: 0px solid #000000;
 }
-
 .control-radio .control_indicator {
     border-radius: undefined%;
 }
 
-.control:hover input~.control_indicator,
-.control input:focus~.control_indicator {
+.control:hover input ~ .control_indicator,
+.control input:focus ~ .control_indicator {
     background: #cccccc;
 }
 
-.control input:checked~.control_indicator {
-    background: #f00;
+.control input:checked ~ .control_indicator {
+    background: #ff0000;
 }
-
-.control:hover input:not([disabled]):checked~.control_indicator,
-.control input:checked:focus~.control_indicator {
+.control:hover input:not([disabled]):checked ~ .control_indicator,
+.control input:checked:focus ~ .control_indicator {
     background: #0e6647d;
 }
-
-.control input:disabled~.control_indicator {
+.control input:disabled ~ .control_indicator {
     background: #e6e6e6;
     opacity: 0.6;
     pointer-events: none;
 }
-
 .control_indicator:after {
     box-sizing: unset;
     content: '';
     position: absolute;
     display: none;
 }
-
-.control input:checked~.control_indicator:after {
+.control input:checked ~ .control_indicator:after {
     display: block;
 }
-
 .control-checkbox .control_indicator:after {
-    left: 0px;
-    top: 0px;
-    width: 0px;
-    height: 0px;
-    border: solid #FFFFFF;
-    border-width: 0 0px 0px 0;
+    left: 8px;
+    top: 4px;
+    width: 3px;
+    height: 8px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
-
-.control-checkbox input:disabled~.control_indicator:after {
+.control-checkbox input:disabled ~ .control_indicator:after {
     border-color: #7b7b7b;
 }

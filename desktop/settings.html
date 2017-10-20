@@ -12,9 +12,9 @@
     <h1>SETTINGS</h1>
     <form>
       <div class="form-element">
-        <label for="max-usage">Max CPU usage:</label>
+        <label for="max-usage">Max CPU usage: <span>{{maxUsage}}%</span></label>
         <input v-model="maxUsage" @change="update"  id="max-usage" type="range" min="10" max="100" step="1">
-        <span id="slider-percentage">{{maxUsage}}%</span>
+        
       </div>
 
       <div class="form-element">
@@ -35,6 +35,8 @@
       <button @click="close">Done</button>
     </form>
   </div>
+
+ 
 
   <script src="vue.min.js"></script>
   <script>
