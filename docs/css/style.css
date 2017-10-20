@@ -70,7 +70,8 @@ header {
 .download-area {
     text-align: center;
     text-transform: uppercase;
-    margin: 60px 0;
+    /*margin: 60px 0;*/
+    margin-top:60px;
 }
 
 .download-area a {
@@ -79,6 +80,17 @@ header {
 
 .download-area .alt-link {
     font-size: .8em;
+}
+
+.social-area {
+  width:50%;
+  margin-left:25%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.social-area img {
+  width:50px;
 }
 
 .alt-link {
