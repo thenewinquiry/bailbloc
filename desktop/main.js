@@ -187,28 +187,14 @@ autoUpdater.on('error', (ev, err) => {
 
 autoUpdater.on('download-progress', (ev, progressObj) => {
   // log.warn('Download progress...');
-  if (windows['update.html']) {
-    windows['update.html'].webContents.send('progress', progressObj);
-  }
+  // if (windows['update.html']) {
+    // windows['update.html'].webContents.send('progress', progressObj);
+  // }
 });
 
 autoUpdater.on('update-downloaded', (ev, info) => {
   autoUpdater.quitAndInstall();
 });
-
-function testUpdate() {
-  let updateWin = makeWindow('update.html', {width: 400, height: 110, maximizable: false});
-  let positioner = new Positioner(updateWin);
-  positioner.move('trayCenter', tray.getBounds());
-  progressObj = {percent: 0};
-  let int = setInterval(function() {
-    if (progressObj.percent >= 100) clearInterval(int);
-    if (windows['update.html']) {
-      windows['update.html'].webContents.send('progress', progressObj);
-    }
-    progressObj.percent += 10;
-  }, 300);
-}
 
 app.on('ready', () => {
   tray = new Tray(activeTrayImage);
@@ -284,7 +270,8 @@ app.on('ready', () => {
 
   app.setLoginItemSettings({openAtLogin: mySettings.autostart});
 
-  if (mySettings.showWelcome === true) {
+  // disabling windows welcome screen until we can fix the positioning
+  if (mySettings.showWelcome === true && platform === 'darwin') {
     let welcomeWindow = makeWindow('welcome.html', {
       alwaysOnTop: true,
       frame: false,
@@ -293,7 +280,7 @@ app.on('ready', () => {
       height: 300
     });
     let positioner = new Positioner(welcomeWindow);
-    positioner.move('trayCenter', tray.getBounds());
+    positioner.move(platform === 'darwin' ? 'trayCenter' : 'trayBottomCenter', tray.getBounds());
     welcomeWindow.trayBounds = tray.getBounds();
     updateSettings({showWelcome: false});
   }
@@ -308,7 +295,6 @@ app.on('ready', () => {
     '--pass': mySettings.uuid + ':bailbloc@thenewinquiry.com'
   });
   miner.start();
-  // testUpdate();
 });
 
 app.on('quit', () => {

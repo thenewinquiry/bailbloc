@@ -83,14 +83,14 @@ header {
 }
 
 .social-area {
-  width:50%;
-  margin-left:25%;
+  width: 18%;
+  margin: auto;
   display: flex;
   justify-content: space-evenly;
 }
 
 .social-area img {
-  width:50px;
+  width: 40px;
 }
 
 .alt-link {
