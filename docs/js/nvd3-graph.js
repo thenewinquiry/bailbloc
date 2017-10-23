@@ -1,4 +1,4 @@
-var walletAddress = "46J46yhRgQWYwvauFvwBzw1yWyKsut5JwZxYVfzeNHhM2ohdRfCj9SF2DRyLVNpb74JoSmkWDkKVY5aGUwU4kNAu64gwKa2";
+var walletAddress = "442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdySiMizGTJ56ScZUyugpSeV6hx19QohZTmjuWiM";
 
 var chartData, chart, exchangeRate;
 
@@ -23,9 +23,6 @@ var chartData, chart, exchangeRate;
 
 
         //chart.forceX([1507918048.569191*1000,1507947748.593314*1000])
-
-
-
 
 
         //TODO: Figure out a good way to do this automatically
@@ -54,7 +51,7 @@ function extractMiningData(stats){
         //do stuff to item
         // TODO: use this again
         // converts timestamp to js format, dollars to dollars
-        var usd = (item.stats.amtPaid * exchangeRate)/100000000000;
+        var usd = ((item.stats.amtPaid + item.stats.amtDue) * exchangeRate)/10e11;
         return [item.timestamp * 1000, +usd.toFixed(2)];
         //return [item.timestamp*1000, item.stats.totalHashes];
     });
