@@ -13,17 +13,15 @@ var chartData, chart, exchangeRate;
            // .average(function(d) { return d.mean/100; })
             .duration(300)
             //.clipVoronoi(false);
-        chart.dispatch.on('renderEnd', function() {
-            console.log('render complete: line graph with guide line');
-        });
+        // chart.dispatch.on('renderEnd', function() {
+        //     console.log('render complete: line graph with guide line');
+        // });
         chart.xAxis.tickFormat(function(d) {
             return d3.time.format('%m/%d/%y %H:%M')(new Date(d))
         });
         chart.yAxis.tickFormat(function(d){return  "$" + d3.format(",")(d)  });
 
-
         //chart.forceX([1507918048.569191*1000,1507947748.593314*1000])
-
 
         //TODO: Figure out a good way to do this automatically
         nv.utils.windowResize(chart.update);
@@ -64,7 +62,6 @@ function extractMiningData(stats){
 }
 
 function liftMiningData(graphData, numWorkers){
-  console.log(graphData);
   var newValues = graphData[0]
                   .values
                   .map(function(x){
@@ -79,13 +76,18 @@ function liftMiningData(graphData, numWorkers){
 
 }
 
+var $container = $('#chart1'),
+      width = $container.width(),
+      height = $container.height();
+
 function redrawGraph(stats, numWorkers){
     var graphData = extractMiningData(stats);
     var hypData = liftMiningData(graphData, numWorkers);
-    console.log(hypData);
-    console.log(numWorkers);
-    console.log(graphData);
     d3.select('#chart1 svg')
+        .attr("width", '100%')
+        .attr("height", '100%')
+        .attr('viewBox','0 0 '+width+' '+height)
+        .attr('preserveAspectRatio','xMinYMin')
         .datum(hypData)
         .call(chart);
 }
@@ -110,7 +112,6 @@ function pullWorkerNumber(stats){
         cache: false,
         success: function(workerStats) {
           var numWorkers = Object.keys(workerStats).length - 1;
-          console.log(numWorkers);
           redrawGraph(stats,numWorkers);
 
 
@@ -126,7 +127,6 @@ function getExchangeStats(){
       cache: false,
       success: function(exchangestats) {
 
-          console.log(exchangestats);
           exchangeRate = exchangestats.ticker.price;
 
 
