@@ -20,7 +20,7 @@ var chartData, chart, exchangeRate;
         // });
         chart.xAxis.tickFormat(function(d) {
             return d3.time.format('%m/%d/%y %H:%M')(new Date(d))
-        });
+        }).rotateLabels(-45);
         chart.yAxis.tickFormat(function(d){return  "$" + d3.format(",")(d)  });
 
         //chart.forceX([1507918048.569191*1000,1507947748.593314*1000])
