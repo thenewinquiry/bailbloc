@@ -56,15 +56,19 @@ header {
 #money-raised-holder {
     padding: 5px 10px;
     text-transform: uppercase;
-    font-size: 17px;
+    font-size: 15px;
     display: inline-block;
     border: 1px dashed red;
     border-width: 1px 0;
 }
 
-#money-raised {
-    font-size: 24px;
+#money-raised, #active-users {
+    font-size: 22px;
     font-weight: bold;
+}
+
+#active-users {
+  margin-left: 10px;
 }
 
 .download-area {
