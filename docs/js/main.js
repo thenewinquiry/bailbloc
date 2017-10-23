@@ -34,9 +34,9 @@
     var userAgent = navigator.userAgent;
 
     if (/Mac/.test(userAgent)) {
-      $('#download-button').text('Download Bail Bloc For Mac');
+      $('#download-button').text('Download The App For Mac');
     } else if (/Windows/.test(userAgent)) {
-      $('#download-button').text('Download Bail Bloc For Windows');
+      $('#download-button').text('Download The App For Windows');
     }
 
     $.getJSON(apiURL, function(release) {
@@ -60,5 +60,5 @@
   }
 
   getRelease();
-  getStats();
+  // getStats();
 })();
