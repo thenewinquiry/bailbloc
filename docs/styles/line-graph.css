@@ -1,0 +1,261 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  margin: 0 auto 4em auto;
+  tab-size: 2;
+  -webkit-text-size-adjust: none;
+}
+
+header {
+  color: #999;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 1.5em 0;
+}
+
+.navigation {
+  float: right;
+}
+
+.navigation a:not(.self) {
+  color: inherit;
+}
+
+.column {
+  max-width: 960px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+h1 {
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  margin: 0.1em 0;
+}
+
+h2 {
+  margin-top: 2em;
+}
+
+h1, h2 {
+  text-rendering: optimizeLegibility;
+}
+
+.avatar {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  border-radius: 4px;
+}
+
+.gist-readme {
+  line-height: 1.5em;
+  max-width: 720px;
+  max-height: 1000000vh;
+}
+
+blockquote {
+  max-width: 640px;
+}
+
+li {
+  max-width: 680px;
+}
+
+a:link {
+  color: #3182bd;
+  fill: #3182bd;
+}
+
+a:visited {
+  color: #756bb1;
+  fill: #756bb1;
+}
+
+a.self {
+  color: #000;
+}
+
+a.anchor {
+  color: #ccc;
+  left: -40px;
+  padding: 0 10px;
+  margin: 0 10px;
+  position: absolute;
+  font-weight: normal;
+}
+
+a:not(:hover) {
+  text-decoration: none;
+}
+
+.gist-id,
+pre,
+code,
+textarea {
+  font-family: "Menlo", monospace;
+  line-height: normal;
+}
+
+.gist-id {
+  line-height: 0;
+}
+
+textarea {
+  font-size: 100%;
+}
+
+pre {
+  border-left: solid 2px #ccc;
+  padding-left: 18px;
+  margin: 2em 0 2em -20px;
+  max-width: 960px;
+  overflow-x: auto;
+}
+
+.html .value,
+.javascript .string,
+.javascript .regexp {
+  color: #756bb1;
+}
+
+.html .tag,
+.css .tag,
+.javascript .keyword {
+  color: #3182bd;
+}
+
+aside,
+.comment {
+  color: #636363;
+}
+
+.html .doctype,
+.javascript .number {
+  color: #31a354;
+}
+
+.html .attribute,
+.css .attribute,
+.javascript .class,
+.javascript .special {
+  color: #e6550d;
+}
+
+h1,
+iframe {
+  width: 960px;
+}
+
+iframe {
+  border: solid 1px #eee;
+  border-bottom: solid 1px #ccc;
+}
+
+.gists {
+  max-width: 970px;
+}
+
+.gists .gist {
+  background-position: 50% 0%;
+  border: solid 1px #eee;
+  border-bottom: solid 1px #ccc;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  float: left;
+  line-height: normal;
+  margin: 0 10px 10px 0;
+  position: relative;
+  text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff;
+  -webkit-transition: ease 750ms background-position;
+  -moz-transition: ease 750ms background-position;
+  -ms-transition: ease 750ms background-position;
+  -o-transition: ease 750ms background-position;
+  transition: ease 750ms background-position;
+  width: 232px;
+  padding: 8px 10px;
+}
+
+.gists .gist--thumbnail {
+  height: 82px;
+  color: #000;
+}
+
+.gists .gist:hover,
+.gists .gist:focus {
+  background-color: #eee;
+  background-position: 50% 100%;
+  text-decoration: none;
+}
+
+.gists .gist-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 55px;
+}
+
+.gists .gist-author {
+  color: #777;
+  font-weight: 300;
+}
+
+.gists .gist:hover .gist-underline {
+  text-decoration: underline;
+}
+
+.loading {
+  clear: both;
+  color: #aaa;
+}
+
+.index-pop {
+  position: absolute;
+  right: 10px;
+  margin-top: 1em;
+  line-height: 1.5em;
+}
+
+.index-pop svg {
+  text-decoration: none !important;
+  margin-left: 0.3em;
+  position: relative;
+  top: 3px;
+}
+
+.gist-secret {
+  display: inline-block;
+  padding: 4px 5px;
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 10px;
+  color: #a1882b;
+  text-transform: uppercase;
+  vertical-align: middle;
+  background-color: #ffefc6;
+  border-radius: 3px;
+  margin-top: -4px;
+}
+
+.date {
+  font-size: 11px;
+}
+
+@media only screen and (max-width: 860px) {
+  .index-pop {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1060px) {
+  .avatar {
+    display: none;
+  }
+}
+
