@@ -23,7 +23,7 @@ a.no-hover:hover {
 }
 
 .container {
-    max-width: 750px;
+    max-width: 780px;
     margin: auto;
 }
 
@@ -56,7 +56,7 @@ header {
 #money-raised-holder {
     padding: 5px 10px;
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 18px;
     display: inline-block;
     border: 1px dashed red;
     border-width: 1px 0;
