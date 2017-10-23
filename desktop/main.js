@@ -270,7 +270,8 @@ app.on('ready', () => {
 
   app.setLoginItemSettings({openAtLogin: mySettings.autostart});
 
-  if (mySettings.showWelcome === true) {
+  // disabling windows welcome screen until we can fix the positioning
+  if (mySettings.showWelcome === true && platform === 'darwin') {
     let welcomeWindow = makeWindow('welcome.html', {
       alwaysOnTop: true,
       frame: false,
@@ -279,7 +280,7 @@ app.on('ready', () => {
       height: 300
     });
     let positioner = new Positioner(welcomeWindow);
-    positioner.move('trayCenter', tray.getBounds());
+    positioner.move(platform === 'darwin' ? 'trayCenter' : 'trayBottomCenter', tray.getBounds());
     welcomeWindow.trayBounds = tray.getBounds();
     updateSettings({showWelcome: false});
   }
