@@ -1,0 +1,71 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Software that raises money for bail funds.">
+    <meta name="author" content="The New Inquiry">
+    <title>Bail Bloc</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-col center-col">
+                <a id="logo" href="index.html"><img src="images/logo.png" alt="Bail Bloc"></a>
+            </div>
+            <div class="header-col">
+                <h1 class="desktop">
+          <a href="https://github.com/thenewinquiry/bailbloc/releases/latest" id="install-the-app">Install the App</a>
+          Bail Someone Out of Jail
+        </h1>
+                <h1 class="mobile">
+          The App that bails people out of jail
+        </h1>
+                <div id="money-raised-holder">
+                    <span id="money-raised">$1,234</span> raised
+                </div>
+            </div>
+        </header>
+        <div class="download-area">
+            <p><a href="https://github.com/thenewinquiry/bailbloc/releases/latest" id="download-button" class="big-button">Download Bail Bloc</a></p>
+            <p><a class="alt-link" id="other-platforms" href="https://github.com/thenewinquiry/bailbloc/releases/latest">Other platforms</a></p>
+        </div>
+        <div class="section privacy">
+            <h1>Privacy Statement</h1>
+            <p>Bail Bloc provides software that transforms computing power into cryptocurrency, which is then transformed into bail funds via our partner the Bronx Freedom Fund. 100% of the resources generated using the software are used to provide bail to defendants standing trial.</p>
+            <h2>INFORMATION WE HAVE</h2>
+            <p>We do not collect information of any participants aside from an optional newsletter which requires an email address. The Bail Bloc software does not collect or transmit any identifying information of the user’s computer other than the IP address, which is used on a temporary basis by the mining pool (XMRpool.net) to prevent abuse of the network.</p>
+            <h2>INFORMATION WE SHARE</h2>
+            <p>We will not share any of your information with anyone unless required to by law.</p>
+            <h2>OUR SECURITY</h2>
+            <p>We use HTTPS, an encrypted protocol that establishes communication between the user’s computer and our web server. Our code is open source so that it can be vetted by our community. We passed a security audit on XX. The Bail Bloc software mines Monero, which is an anonymous and decentralized cryptocurrency.</p>
+        </div>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+        var names = ["Grayson Earle", "JB Rubinovitz", "Maya Binyam", "Francis Tseng", "Sam Lavigne", "Rachel Rosenfelt"];
+
+        function shuffle(array) {
+            var currentIndex = array.length,
+                temporaryValue, randomIndex;
+
+            while (0 !== currentIndex) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+            return array;
+        }
+
+        names = shuffle(names);
+
+        $('#credits').text(names.join(', '));
+        </script>
+</body>
+
+</html>
