@@ -117,7 +117,8 @@ header {
 }
 
 .main p,
-.about p {
+.about p,
+.privacy p {
     font-size: 22px;
     line-height: 1.4;
     -webkit-hyphens: auto;
@@ -126,7 +127,7 @@ header {
     hyphens: auto;
 }
 
-.about p {
+.about p, .privacy p {
     font-size: 18px;
 }
 
@@ -159,16 +160,16 @@ header {
 
 @media only screen and (max-width: 654px) {
     header {
-    display: block;
-}
+        display: block;
+    }
 
-.center-col {
-  text-align: center;
-}
+    .center-col {
+      text-align: center;
+    }
 
-#logo img {
-  width: 80%;
-}
+    #logo img {
+      width: 80%;
+    }
 
     .partners {
         display: block;
@@ -205,5 +206,5 @@ header {
     }
     #money-raised-holder::after { 
     content: " so far";
-}
+    }
 }
