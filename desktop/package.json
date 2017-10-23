@@ -8,8 +8,8 @@
     "icons": "nicns --in build/logo.png --out build/icon.icns;convert -resize 256x256 build/logo.png build/icon.ico",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "buildall": "electron-builder -mwl",
-    "publish": "electron-builder -mwl -p always",
+    "buildall": "electron-builder -mw",
+    "publish": "electron-builder -mw -p always",
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "The New Inquiry",
