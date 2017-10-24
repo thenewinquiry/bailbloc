@@ -53,6 +53,10 @@ header {
     text-transform: uppercase;
 }
 
+h2 {
+    text-transform: uppercase;
+}
+
 #money-raised-holder {
     padding: 5px 10px;
     text-transform: uppercase;
