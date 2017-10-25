@@ -80,7 +80,7 @@ function liftMiningData(graphData, numWorkers){
 
 var $container = $('#stats-chart'),
       width = $container.width(),
-      height = $container.height();
+      height = $container.height()+30;
 
 function redrawGraph(stats, numWorkers){
     var graphData = extractMiningData(stats);
