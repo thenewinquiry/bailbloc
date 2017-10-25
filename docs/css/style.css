@@ -209,6 +209,6 @@ h2 {
       text-align: center;
     }
     #money-raised-holder::after { 
-    content: " so far";
+    /* content: " so far"; */
     }
 }
