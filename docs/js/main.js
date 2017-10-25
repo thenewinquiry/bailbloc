@@ -55,7 +55,7 @@
         });
       }
 
-      $('#download-button, #install-the-app').attr('href', url);
+      $('#download-button').attr('href', url);
     });
   }
 
