@@ -56,7 +56,7 @@ function extractMiningData(stats){
         //return [item.timestamp*1000, item.stats.totalHashes];
     });
     var dataObject = {
-        key: "Mining Gross",
+        key: "Amount raised",
         values: datapoints
     }
     return [dataObject];
@@ -71,7 +71,7 @@ function liftMiningData(graphData, numWorkers){
                   });
   var stats = {};
   stats['values'] = newValues;
-  stats['key'] = 'Mining Gross if you invited 5 friends';
+  stats['key'] = 'Amount raised if you invite 5 more friends';
   graphData.push(stats);
   return graphData;
 
