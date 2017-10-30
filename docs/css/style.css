@@ -121,7 +121,7 @@ h1, h2 {
 }
 
 .social-area {
-  margin: 4em auto;
+  /* margin: 4em auto; */
   text-align: center;
 }
 .social-area a {
@@ -183,6 +183,30 @@ h1, h2 {
 
 .partners img {
     height: 40px;
+}
+
+.footer {
+  text-align: center;
+}
+
+.margin-right, .margin-left {
+  width: 300px;
+  font-size: .9em;
+}
+
+.margin-right {
+  float: right;
+  margin-left: 50px;
+  margin-bottom: 50px;
+  margin-right: -150px;
+}
+
+.margin-left {
+  float: left;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  margin-left: -150px;
+
 }
 
 @media only screen and (min-width: 655px) {
