@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,800');
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    font: 16px 'Lato', sans-serif;
+    font: 16px 'Work Sans', sans-serif;
     margin: 40px 20px;
     color: #333;
 }
@@ -61,8 +63,8 @@ h1, h2 {
   content: ' ';
   background: red;
   display: inline-block;
-  height: 0.8em;
-  width: 0.8em;
+  height: 0.75em;
+  width: 0.75em;
   margin-right: 0.4em;
 }
 .section h2 {
