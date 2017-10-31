@@ -209,7 +209,7 @@ app.on('ready', () => {
     {
       label: 'Stats',
       click() {
-        let statsWindow = makeWindow('stats.html');
+        let statsWindow = makeWindow('stats-p5.html');
         statsWindow.uuid = mySettings.uuid;
       }
     },
