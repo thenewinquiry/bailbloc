@@ -1,3 +1,9 @@
+/* to do:
+
+optimize; graph doesnt need to keep drawing if things arent changing
+
+*/
+
 const $ = require('./jquery.min.js');
 
 var gp = [];
@@ -276,7 +282,7 @@ function redrawGraph(stats, numWorkers) {
         var y = 0.0;
         var val = 0.0;
 
-        var date = new Date(stats[stats.length - 1].timestamp * 1000);
+        var date = new Date(stats[i].timestamp * 1000);
         var month = date.getMonth();
         var day = date.getDate();
         var hours = date.getHours();
