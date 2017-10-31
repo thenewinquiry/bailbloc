@@ -2,32 +2,40 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>Bail Bloc</title>
+    <meta charset="utf-8">
+    <title>Stats</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
 
-  <link rel="stylesheet" href="style.css">
-  <style>
-      text {
-          font: 12px sans-serif;
-      }
-      html, body{
-          margin: 0px;
-          padding: 0px;
-          width: 100%;
-          height: 100%;
-      }
-      #stats-chart{
-        height:500px;
-        width:100%;
-      }
-      h1 {
-          text-align: center;
-      }
-  </style>
+    html,
+    body {
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    
+    </style>
 </head>
+
 <body>
-	<script src="p5.min.js"></script>
-	<script src="moment.min.js"></script>
-<script src="stats-p5.js"></script>
+    <div id="stats-text">
+      <p><span id="numWorkers">0</span> people using Bail Bloc</p>
+      <p><span id="totalUSD">$0</span> raised so far</p>
+      <p><span id="peopleFree">0</span> people out on bail</p>
+    </div>
+
+    <div id="stats-modes">
+      display as: 
+      <a href="#" onclick="changeMode(0);return false;">hashrate</a> | 
+      <a href="#" onclick="changeMode(1);return false;">people participating</a> |
+      <a href="#" onclick="changeMode(2);return false;">money raised</a>
+    </div>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="p5.min.js"></script>
+    <script src="moment.min.js"></script>
+    <script src="stats-p5.js"></script>
 </body>
+
 </html>

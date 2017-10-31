@@ -38,6 +38,32 @@ p {
     height: 100%;
 }
 
+#stats-text {
+    fill: #f00;
+    font-size: 18.7px;
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    padding-left: 6px;
+    background-color: rgba(255,255,255,0.8);
+}
+
+#stats-text p {
+    margin: 0;
+    text-align: left;
+}
+
+#stats-text span {
+    color: red;
+    font-weight: bold;
+}
+
+#stats-modes {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
 #header {
     display: flex;
     height: 25%;
@@ -111,6 +137,7 @@ input[type="range"] {
 
 
 
+
 /*
  * 1. Set to 0 height and width, and remove border for a slider without a thumb
  */
@@ -153,11 +180,13 @@ button:hover {
     padding-top: 3px;
     cursor: pointer;
 }
-    .control input {
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-    }
+
+.control input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
 .control_indicator {
     position: absolute;
     top: 2px;
@@ -167,36 +196,42 @@ button:hover {
     background: #e6e6e6;
     border: 0px solid #000000;
 }
+
 .control-radio .control_indicator {
     border-radius: undefined%;
 }
 
-.control:hover input ~ .control_indicator,
-.control input:focus ~ .control_indicator {
+.control:hover input~.control_indicator,
+.control input:focus~.control_indicator {
     background: #cccccc;
 }
 
-.control input:checked ~ .control_indicator {
+.control input:checked~.control_indicator {
     background: #ff0000;
 }
-.control:hover input:not([disabled]):checked ~ .control_indicator,
-.control input:checked:focus ~ .control_indicator {
+
+.control:hover input:not([disabled]):checked~.control_indicator,
+.control input:checked:focus~.control_indicator {
     background: #0e6647d;
 }
-.control input:disabled ~ .control_indicator {
+
+.control input:disabled~.control_indicator {
     background: #e6e6e6;
     opacity: 0.6;
     pointer-events: none;
 }
+
 .control_indicator:after {
     box-sizing: unset;
     content: '';
     position: absolute;
     display: none;
 }
-.control input:checked ~ .control_indicator:after {
+
+.control input:checked~.control_indicator:after {
     display: block;
 }
+
 .control-checkbox .control_indicator:after {
     left: 8px;
     top: 4px;
@@ -206,6 +241,7 @@ button:hover {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
-.control-checkbox input:disabled ~ .control_indicator:after {
+
+.control-checkbox input:disabled~.control_indicator:after {
     border-color: #7b7b7b;
 }
