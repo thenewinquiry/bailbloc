@@ -45,6 +45,7 @@ function setup() {
     mR = width * .95;
     mT = height * .05;
     mB = height - mT * 2;
+    mT+=12;
 
     getExchangeStats();
 

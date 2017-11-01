@@ -32,7 +32,7 @@ let miner = new Miner();
 let mySettings = {};
 
 let defaultSettings = {
-  maxUsage: 8,
+  maxUsage: 10,
   autostart: true,
   pauseOnLowPower: true,
   uuid: undefined,
