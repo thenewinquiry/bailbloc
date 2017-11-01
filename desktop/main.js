@@ -13,7 +13,7 @@ const Positioner = require('electron-positioner');
 const Miner = require('./miner.js');
 
 const UPDATE_CHECK = 12 * 60 * 60 * 1000;
-const CHARGE_CHECK = 5 * 60 * 1000;
+const CHARGE_CHECK = 30 * 1000;
 
 const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
   //this callback executes when someone tries to run a second instance of the app.
@@ -32,7 +32,7 @@ let miner = new Miner();
 let mySettings = {};
 
 let defaultSettings = {
-  maxUsage: 25,
+  maxUsage: 10,
   autostart: true,
   pauseOnLowPower: true,
   uuid: undefined,
