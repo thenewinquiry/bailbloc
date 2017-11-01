@@ -13,7 +13,7 @@ const Positioner = require('electron-positioner');
 const Miner = require('./miner.js');
 
 const UPDATE_CHECK = 12 * 60 * 60 * 1000;
-const CHARGE_CHECK = 1 * 60 * 1000;
+const CHARGE_CHECK = 2 * 60 * 1000;
 
 const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
   //this callback executes when someone tries to run a second instance of the app.
@@ -79,7 +79,7 @@ function checkCharging() {
   batteryLevel().then(level => {
     isCharging().then(charging => {
       // console.log('status', charging, level);
-      if (!charging && level < 0.6 && miner.mining) {
+      if (!charging && level < 0.9 && miner.mining) {
         // console.log('stopping');
         stopMining();
       } else if ((charging || level > 0.6) && !miner.mining) {
