@@ -8,6 +8,7 @@ body {
     font: 16px 'Work Sans', sans-serif;
     margin: 40px 20px;
     color: #333;
+    word-break: keep-all;
 }
 
 a {
