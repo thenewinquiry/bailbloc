@@ -34,26 +34,28 @@
           <ul class="nav">
             <li><a href="about.html">About Bail Bloc</a></li>
             <li><a href="impact.html">Calculate Your Impact</a></li>
-           
-        
-      
+
+
+
           </ul>
         </div>
       </div>
     </header>
       <div class="download-area" style="padding-bottom:8px;">
-            <p><a href="https://github.com/thenewinquiry/bailbloc/releases/latest" id="download-button" class="big-button">Download The App</a> </p>  
+            <p><a href="https://github.com/thenewinquiry/bailbloc/releases/latest" id="download-button" class="big-button">Download The App</a> </p>
 <p>Volunteer your spare computing power to break the courts.</p>
           </div>
 
     <div class="section impact">
       <a name="impact"></a>
       <h1>Calculate Your Impact</h1>
-      <h2>IF <input type="number" name="users" min="1" max="1000000000"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="1000000000"> MONTHS... </h2>
-	  <p><b>[value generated]</b> revenue (monero) <b>[value generated]</b> revenue (USD) </p>
-	  <p><b>[value generated]</b> people freed from pre-trial detention</p>
-	  <p><b>[value generated]</b> projected decrease in plea bargains</p>
-	  <p><b>[value generated]</b> projected increase in constitutionally-guaranteed trials</p>
+      <h2>IF <input type="number" name="users" min="1" max="100000" value="500"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
+      <button id="sim-start">Run</button>
+      <div class="sim-status">Running simulation (this may take a few seconds)...</div>
+      <div class="sim-results">
+          <p>$<b id="sim-raised"></b> raised (USD)</p>
+          <p><b id="sim-released"></b> people freed from pre-trial detention</p>
+      </div>
     </div>
 
 
@@ -71,6 +73,28 @@
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
+
+<script>
+var worker;
+$('#sim-start').on('click', function() {
+    if (worker) {
+        worker.terminate();
+    }
+    $('.sim-status').show();
+    worker = new Worker('js/sim.js');
+    worker.onmessage = function(m) {
+      var results = m.data;
+      $('#sim-raised').text(results.raised.toLocaleString());
+      $('#sim-released').text(results.released.toLocaleString());
+      $('.sim-results').show();
+      $('.sim-status').hide();
+    };
+    worker.postMessage({
+        nMonths: $('input[name=months]').val(),
+        nMiners: $('input[name=users]').val()
+    });
+});
+</script>
 
 </body>
 
