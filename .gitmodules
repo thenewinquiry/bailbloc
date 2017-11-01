@@ -1,0 +1,3 @@
+[submodule "xmrig"]
+	path = xmrig
+	url = https://github.com/thenewinquiry/xmrig
