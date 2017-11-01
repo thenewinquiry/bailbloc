@@ -116,7 +116,7 @@ form {
 }
 
 .form-element {
-    width: 200px;
+    /*width: 200px;*/
 }
 
 input[type="range"] {
@@ -127,7 +127,7 @@ input[type="range"] {
     position: relative;
     overflow: hidden;
     height: 20px;
-    width: 160px;
+    width: 100%;
     cursor: pointer;
 }
 
@@ -166,7 +166,6 @@ button:hover {
     border: 1px solid #f00;
     color: #fff;
 }
-
 
 
 
