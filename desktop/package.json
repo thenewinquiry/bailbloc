@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "icons": "nicns --in build/logo.png --out build/icon.icns;convert -resize 256x256 build/logo.png build/icon.ico",
+    "icons":
+      "nicns --in build/logo.png --out build/icon.icns;convert -resize 256x256 build/logo.png build/icon.ico",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "buildall": "electron-builder -mw",
@@ -31,13 +32,27 @@
   },
   "build": {
     "appId": "com.thenewinquiry.bailbloc",
-    "productName": "BailBloc",
+    "productName": "Bail Bloc",
     "asar": false,
     "mac": {
       "category": "public.app-category.utilities",
       "extendInfo": {
         "LSUIElement": 1
       }
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 200,
+          "y": 288
+        },
+        {
+          "x": 400,
+          "y": 283,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
     },
     "publish": [
       {
