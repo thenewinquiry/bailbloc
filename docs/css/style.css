@@ -234,6 +234,10 @@ h2 {
     margin-left: -150px;
 }
 
+.sim-results, .sim-status {
+  display: none;
+}
+
 @media only screen and (min-width: 655px) {
     .mobile {
         display: none;
