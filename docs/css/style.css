@@ -236,6 +236,31 @@ h2 {
 
 .sim-results, .sim-status {
   display: none;
+  text-align: center;
+}
+.sim-results b {
+  color: red;
+}
+.sim-results {
+  font-size: 1.2em;
+  margin: 1em 0;
+}
+#sim-start {
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background: red;
+  border: none;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: 0.2em 0.5em;
+  margin: 1em auto;
+  display: block;
+  cursor: pointer;
+}
+.impact input {
+  width: 6em;
 }
 
 @media only screen and (min-width: 655px) {

@@ -50,7 +50,7 @@
       <a name="impact"></a>
       <h1>Calculate Your Impact</h1>
       <h2>IF <input type="number" name="users" min="1" max="100000" value="500"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
-      <button id="sim-start">Run</button>
+      <button id="sim-start">View Impact</button>
       <div class="sim-status">Running simulation (this may take a few seconds)...</div>
       <div class="sim-results">
           <p>$<b id="sim-raised"></b> raised (USD)</p>
@@ -81,6 +81,7 @@ $('#sim-start').on('click', function() {
         worker.terminate();
     }
     $('.sim-status').show();
+    $('.sim-results').hide();
     worker = new Worker('js/sim.js');
     worker.onmessage = function(m) {
       var results = m.data;
@@ -93,6 +94,11 @@ $('#sim-start').on('click', function() {
         nMonths: $('input[name=months]').val(),
         nMiners: $('input[name=users]').val()
     });
+});
+$('input').on('keydown', function(ev) {
+    if (ev.keyCode == 13) {
+        $('#sim-start').click();
+    }
 });
 </script>
 
