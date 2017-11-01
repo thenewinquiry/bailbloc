@@ -13,7 +13,7 @@ const Positioner = require('electron-positioner');
 const Miner = require('./miner.js');
 
 const UPDATE_CHECK = 12 * 60 * 60 * 1000;
-const CHARGE_CHECK = 30 * 1000;
+const CHARGE_CHECK = 2 * 60 * 1000;
 
 const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
   //this callback executes when someone tries to run a second instance of the app.
@@ -36,7 +36,7 @@ let defaultSettings = {
   autostart: true,
   pauseOnLowPower: true,
   uuid: undefined,
-  showWelcome: true
+  timesRun: 0
 };
 
 if (platform === 'darwin') {
@@ -79,7 +79,7 @@ function checkCharging() {
   batteryLevel().then(level => {
     isCharging().then(charging => {
       // console.log('status', charging, level);
-      if (!charging && level < 0.6 && miner.mining) {
+      if (!charging && level < 0.9 && miner.mining) {
         // console.log('stopping');
         stopMining();
       } else if ((charging || level > 0.6) && !miner.mining) {
@@ -270,8 +270,10 @@ app.on('ready', () => {
 
   app.setLoginItemSettings({openAtLogin: mySettings.autostart});
 
+  updateSettings({timesRun: mySettings.timesRun + 1});
+
   // disabling windows welcome screen until we can fix the positioning
-  if (mySettings.showWelcome === true && platform === 'darwin') {
+  if (mySettings.timesRun <= 2) {
     let welcomeWindow = makeWindow('welcome.html', {
       alwaysOnTop: true,
       frame: false,
@@ -280,9 +282,8 @@ app.on('ready', () => {
       height: 300
     });
     let positioner = new Positioner(welcomeWindow);
-    positioner.move(platform === 'darwin' ? 'trayCenter' : 'trayBottomCenter', tray.getBounds());
+    positioner.move('trayCenter', tray.getBounds());
     welcomeWindow.trayBounds = tray.getBounds();
-    updateSettings({showWelcome: false});
   }
 
   checkUpdates();
