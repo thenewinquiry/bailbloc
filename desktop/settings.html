@@ -1,69 +1,88 @@
 <html>
+
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-  <title>Settings</title>
-  <link rel="stylesheet" href="style.css">
-  
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Settings</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div id="app">
+        <h1 style="margin-bottom: 24px;">SETTINGS</h1>
+        <form>
+          <p style="margin-bottom:12px;text-align:left;">System Impact</p>
+          <div style="display:flex">
 
-  <div id="app">
-    <h1>SETTINGS</h1>
-    <form>
-      <div class="form-element">
-        <label for="max-usage">Max CPU usage: <span>{{maxUsage}}%</span></label>
-        <input v-model="maxUsage" @change="update"  id="max-usage" type="range" min="10" max="100" step="1">
-        
-      </div>
+            <div class="form-element" style="float:left;margin-right:18px">
+                <label class="control control-checkbox">
+                    <input class="control radio" type="radio" name="mode" v-model="maxUsage" @change="update" value="8">Low
+                    <div class="control_indicator"></div>
+                </label>
+            </div>
 
-      <div class="form-element">
+            <div class="form-element" style="float:left;margin-right:18px">
+                <label class="control control-checkbox">
+                    <input class="control radio" type="radio" name="mode" v-model="maxUsage" @change="update" value="20">Medium
+                    <div class="control_indicator"></div>
+                </label>
+            </div>
+
+            <div class="form-element" style="float:left;">
+                <label class="control control-checkbox">
+                    <input class="control radio" type="radio" name="mode" v-model="maxUsage" @change="update" value="50">High
+                    <div class="control_indicator"></div>
+                </label>
+            </div>
+          </div>
+    
+    <!-- <label for="max-usage">Max CPU usage: <span>{{maxUsage}}%</span></label>
+        <input v-model="maxUsage" @change="update"  id="max-usage" type="range" min="10" max="100" step="1"> -->
+    
+    <div class="form-element" style="margin-top: 24px;">
         <label for="autostart" class="control control-checkbox">
-          Start Bail Bloc on login
-          <input v-model="autostart" @change="update" id="autostart" type="checkbox">
-          <div class="control_indicator"></div>
+            Start Bail Bloc on login
+            <input v-model="autostart" @change="update" id="autostart" type="checkbox">
+            <div class="control_indicator"></div>
         </label>
-      </div>
-
-      <div class="form-element">
+    </div>
+    <div class="form-element" style="margin-top: 24px;">
         <label for="should-pause" class="control control-checkbox">
-          Pause when on battery
-          <input v-model="pauseOnLowPower" @change="update" id="should-pause" type="checkbox">
-          <div class="control_indicator"></div>
+            Pause when on battery
+            <input v-model="pauseOnLowPower" @change="update" id="should-pause" type="checkbox">
+            <div class="control_indicator"></div>
         </label>
-      </div>
-      <button @click="close">Done</button>
+    </div>
+    <button @click="close" style="margin-top: 24px;">Done</button>
     </form>
-  </div>
-
- 
-
-  <script src="vue.min.js"></script>
-  <script>
-    const {ipcRenderer, remote} = require('electron');
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+    const { ipcRenderer, remote } = require('electron');
 
     let currentWindow = remote.getCurrentWindow();
 
     var app = new Vue({
-      el: '#app',
-      data: {
-        maxUsage: currentWindow.settings.maxUsage,
-        pauseOnLowPower: currentWindow.settings.pauseOnLowPower,
-        autostart: currentWindow.settings.autostart
-      },
-      methods: {
-        close() {
-          window.close();
+        el: '#app',
+        data: {
+            maxUsage: currentWindow.settings.maxUsage,
+            pauseOnLowPower: currentWindow.settings.pauseOnLowPower,
+            autostart: currentWindow.settings.autostart
         },
-        update() {
-          ipcRenderer.send('changeSettings', {
-            maxUsage: this.maxUsage,
-            pauseOnLowPower: this.pauseOnLowPower,
-            autostart: this.autostart
-          });
+        methods: {
+            close() {
+                window.close();
+            },
+            update() {
+                ipcRenderer.send('changeSettings', {
+                    maxUsage: this.maxUsage,
+                    pauseOnLowPower: this.pauseOnLowPower,
+                    autostart: this.autostart
+                });
+            }
         }
-      }
     });
-  </script>
+    </script>
 </body>
+
 </html>
