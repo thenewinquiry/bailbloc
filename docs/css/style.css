@@ -245,6 +245,10 @@ h2 {
   font-size: 1.2em;
   margin: 1em 0;
 }
+.sim-note {
+  font-size: 0.7em;
+  color: #b0b0b0;
+}
 #sim-start {
   text-align: center;
   text-transform: uppercase;
