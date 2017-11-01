@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Software that raises money for bail funds.">
+    <meta name="author" content="The New Inquiry">
+    <title>Bail Bloc</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- open graph for facebook sharing -->
+    <meta property="og:title" content="Bail Bloc" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://bailbloc.thenewinquiry.com/" />
+    <meta property="og:image" content="http://bailbloc.thenewinquiry.com/images/og-image.png" />
+    <meta property="og:description" content="Smash the racist criminal justice system. Run this app to bail people out of jail. Partnered with the Bronx Freedom Fund, this app mines cryptocurrency in the background of your computer and donates it to get people out on bail. Download it from http://bailbloc.com/" />
+</head>
+
+<body style="display:flex">
+    <div class="container">
+        
+        <div class="section download">
+            <h1>While you are downloading bail bloc</h1>
+            <p style="text-align: center;color:#aaa">If your download did not begin automatically, <a href="https://github.com/thenewinquiry/bailbloc/releases/latest" id="download-button">click this link</a>.</p>
+            
+            <p>While your antivirus software means well, it might misidentify Bail Bloc as malware. In recent weeks covert cryptocurrency mining software has been deployed without user consent. You might need to temporarily disable your antivirus software.</p>
+
+            <p>Bail Bloc is not a virus! The app is completely legal, safe, and private, and allows you to keep working as normal.</p>
+
+            <p>If you still have concerns or questions, <a href="https://github.com/thenewinquiry/bailbloc">view our open-source code</a> or email us at <a href="mailto:bailbloc@thenewinquiry.com">bailbloc@thenewinquiry.com</a></p>
+            <p><a href="index.html"><- back</a></p>
+        </div>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+        function getRelease() {
+            var defaultURL = 'https://github.com/thenewinquiry/bailbloc/releases/latest';
+            var apiURL = 'https://api.github.com/repos/thenewinquiry/bailbloc/releases/latest';
+            var userAgent = navigator.userAgent;
+
+            $.getJSON(apiURL, function(release) {
+                var url = defaultURL;
+                var assets = release.assets.map(function(a) {
+                    return a.browser_download_url;
+                });
+
+                if (/Mac/.test(userAgent)) {
+                    url = assets.find(function(a) {
+                        return a.indexOf('.dmg') > -1;
+                    });
+                } else if (/Windows/.test(userAgent)) {
+                    url = assets.find(function(a) {
+                        return a.indexOf('.exe') > -1;
+                    });
+                }
+
+                $('#download-button').attr('href', url);
+            });
+        }
+
+        getRelease();
+        </script>
+</body>
+
+</html>

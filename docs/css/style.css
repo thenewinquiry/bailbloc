@@ -46,6 +46,7 @@ header {
     display: flex;
     flex: 1;
     flex-direction: column;
+    padding-top: 0;
 }
 
 .header-col h1 {
@@ -55,23 +56,36 @@ header {
     text-transform: uppercase;
 }
 
-h1, h2 {
+h1,
+h2 {
     text-transform: uppercase;
 }
 
+.footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+
+.sub-footer {
+    margin-top: 30px;
+}
+
 .section h1:before {
-  content: ' ';
-  background: red;
-  display: inline-block;
-  height: 0.75em;
-  width: 0.75em;
-  margin-right: 0.4em;
+    content: ' ';
+    background: red;
+    display: inline-block;
+    height: 0.75em;
+    width: 0.75em;
+    margin-right: 0.4em;
 }
+
 .section h2 {
-  margin: 2em 0 0.2em 0;
+    margin: 2em 0 0.2em 0;
 }
+
 .section p {
-  margin-top: 0.2em;
+    margin-top: 0.2em;
 }
 
 #money-raised-holder {
@@ -80,36 +94,41 @@ h1, h2 {
     font-size: 18px;
     display: inline-block;
 }
+
 #money-raised-holder ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-#money-raised-holder li {
-  margin: 0 0 0.5em 0;
-}
-#money-raised-holder a:before {
-  content: ' ';
-  background: red;
-  display: inline-block;
-  height: 0.8em;
-  width: 0.8em;
-  margin-right: 0.4em;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-#money-raised, #active-users {
+#money-raised-holder li {
+    margin: 0 0 0.5em 0;
+}
+
+#money-raised-holder a:before {
+    content: ' ';
+    background: red;
+    display: inline-block;
+    height: 0.8em;
+    width: 0.8em;
+    margin-right: 0.4em;
+}
+
+#money-raised,
+#active-users {
     font-size: 22px;
     font-weight: bold;
 }
 
 #active-users {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .download-area {
-  text-align: center;
-  text-transform: uppercase;
-  margin-top: 2em;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 2em;
+    padding-bottom: 60px;
 }
 
 .download-area a {
@@ -121,15 +140,16 @@ h1, h2 {
 }
 
 .social-area {
-  /* margin: 4em auto; */
-  text-align: center;
+    /* margin: 4em auto; */
+    text-align: center;
 }
+
 .social-area a {
-  margin: 0 1em;
+    margin: 0 1em;
 }
 
 .social-area img {
-  width: 40px;
+    width: 40px;
 }
 
 .alt-link {
@@ -162,7 +182,8 @@ h1, h2 {
     hyphens: auto;
 }
 
-.about p, .privacy p {
+.about p,
+.privacy p {
     font-size: 18px;
 }
 
@@ -186,34 +207,39 @@ h1, h2 {
 }
 
 .footer {
-  text-align: center;
+    text-align: center;
 }
 
-.margin-right, .margin-left {
-  width: 300px;
-  font-size: .9em;
+.margin-right,
+.margin-left {
+    width: 300px;
+    font-size: .9em;
 }
 
 .margin-right {
-  float: right;
-  margin-left: 50px;
-  margin-bottom: 50px;
-  margin-right: -150px;
+    float: right;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    /*margin-right: -150px;*/
 }
+.cited-mobile {
+      display:none;
+    }
 
 .margin-left {
-  float: left;
-  margin-right: 50px;
-  margin-bottom: 50px;
-  margin-left: -150px;
-
+    float: left;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    margin-left: -150px;
 }
 
 @media only screen and (min-width: 655px) {
-      .mobile {
-      display:none;
+    .mobile {
+        display: none;
     }
 }
+
+
 
 /* MOBILE */
 
@@ -222,12 +248,27 @@ h1, h2 {
         display: block;
     }
 
+    .margin-right {
+        display: none;
+    }
+
+    .cited-mobile {
+      color:#aaa;
+      margin-top:40px;
+      display:block;
+
+    }
+
+    .cited-mobile p {
+      font-size:13px;
+    }
+
     .center-col {
-      text-align: center;
+        text-align: center;
     }
 
     #logo img {
-      width: 80%;
+        width: 80%;
     }
 
     .partners {
@@ -249,21 +290,21 @@ h1, h2 {
     }
 
     .header-col h1 {
-      text-align: center;
+        text-align: center;
     }
 
     .download-area {
-      margin:20px 0px;
+        margin: 20px 0px;
     }
 
     .desktop {
-      display:none;
+        display: none;
     }
 
     #money-raised-holder {
-      text-align: center;
+        text-align: center;
     }
     #money-raised-holder::after {
-    /* content: " so far"; */
+        /* content: " so far"; */
     }
 }
