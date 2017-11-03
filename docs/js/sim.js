@@ -124,6 +124,7 @@ function run(miners, months) {
       raised = 0,
       released = 0,
       plead = 0,
+      wouldHavePlead = 0,
       dismissed = 0,
       priceChange = 1,
       awaitingTrial = [],
@@ -161,6 +162,9 @@ function run(miners, months) {
         released += 1;
         bailFund -= c.amount;
         awaitingTrial.push(c);
+        if (c.plead) {
+          wouldHavePlead += 1;
+        }
       } else {
         break;
       }
@@ -171,7 +175,8 @@ function run(miners, months) {
     released: released,
     plead: plead,
     dismissed: dismissed,
-    pop: sum(popSizes)
+    pop: sum(popSizes),
+    wouldHavePlead: wouldHavePlead
   }
 }
 
@@ -182,15 +187,12 @@ onmessage = function(m) {
     runs.push(result);
   }
 
-  var reduced_p = runs.map(r => {
-    return r.plead/r.pop - (r.plead - r.dismissed)/r.pop;
-  });
   var results = {
     released: mean(runs, 'released'),
     raised: mean(runs, 'raised'),
     plead: mean(runs, 'plead'),
     dismissed: mean(runs, 'dismissed'),
-    reduced: sum(reduced_p)/N_RUNS
+    reduced: mean(runs, 'wouldHavePlead')
   }
   postMessage(results);
 }

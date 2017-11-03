@@ -50,7 +50,7 @@
       <div class="sim-results">
           <p>$<b id="sim-raised"></b> raised (USD)</p>
           <p><b id="sim-released"></b> people freed from pre-trial detention</p>
-          <p><b id="sim-reduced"></b>% fewer pre-trial detention guilty pleas</p>
+          <p><b id="sim-reduced"></b> people did not have to plead guilty</p>
           <p class="sim-note">Please note that simulation results are just an estimate of impact.</p>
       </div>
     </div>
@@ -84,7 +84,7 @@ $('#sim-start').on('click', function() {
       var results = m.data;
       $('#sim-raised').text(results.raised.toLocaleString());
       $('#sim-released').text(results.released.toLocaleString());
-      $('#sim-reduced').text((results.reduced * 100).toFixed(2));
+      $('#sim-reduced').text(results.reduced.toLocaleString());
       $('.sim-results').show();
       $('.sim-status').hide();
     };
