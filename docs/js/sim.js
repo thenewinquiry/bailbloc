@@ -6,7 +6,7 @@
 
 importScripts('discrete.js', '//cdnjs.cloudflare.com/ajax/libs/chance/1.0.12/chance.min.js');
 
-const N_RUNS = 100;
+const N_RUNS = 50;
 
 // see `../params.py` for
 // annotations about these data
@@ -50,6 +50,14 @@ const BAIL_MADE = [
   0.04,
 ];
 
+// Probability a detained person
+// pleads guilty, from [1]
+const P_PLEAD = 0.92;
+
+// Probability a case is dismissed.
+// Based on 2017 figures from BFF
+const P_DISMISSED = 0.67;
+
 const N = 5138;
 const DETENTION_RANGES = [
   [0, 1],
@@ -64,12 +72,20 @@ const DETENTION_PROBS = [
     315/N
 ];
 
+function sum(arr) {
+  return arr.reduce((acc, v) => acc + v);
+}
+
+function mean(arr, prop) {
+  return Math.round(sum(arr.map(r => r[prop]))/N_RUNS);
+}
+
 function uniform(rng) {
   var [l, u] = rng;
   return Math.round(l + Math.random() * (u-l));
 }
 
-// generate population for one month
+// generate population for one day
 function genPop() {
   var idxs = Array.from(Array(BAIL_RANGES.length),(_,i) => i);
   var pop = Array.from(Array(MONTHLY_POP), (_, i) => chance.weighted(idxs, BAIL_PROBS));
@@ -95,7 +111,8 @@ function genPop() {
   Object.keys(notMade).map(idx => {
     var s = Array.from(Array(notMade[idx]), () => ({
       amount: uniform(BAIL_RANGES[idx]),
-      duration: uniform(DETENTION_RANGES[chance.weighted(durationIdxs, DETENTION_PROBS)])
+      duration: uniform(DETENTION_RANGES[chance.weighted(durationIdxs, DETENTION_PROBS)]),
+      plead: Math.random() < P_PLEAD
     }));
     Array.prototype.push.apply(sample, s);
   });
@@ -106,11 +123,14 @@ function run(miners, months) {
   var bailFund = 0,
       raised = 0,
       released = 0,
+      plead = 0,
+      dismissed = 0,
       priceChange = 1,
       awaitingTrial = [],
+      popSizes = [],
       usd_per_miner = [
-        MONTHLY_USD_PER_MINER[0]*miners,
-        MONTHLY_USD_PER_MINER[1]*miners];
+              MONTHLY_USD_PER_MINER[0]*miners,
+              MONTHLY_USD_PER_MINER[1]*miners];
 
   for (var i=0; i<months; i++) {
     priceChange *= uniform(XMR_CHANGE);
@@ -118,12 +138,17 @@ function run(miners, months) {
     var mined = uniform(usd_per_miner) * priceChange;
     bailFund += mined;
     raised += mined;
+    plead += sum(pop.map(p => p.plead ? 1 : 0 ));
+    popSizes.push(pop.length);
 
     // get reclaimed bail
     awaitingTrial = awaitingTrial.filter(c => {
       c.duration -= 30;
       if (c.duration <= 0 && Math.random() > ADJUSTED_FTA) {
         bailFund += c.amount;
+
+        // check results of case
+        dismissed += Math.random() < P_DISMISSED ? 1 : 0;
         return false;
       }
       return true;
@@ -143,20 +168,29 @@ function run(miners, months) {
   }
   return {
     raised: raised,
-    released: released
+    released: released,
+    plead: plead,
+    dismissed: dismissed,
+    pop: sum(popSizes)
   }
 }
 
 onmessage = function(m) {
-  var results = {released: 0, raised: 0};
+  var runs = [];
   for (var i=0; i<N_RUNS; i++) {
     var result = run(m.data.nMiners, m.data.nMonths);
-    results.released += result.released;
-    results.raised += result.raised;
+    runs.push(result);
   }
-  results.released = Math.round(results.released/N_RUNS);
-  results.raised = Math.round(results.raised/N_RUNS);
+
+  var reduced_p = runs.map(r => {
+    return r.plead/r.pop - (r.plead - r.dismissed)/r.pop;
+  });
+  var results = {
+    released: mean(runs, 'released'),
+    raised: mean(runs, 'raised'),
+    plead: mean(runs, 'plead'),
+    dismissed: mean(runs, 'dismissed'),
+    reduced: sum(reduced_p)/N_RUNS
+  }
   postMessage(results);
 }
-
-

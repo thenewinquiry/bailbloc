@@ -44,12 +44,13 @@
     <div class="section impact">
       <a name="impact"></a>
       <h1>Calculate Your Impact</h1>
-      <h2>IF <input type="number" name="users" min="1" max="100000" value="500"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
+      <h2>IF <input type="number" name="users" min="1" max="100000" value="5000"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
       <button id="sim-start">View Impact</button>
       <div class="sim-status">Running simulation (this may take a few seconds)...</div>
       <div class="sim-results">
           <p>$<b id="sim-raised"></b> raised (USD)</p>
           <p><b id="sim-released"></b> people freed from pre-trial detention</p>
+          <p><b id="sim-reduced"></b>% fewer pre-trial detention guilty pleas</p>
           <p class="sim-note">Please note that simulation results are just an estimate of impact.</p>
       </div>
     </div>
@@ -83,6 +84,7 @@ $('#sim-start').on('click', function() {
       var results = m.data;
       $('#sim-raised').text(results.raised.toLocaleString());
       $('#sim-released').text(results.released.toLocaleString());
+      $('#sim-reduced').text((results.reduced * 100).toFixed(2));
       $('.sim-results').show();
       $('.sim-status').hide();
     };
