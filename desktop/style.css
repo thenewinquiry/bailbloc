@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    pointer-events: none;
 }
 
 *:focus {
@@ -9,6 +10,7 @@
 a {
     color: red;
     text-decoration: none;
+    pointer-events: all;
 }
 
 a:hover {
@@ -21,7 +23,7 @@ body {
     padding: 20px;
     /*background-color: #fff;*/
     color: #333;
-    font: 13px 'Lato', sans-serif;
+    font: 14px 'Lato', sans-serif;
     overflow: hidden;
 }
 
@@ -38,14 +40,69 @@ p {
     height: 100%;
 }
 
+#defaultCanvas0 {
+    position: absolute;
+    left: 80px;
+    top: 41px;
+    border-left-color: #f00;
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-bottom-color: #f00;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+#stats-line {
+    position:absolute;
+    background-color:#aaa;
+    z-index:9;
+    top: 41px;
+    height:480px;
+    width:1px;
+}
+
+#stats-date {
+    position:absolute;
+    /*right: 42px;*/
+    bottom:58px;
+    left:82px;
+    /*width:80px;*/
+    /*background-color:#aaa;*/
+    z-index:99;
+    /*text-align: right;*/
+    color:#fff;
+}
+
+#scrub-actual, #scrub-friends {
+    position:absolute;
+    z-index:99;
+}
+
+
+#xlabel,
+#yTopLabel,
+#yBottomLabel,
+#stats-modes,
+#mouse-info {
+    position: absolute;
+}
+
+#mouse-info {
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 999;
+
+    transition: .1s ease-in-out;
+}
+
 #stats-text {
     fill: #f00;
     font-size: 18.7px;
     position: absolute;
-    left: 5%;
-    top: 5%;
+    top: 40.9px;
+    left: 84px;
     padding-left: 6px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 99;
 }
 
 #stats-text p {
@@ -59,10 +116,40 @@ p {
 }
 
 #stats-modes {
-    position: absolute;
     width: 100%;
     text-align: center;
-    top:12px;
+    top: 12px;
+}
+
+/*#xlabel {
+    width: 100%;
+    bottom: 20px;
+    text-align: center;
+}*/
+
+#x-colors {
+    text-transform: uppercase;
+    position:absolute;
+    left: 80px;
+    bottom: 0px;
+    height: 50px;
+    font-size:15px;
+}
+#x-label {
+    display: inline;
+    font-size:inherit;
+}
+
+#yTopLabel {
+    width: 70px;
+    top: 38px;
+    text-align: right;
+}
+
+#yBottomLabel {
+    width: 70px;
+    top: 499px;
+    text-align: right;
 }
 
 #header {
@@ -135,6 +222,7 @@ input[type="range"] {
 ::-webkit-slider-runnable-track {
     /*background: #dd0;*/
 }
+
 
 
 
