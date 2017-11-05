@@ -9,7 +9,6 @@ var walletAddress = "442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdyS
 
 var gp = [];
 var gp_friends = [];
-var statsReady = false;
 
 var mL, mR, mT, mB; // margins
 
@@ -30,10 +29,10 @@ var graphMode = 0;
 var HASHRATE = 0;
 var PEOPLEMINING = 1;
 var TOTALRAISED = 2;
-var labels = ["Current Hashrate (kH/s)", "Number of People Participaing", "Money Raised to Date (USD)"];
+var labels = ["HASHRATE (kH/s)", "PEOPLE CURRENTLY PARTICIPATING", "MONEY RAISED TO DATE (USD)"];
 
-var friendsMode = true;
-var friendsMultiplier = 5;
+var friendsMode = false;
+var friendsMultiplier = 1;
 
 function preload() {
     myFont = loadFont('assets/Lato-Regular.ttf');
@@ -41,32 +40,27 @@ function preload() {
 
 function setup() {
     // put setup code here
-    createCanvas(680, 480);
-    // createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, windowHeight);
     background(255);
     strokeWeight(3);
 
     textFont(myFont);
     textSize(fontS);
 
-    // mL = width * .1;
-    // mR = width * .95;
-    // mT = height * .05;
-    // mB = height - mT * 2;
-    // mT += 12;
-    mL = 0;
-    mR = width;
-    mT = 0;
-    mB = height;
+    mL = width * .1;
+    mR = width * .95;
+    mT = height * .05;
+    mB = height - mT * 2;
+    mT += 12;
 
 
-    pullData();
+    getExchangeStats();
 
 }
 
 function changeMode(n) {
     graphMode = n;
-    pullData();
+    getExchangeStats();
 }
 
 function friendsModeEngage(n) {
@@ -78,87 +72,82 @@ function friendsModeEngage(n) {
     else
         friendsMultiplier = 1;
 
-    pullData();
+    getExchangeStats();
 }
 
 function draw() {
+
     background(255);
 
-    if (statsReady) {
-        // lastX = gp[0].x;
-        // lastY = gp[0].y;
+    // draw axes
+    textSize(fontS);
+    stroke(255, 0, 0);
+    line(mL, mT, mL, mB);
+    line(mL, mB, mR, mB);
 
-        // 5 friends
-        if (friendsMode) {
-            noStroke();
-            fill(255, 200, 200);
-            beginShape();
-            var mappedY = mB - (mB - gp[0].y) * 5;
-            vertex(gp[0].x, mappedY);
+    // draw Y labels
+    fill(0);
+    noStroke();
+    textAlign(RIGHT, BOTTOM);
+    // l1 is top Y label, l2 is bottom y label
+    var l1, l2 = "";
+    switch (graphMode) {
+        case HASHRATE:
+            l1 = yMax.toFixed(2);
+            l2 = yMin.toFixed(2);
+            break;
+        case PEOPLEMINING:
+            l1 = yMax.toFixed(0);
+            l2 = yMin.toFixed(0);
+            break;
+        case TOTALRAISED:
+            l1 = "$" + yMax.toFixed(2);
+            l2 = "$" + yMin.toFixed(2);
+            break;
+    }
+    text(l1, mL - 10, mT + fontS);
+    text(l2, mL - 10, mB);
 
-            for (var i = 1; i < gp.length; i++) {
-                mappedY = mB - (mB - gp[i].y) * 5;
-                vertex(gp[i].x, mappedY);
-            }
+    // draw X labels
+    textAlign(CENTER, TOP);
+    text(labels[graphMode], width / 2, mB + 12);
 
-            vertex(mL, mB);
-            vertex(mR, mB);
+    lastX = mL;
+    lastY = mB;
 
-            endShape();
+    // update & display points
+    for (var i = 0; i < gp.length; i++) {
+        if (!gp[i].inPosition) {
+            gp[i].getIntoPosition();
+            gp[i].display(color(255, 0, 0));
 
+        } else {
+            gp[i].getIntoPosition();
+            gp[i].display(color(255, 0, 0));
+            gp[i].checkMouse();
         }
 
-        // display points
-        stroke(255, 0, 0);
-        fill(255, 0, 0);
+        lastX = gp[i].x;
+        lastY = gp[i].y;
+    }
 
-        beginShape();
-        vertex(gp[0].x, gp[0].y);
-
-        for (var i = 1; i < gp.length; i++) {
-            vertex(gp[i].x, gp[i].y);
-        }
-
-        vertex(mL, mB);
-        vertex(mR, mB);
-
-        endShape();
-
-
-
-        for (var i = 0; i < gp.length; i++) {
-            if (!gp[i].inPosition) {
-                gp[i].getIntoPosition();
-                // gp[i].display(color(255, 0, 0));
+    // update & display points
+    if (friendsMode) {
+        for (var i = 0; i < gp_friends.length; i++) {
+            if (!gp_friends[i].inPosition) {
+                gp_friends[i].getIntoPosition();
+                gp_friends[i].display(color(255, 255, 0));
 
             } else {
-                reDraw = false;
-                gp[i].getIntoPosition();
-                // gp[i].display(color(255, 0, 0));
-                gp[i].checkMouse();
+                gp_friends[i].display(color(255, 255, 0));
+                gp_friends[i].checkMouse();
             }
 
-            lastX = gp[i].x;
-            lastY = gp[i].y;
-        }
-
-        // update & display points
-        if (friendsMode) {
-            for (var i = 0; i < gp_friends.length; i++) {
-                if (!gp_friends[i].inPosition) {
-                    gp_friends[i].getIntoPosition();
-                    gp_friends[i].display(color(255, 255, 0));
-
-                } else {
-                    gp_friends[i].display(color(255, 255, 0));
-                    gp_friends[i].checkMouse();
-                }
-
-                lastX = gp_friends[i].x;
-                lastY = gp_friends[i].y;
-            }
+            lastX = gp_friends[i].x;
+            lastY = gp_friends[i].y;
         }
     }
+
 }
 
 
@@ -195,7 +184,10 @@ function GP(x, y, val, label) {
     };
 
     this.display = function(c) {
-
+        if (lastX != mL && lastY != mB) {
+            stroke(c);
+            line(this.x, this.y, lastX, lastY);
+        }
     };
 
     this.checkMouse = function() {
@@ -209,24 +201,19 @@ function GP(x, y, val, label) {
             if (graphMode == TOTALRAISED) valToPrint = "$" + valToPrint;
 
             // constrain positioning
-            var y = mouseY + 21;
-            //var x = constrain(mouseX + 80, 0, width * .925);
-            var x = mouseX + 80;
+            var x = constrain(mouseX, 0, width * .925);
+            var y = constrain(mouseY - 10, height * .1, height);
 
-            $("#stats-line").css("left", x + "px");
-            //$("#mouse-info").offset({ top: y, left: x});
-            // $("#mouse-info #val").text(valToPrint.toFixed(2));
-            // $("#mouse-info #date").text(this.label);
-
-            $("#stats-date").text(this.label);
-            $("#scrub-actual").offset({ top: y, left: x});
-            $("#scrub-actual").text(valToPrint);
-
-            y = height - (height - this.y) * 5;
-            y += 21;
-            y = constrain(y,40,height);
-            $("#scrub-friends").offset({ top: y, left: x});
-            $("#scrub-friends").text(valToPrint * friendsMultiplier);
+            fill(255, 200);
+            noStroke();
+            rect(x + 10, y - fontS, 60, 30);
+            fill(0);
+            stroke(255);
+            textAlign(LEFT, BOTTOM);
+            textSize(fontS);
+            text(valToPrint, x + 10, y);
+            textSize(fontS / 2);
+            text(this.label, x + 10, y + fontS / 2);
         }
     };
 }
@@ -250,8 +237,8 @@ function redrawGraph(stats, numWorkers) {
         totalXMR *= friendsMultiplier;
     }
 
-    // $("#stats-text").css("top", mT + "px");
-    // $("#stats-text").css("left", mL + 4 + "px");
+    $("#stats-text").css("top", mT + "px");
+    $("#stats-text").css("left", mL + 4 + "px");
     $("#numWorkers").text(numWorkers);
     $("#totalUSD").text("$" + totalUSD.toFixed(0));
     $("#peopleFree").text(peopleFree);
@@ -302,8 +289,8 @@ function redrawGraph(stats, numWorkers) {
         }
     } else {
         yMax = totalUSD;
-        // yMin = (stats[stats.length - 1].stats.amtPaid + stats[stats.length - 1].stats.amtDue) / 1000000000000 * stats[0].ticker.price;
-        // if (yMin == yMax) yMin = 0;
+        yMin = (stats[stats.length - 1].stats.amtPaid + stats[stats.length - 1].stats.amtDue) / 1000000000000 * stats[0].ticker.price;
+        if (yMin == yMax) yMin = 0;
     }
 
     // add points to array
@@ -352,7 +339,6 @@ function redrawGraph(stats, numWorkers) {
         }
     }
     firstLoad = false;
-    statsReady = true;
 }
 
 function pullData() {
@@ -365,35 +351,27 @@ function pullData() {
 
             var numWorkers = Object.keys(stats[0].miners).length - 1;
 
-            exchangeRate = stats[0].ticker.price;
-
             redrawGraph(stats, numWorkers);
-
-            // re-render all the labels and stuff
-            $("#x-label").text(labels[graphMode]);
-
-            var l1, l2 = "";
-            switch (graphMode) {
-                case HASHRATE:
-                    l1 = yMax.toFixed(2);
-                    l2 = yMin.toFixed(2);
-                    break;
-                case PEOPLEMINING:
-                    l1 = yMax.toFixed(0);
-                    l2 = yMin.toFixed(0);
-                    break;
-                case TOTALRAISED:
-                    l1 = "$" + yMax.toFixed(2);
-                    l2 = "$" + yMin.toFixed(2);
-                    break;
-            }
-            $("#yTopLabel").text(l1);
-            $("#yBottomLabel").text(l2);
-
         }
     });
 }
 
+function getExchangeStats() {
+    $.ajax({
+        url: "https://api.cryptonator.com/api/ticker/xmr-usd",
+        type: 'get',
+        cache: false,
+        success: function(exchangestats) {
+
+            console.log(exchangestats);
+
+            exchangeRate = exchangestats.ticker.price;
+
+            pullData();
+        }
+    });
+
+}
 
 // Pull data every 2 seconds
 // setInterval(getExchangeStats, 5 * 1000)
