@@ -14,7 +14,7 @@ const XMR_CHANGE = [0.95, 1.05];
 const POP_SIZE = 52465;
 const MONTHLY_POP = Math.round(POP_SIZE/12);
 const ADJUSTED_FTA = 0.07;
-const MONTHLY_USD_PER_MINER = [3, 5];
+const MONTHLY_USD_PER_MINER = [1, 4];
 const BAIL_RANGES = [
   [1, 25],
   [25, 499],
