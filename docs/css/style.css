@@ -267,6 +267,12 @@ h2 {
   width: 6em;
 }
 
+.footer-nav a {
+    float left;
+    list-style-type: square;
+    text-transform: uppercase;
+}
+
 @media only screen and (min-width: 655px) {
     .mobile {
         display: none;
