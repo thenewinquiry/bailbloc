@@ -89,7 +89,7 @@ h2 {
     margin-top: 0.2em;
 }
 
-#money-raised-holder {
+#money-raised-holder, .footer-nav {
     padding: 1em 0;
     text-transform: uppercase;
     font-size: 18px;
@@ -106,7 +106,7 @@ h2 {
     margin: 0 0 0.5em 0;
 }
 
-#money-raised-holder a:before {
+#money-raised-holder a:before, .footer-nav a:before {
     content: ' ';
     background: red;
     display: inline-block;
@@ -115,8 +115,12 @@ h2 {
     margin-right: 0.4em;
 }
 
+.footer-nav a {
+    margin-right: 0.8em;
+}
+
 #money-raised,
-#active-users {
+#active-users, {
     font-size: 22px;
     font-weight: bold;
 }
