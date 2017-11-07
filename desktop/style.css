@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    pointer-events: none;
 }
 
 *:focus {
@@ -10,7 +9,6 @@
 a {
     color: red;
     text-decoration: none;
-    pointer-events: all;
 }
 
 a:hover {
@@ -59,6 +57,7 @@ p {
     top: 41px;
     height:480px;
     width:1px;
+    pointer-events: none;
 }
 
 #stats-date {
@@ -76,6 +75,8 @@ p {
 #scrub-actual, #scrub-friends {
     position:absolute;
     z-index:99;
+    pointer-events: none;
+    background-color: rgb(255, 255, 0);
 }
 
 
@@ -83,7 +84,8 @@ p {
 #yTopLabel,
 #yBottomLabel,
 #stats-modes,
-#mouse-info {
+#mouse-info,
+#invite {
     position: absolute;
 }
 
@@ -140,6 +142,27 @@ p {
     font-size:inherit;
 }
 
+#invite {
+    font-size:15px;
+    bottom: 0px;
+    text-transform: uppercase;
+    right:40px;
+    text-align: right;
+    height: 46px;
+/*    background-color:#ff0;
+*/}
+#invite, #x-colors img {
+    width:20px;
+    float:right;
+    margin-left:4px;
+    margin-top:-2px;
+}
+#x-colors a img {
+    opacity:.5;
+}
+#x-colors a img:hover {
+    opacity:1;
+}
 #yTopLabel {
     width: 70px;
     top: 38px;
