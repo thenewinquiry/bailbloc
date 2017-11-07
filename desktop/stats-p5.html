@@ -6,7 +6,6 @@
     <title>Stats</title>
     <link rel="stylesheet" href="style.css">
     <style>
-
     html,
     body {
         margin: 0px;
@@ -14,65 +13,64 @@
         width: 100%;
         height: 100%;
     }
-    
     </style>
 </head>
 
 <body>
     <div id="stats-text">
-      <p><span id="numWorkers">0</span> people using Bail Bloc</p>
-      <p><span id="totalUSD">$0</span> raised so far</p>
-      <p><span id="peopleFree">0</span> people out on bail</p>
+        <p><span id="numWorkers">0</span> people using Bail Bloc</p>
+        <p><span id="totalUSD">$0</span> raised so far</p>
+        <p><span id="peopleFree">0</span> people out on bail</p>
     </div>
-
     <div id="x-colors">
-      <div style="color:#f00;display:inline">■ </div><div id="x-label">current hashrate (kH/s)</div><br>
-      <div style="color:#ffc8c8;display:inline">■ </div>if everyone invited 5 friends
+        <div style="color:#f00;display:inline">■ </div>
+        <div id="x-label">current hashrate (kH/s)</div>
+        <br>
+        <div style="color:#ffc8c8;display:inline">■ </div>if everyone invited 3 friends
+        <a href="https://www.facebook.com/dialog/feed?app_id=140586622674265&link=https://bailbloc.thenewinquiry.com&name=BAIL%20BLOC&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html" target="_blank"><img src="assets/social/fb.png"></a>
+
+        <a href="https://twitter.com/intent/tweet?text=DOWNLOAD %23BAILBLOC%0AInstall the app, volunteer unused computing power, get people out of jail with cryptocurrency&url=http://bailbloc.thenewinquiry.com" target="_blank"><img src="assets/social/twitter.png"></a>
     </div>
 
     <div id="stats-line">
-      
     </div>
-
     <div id="stats-date">
-      
     </div>
-
     <div id="scrub-actual">
-      
     </div>
-
     <div id="scrub-friends">
-      
     </div>
-
     <div id="yTopLabel">
-      5.61
+        5.61
     </div>
-
     <div id="yBottomLabel">
-      0.00
+        0.00
     </div>
-
     <div id="mouse-info">
-      <div id="val">
-        
-      </div>
-      <div id="date">
-        
-      </div>
+        <div id="val">
+        </div>
+        <div id="date">
+        </div>
     </div>
-
     <div id="stats-modes">
-      display as: 
-      <a href="#" onclick="changeMode(0);return false;">hashrate</a> | 
-      <a href="#" onclick="changeMode(1);return false;">people participating</a> |
-      <a href="#" onclick="changeMode(2);return false;">money raised</a>
+        display as:
+        <a href="#" onclick="changeMode(0);return false;">money raised</a> |
+        <a href="#" onclick="changeMode(2);return false;">hashrate</a> |
+        <a href="#" onclick="changeMode(1);return false;">people participating</a>
     </div>
-
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="p5.min.js"></script>
     <script src="stats-p5.js"></script>
+
+    <script>
+    const shell = require('electron').shell;
+
+    // assuming $ is jQuery
+    $(document).on('click', 'a[href^="http"]', function(event) {
+        event.preventDefault();
+        shell.openExternal(this.href);
+    });
+    </script>
 
 </body>
 
