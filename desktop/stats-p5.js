@@ -42,7 +42,7 @@ function preload() {
 
 function setup() {
     // put setup code here
-    createCanvas(680, 480);
+    createCanvas(588, 305);
     // createCanvas(windowWidth, windowHeight);
     background(255);
     strokeWeight(3);
@@ -183,8 +183,8 @@ function mouseMoved() {
         var valToPrint = gp[pointInQuestion].val;
         if (graphMode == TOTALRAISED) valToPrint = "$" + gp[pointInQuestion].val;
 
-        var y = gp[pointInQuestion].y + 10;
-        var x = mouseX + 80;
+        var y = gp[pointInQuestion].y + $("#defaultCanvas0").offset().top - 18;
+        var x = mouseX + 120;
 
         $("#stats-line").css("left", x + "px");
 
@@ -194,7 +194,7 @@ function mouseMoved() {
 
         y = height - (height - gp[pointInQuestion].y) * friendsMultiplier;
         //y = map(gp[pointInQuestion].val * friendsMultiplier, yMin, yMax, height, 0);
-        y += 14;
+        y += $("#defaultCanvas0").offset().top - 18;
         y = constrain(y, 40, height);
         $("#scrub-friends").offset({ top: y, left: x });
         valToPrint *= friendsMultiplier;
@@ -385,7 +385,7 @@ function pullData() {
             redrawGraph(stats, numWorkers);
 
             // re-render all the labels and stuff
-            $("#x-label").text(labels[graphMode]);
+            $("#xaxis-label-actual div").text(labels[graphMode]);
 
             var l1, l2 = "";
             switch (graphMode) {
@@ -403,8 +403,8 @@ function pullData() {
                     break;
             }
 
-            $("#yTopLabel").text(l1);
-            $("#yBottomLabel").text(l2);
+            $("#yaxis-label-top").text(l1);
+            $("#yaxis-label-bottom").text(l2);
 
         }
     });
