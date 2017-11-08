@@ -263,7 +263,7 @@ app.on('ready', () => {
 
   tray.setContextMenu(contextMenu);
 
-  tray.on('mouse-enter', hideWelcome);
+  // tray.on('mouse-enter', hideWelcome);
 
   function hideWelcome() {
     if (windows['welcome.html']) {
@@ -278,17 +278,16 @@ app.on('ready', () => {
 
   updateSettings({timesRun: mySettings.timesRun + 1});
 
-  // disabling windows welcome screen until we can fix the positioning
-  if (mySettings.timesRun <= 2) {
+  if (mySettings.timesRun < 2) {
     let welcomeWindow = makeWindow('welcome.html', {
       alwaysOnTop: true,
-      frame: false,
-      transparent: true,
+      // frame: false,
+      // transparent: true,
       width: 400,
       height: 300
     });
     let positioner = new Positioner(welcomeWindow);
-    positioner.move('trayCenter', tray.getBounds());
+    positioner.move('center', tray.getBounds());
     welcomeWindow.trayBounds = tray.getBounds();
   }
 
