@@ -16,6 +16,11 @@ a:hover {
     color: #fff;
 }
 
+a.no-hover:hover {
+  background: none !Important;
+  color: red;
+}
+
 body {
     margin: 0;
     padding: 20px;
