@@ -89,6 +89,12 @@ h2 {
     margin-top: 0.2em;
 }
 
+.notice {
+    border: .2em solid red;
+    margin: 0em 7.5em;
+    padding: 1em 1.5em;
+}
+
 #money-raised-holder, .footer-nav {
     padding: 1em 0;
     text-transform: uppercase;
@@ -313,6 +319,10 @@ h2 {
 
     #logo img {
         width: 80%;
+    }
+
+    .notice {
+        margin: .5em;
     }
 
     .partners {
