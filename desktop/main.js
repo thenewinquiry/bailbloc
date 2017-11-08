@@ -224,7 +224,7 @@ app.on('ready', () => {
       click() {
         let aboutWindow = makeWindow('about.html', {
           width: 300,
-          height: 270,
+          height: 300,
           resizable: false,
           minimizable: false,
           maximizable: false
