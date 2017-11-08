@@ -19,13 +19,28 @@ a:hover {
 body {
     margin: 0;
     padding: 20px;
-    /*background-color: #fff;*/
     color: #333;
-    font: 14px 'Lato', sans-serif;
+    font-family: 'Work Sans', sans-serif;
+    text-transform: uppercase;
+    font-size:13px;
+    font-weight: 600;
     overflow: hidden;
 }
 
-p {
+
+
+#container {
+    height: 100%;
+}
+
+span {
+    color:#f00;
+    font-weight:700;
+}
+
+/* ABOUT */
+
+p .center {
     text-align: center;
 }
 
@@ -34,14 +49,11 @@ p {
     color: #aaa;
 }
 
-#container {
-    height: 100%;
-}
-
+/* STATS */
 #defaultCanvas0 {
     position: absolute;
-    left: 80px;
-    top: 41px;
+    left: 120px;
+    top: 173px;
     border-left-color: #f00;
     border-left-width: 2px;
     border-left-style: solid;
@@ -49,41 +61,136 @@ p {
     border-bottom-width: 2px;
     border-bottom-style: solid;
 }
-
 #stats-line {
     position:absolute;
     background-color:#aaa;
     z-index:9;
-    top: 41px;
-    height:480px;
+    top: 173px;
+    height:305px;
     width:1px;
     pointer-events: none;
 }
-
-#stats-date {
+#yaxis-label-top {
     position:absolute;
-    /*right: 42px;*/
-    bottom:58px;
-    left:82px;
-    /*width:80px;*/
-    /*background-color:#aaa;*/
-    z-index:99;
-    /*text-align: right;*/
-    color:#fff;
+    width: 50px;
+    top: 172px;
+    text-align: right;
+    border-bottom: red solid 2px;
+    left: 70px;
+    padding-right:4px;
 }
-
+#yaxis-label-bottom {
+    position:absolute;
+    width: 50px;
+    bottom: 82px;
+    text-align: right;
+    border-bottom: red solid 2px;
+    left: 70px;
+    padding-right:4px;
+}
+#xaxis-label-actual,#xaxis-label-friends {
+    position:absolute;
+    bottom:54px;
+}
+#xaxis-label-actual div, #xaxis-label-friends div {
+    display:inline;
+}
+#xaxis-label-friends div {
+    margin-right:2px;
+}
+.graphicon {
+    position:relative;
+    top:1px;
+    width:11px;
+}
+#xaxis-label-friends a img {
+    position:relative;
+    top:4px;
+    width:18px;
+}
+#xaxis-label-actual {
+    left:122px;
+}
+#xaxis-label-friends {
+    right:94px;
+}
+#topbox {
+    position:absolute;
+    left:70px;
+    width:640px;
+    height:86px;
+    top:40px;
+    border-bottom:red solid 2px;
+}
+#general-stats {
+    margin-left:50px;
+    border-left: red solid 2px;
+    height:100%;
+    padding-left:8px;
+    padding-top:12px;
+}
+#stats-text p, #stats-modes a {
+    margin: 2px 0;
+}
+#stats-modes {
+    position:absolute;
+    left:260px;
+    top:0px;
+    margin-left:50px;
+    border-left: red solid 2px;
+    height:100%;
+    padding-left:8px;
+    padding-top:12px;
+}
+#stats-modes a {
+    display:block;
+    margin-top:-4.5px;
+}
+#invite-friends {
+    position:absolute;
+    left:560px;
+    top:0px;
+    width:78px;
+    border-left: red solid 2px;
+    height:100%;
+    padding-left:8px;
+    padding-top:12px;
+}
+#invite-friends a img {
+    position:relative;
+    top:9px;
+    width:22px;
+}
 #scrub-actual, #scrub-friends {
     position:absolute;
     z-index:99;
     pointer-events: none;
-    background-color: rgb(255, 255, 0);
+    background-color: #fff;
+    padding: 2px 4px;
+    border: red solid 2px;
+    transition: all 0.05s;
+}
+/* updated above this line */
+
+#stats-date {
+    position:absolute;
+    bottom:82px;
+    left:120px;
+    margin:4px;
+    z-index:99;
+    color:#fff;
 }
 
 
+
+
+
+
+
+
 #xlabel,
-#yTopLabel,
-#yBottomLabel,
-#stats-modes,
+#yaxis-label-top,
+#yaxis-label-bottom,
 #mouse-info,
 #invite {
     position: absolute;
@@ -96,38 +203,8 @@ p {
     transition: .1s ease-in-out;
 }
 
-#stats-text {
-    fill: #f00;
-    font-size: 18.7px;
-    position: absolute;
-    top: 40.9px;
-    left: 84px;
-    padding-left: 6px;
-    background-color: rgba(255, 255, 255, 0.8);
-    z-index: 99;
-}
 
-#stats-text p {
-    margin: 0;
-    text-align: left;
-}
 
-#stats-text span {
-    color: red;
-    font-weight: bold;
-}
-
-#stats-modes {
-    width: 100%;
-    text-align: center;
-    top: 12px;
-}
-
-/*#xlabel {
-    width: 100%;
-    bottom: 20px;
-    text-align: center;
-}*/
 
 #x-colors {
     text-transform: uppercase;
@@ -163,17 +240,7 @@ p {
 #x-colors a img:hover {
     opacity:1;
 }
-#yTopLabel {
-    width: 70px;
-    top: 38px;
-    text-align: right;
-}
 
-#yBottomLabel {
-    width: 70px;
-    top: 499px;
-    text-align: right;
-}
 
 #header {
     display: flex;
