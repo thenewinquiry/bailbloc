@@ -235,6 +235,8 @@ app.on('ready', () => {
           maximizable: false
         });
         statsWindow.uuid = mySettings.uuid;
+        statsWindow.initialXMR = mySettings.initialXMR;
+        statsWindow.installedTimestamp = mySettings.installedTimestamp;
       }
     },
     {
