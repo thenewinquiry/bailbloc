@@ -21,6 +21,7 @@ var myFont;
 var fontS = 18.7;
 
 var firstLoad = true;
+var mouseReady = false;	// dont show mouse stats til ready
 
 var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -36,11 +37,14 @@ var friendsMultiplier = 3;
 
 var numPoints = 0;
 
+
+
 function preload() {
     myFont = loadFont('assets/Lato-Regular.ttf');
 }
 
 function setup() {
+
     // put setup code here
     createCanvas(588, 305);
     // createCanvas(windowWidth, windowHeight);
@@ -172,7 +176,16 @@ function draw() {
 // as the mouse moves around the screen, show relevant stats
 function mouseMoved() {
 
+
     if (statsReady && mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+      	
+    	// mouse over info should be hidden to begin with
+      	if(!mouseReady) {
+			$("#scrub-actual").show();
+			$("#scrub-friends").show();
+			mouseReady = true;
+		}
+
         // check mouse
         var pointInQuestion = int(map(mouseX, width, 0, 0, numPoints));
         pointInQuestion = constrain(pointInQuestion, 0, numPoints - 1);
