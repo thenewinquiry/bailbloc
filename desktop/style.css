@@ -15,7 +15,7 @@ a:hover {
     background-color: red;
     color: #fff;
 }
-
+a:hover img { background-color: #fff; }
 body {
     margin: 0;
     padding: 20px;
@@ -132,6 +132,10 @@ p .center {
 #stats-text p, #stats-modes a {
     margin: 2px 0;
 }
+#stats-modes img {
+    width:10px;
+    margin-right:4px;
+}
 #stats-modes {
     position:absolute;
     left:260px;
@@ -144,7 +148,7 @@ p .center {
 }
 #stats-modes a {
     display:block;
-    margin-top:-4.5px;
+    padding-right:2px;
 }
 #invite-friends {
     position:absolute;
@@ -162,6 +166,7 @@ p .center {
     width:22px;
 }
 #scrub-actual, #scrub-friends {
+    display:none;
     position:absolute;
     z-index:99;
     pointer-events: none;
@@ -170,6 +175,7 @@ p .center {
     border: red solid 2px;
     transition: all 0.05s;
 }
+
 /* updated above this line */
 
 #stats-date {
@@ -196,12 +202,7 @@ p .center {
     position: absolute;
 }
 
-#mouse-info {
-    background-color: rgba(255, 255, 255, 0.8);
-    z-index: 999;
 
-    transition: .1s ease-in-out;
-}
 
 
 

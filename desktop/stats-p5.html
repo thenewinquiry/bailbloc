@@ -46,9 +46,15 @@
         </div>
         <div id="stats-modes">
             display as
-            <a href="#" onclick="changeMode(0);return false;">◾ money raised</a>
-            <a href="#" onclick="changeMode(2);return false;">◾ hashrate</a>
-            <a href="#" onclick="changeMode(1);return false;">◾ people participating</a>
+            <div id="stats-text">
+                <p><a href="#" onclick="changeMode(0);return false;"><img src="assets/pages/redsquare.png">money raised</a></p>
+                <p><a href="#" onclick="changeMode(2);return false;"><img src="assets/pages/redsquare.png">hashrate</a></p>
+                <p><a href="#" onclick="changeMode(1);return false;"><img src="assets/pages/redsquare.png">people participating</a></p>
+            </div>
+            <!-- display as
+            <p>money raised</a>
+            <p>hashrate</a>
+            <p>people participating</a> -->
         </div>
         <div id="invite-friends">
             invite friends
@@ -84,6 +90,8 @@
         event.preventDefault();
         shell.openExternal(this.href);
     });
+
+
     </script>
 </body>
 
