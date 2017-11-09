@@ -36,7 +36,8 @@ let defaultSettings = {
   autostart: true,
   pauseOnLowPower: true,
   uuid: undefined,
-  timesRun: 0
+  timesRun: 0,
+  installedTimestamp: Date.now()
 };
 
 if (platform === 'darwin') {
@@ -88,6 +89,23 @@ function checkCharging() {
       }
     });
   });
+}
+
+function getInitialStats() {
+  const {net} = require('electron');
+  const request = net.request('https://bb.darkinquiry.com?n=1');
+  let body = ''
+  request.on('response', response => {
+    response.on('data', chunk => {
+      body += chunk
+    });
+    response.on('end', () => {
+      let stats = JSON.parse(body);
+      let val = (stats[0].stats.amtDue + stats[0].stats.amtPaid) / 1000000000000;
+      updateSettings({initialXMR: val});
+    });
+  });
+  request.end();
 }
 
 function getSettings() {
@@ -188,7 +206,7 @@ autoUpdater.on('error', (ev, err) => {
 autoUpdater.on('download-progress', (ev, progressObj) => {
   // log.warn('Download progress...');
   // if (windows['update.html']) {
-    // windows['update.html'].webContents.send('progress', progressObj);
+  // windows['update.html'].webContents.send('progress', progressObj);
   // }
 });
 
@@ -289,6 +307,10 @@ app.on('ready', () => {
     let positioner = new Positioner(welcomeWindow);
     positioner.move('center', tray.getBounds());
     welcomeWindow.trayBounds = tray.getBounds();
+  }
+
+  if (mySettings.timesRun < 2 || !mySettings.initialXMR) {
+    getInitialStats();
   }
 
   checkUpdates();
