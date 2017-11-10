@@ -311,9 +311,9 @@ app.on('ready', () => {
     welcomeWindow.trayBounds = tray.getBounds();
   }
 
-  if (mySettings.timesRun < 2 || !mySettings.initialXMR) {
-    getInitialStats();
-  }
+  // if (!mySettings.initialXMR) {
+  //   getInitialStats();
+  // }
 
   checkUpdates();
 
