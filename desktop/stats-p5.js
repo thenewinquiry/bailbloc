@@ -1,8 +1,20 @@
 /* to do:
 
-optimize; graph doesnt need to keep drawing if things arent changing
++ optimize; graph doesnt need to keep drawing if things arent changing
++ include stats since joining, to make the individual feel good n warm
++ "initialXMR" is the only relevant var ATM
++ check to see if the "amount of money since joining" stuff is null, like if they installed while
+  offline. if so, update those vals
+  update() {
+                ipcRenderer.send('changeSettings', {
+                    whateverVal : 12
+                });
+            }
 
 */
+
+const { ipcRenderer, remote } = require('electron');
+let currentWindow = remote.getCurrentWindow();
 
 const $ = require('./jquery.min.js');
 var walletAddress = "442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdySiMizGTJ56ScZUyugpSeV6hx19QohZTmjuWiM";
@@ -21,7 +33,7 @@ var myFont;
 var fontS = 18.7;
 
 var firstLoad = true;
-var mouseReady = false;	// dont show mouse stats til ready
+var mouseReady = false; // dont show mouse stats til ready
 
 var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -44,6 +56,12 @@ function preload() {
 }
 
 function setup() {
+    // check if this doesnt exist!!
+    // do something with these... so people feel special.
+    // console.log(currentWindow.initialXMR);
+    // console.log(currentWindow.installedTimestamp);
+
+
 
     // put setup code here
     createCanvas(588, 305);
@@ -78,8 +96,6 @@ function draw() {
     background(255);
 
     if (statsReady) {
-        // lastX = gp[0].x;
-        // lastY = gp[0].y;
 
         // 5 friends
         if (friendsMode) {
@@ -156,35 +172,22 @@ function draw() {
         for (var i = 0; i < gp.length; i++) {
             if (!gp[i].inPosition) {
                 gp[i].getIntoPosition();
-                // gp[i].display(color(255, 0, 0));
-
-            } else {
-                //gp[i].getIntoPosition();
-                // gp[i].display(color(255, 0, 0));
-                // gp[i].checkMouse();
             }
-
-            // lastX = gp[i].x;
-            // lastY = gp[i].y;
         }
     }
-
-
-
 }
 
 // as the mouse moves around the screen, show relevant stats
 function mouseMoved() {
 
-
     if (statsReady && mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-      	
-    	// mouse over info should be hidden to begin with
-      	if(!mouseReady) {
-			$("#scrub-actual").show();
-			$("#scrub-friends").show();
-			mouseReady = true;
-		}
+
+        // mouse over info should be hidden to begin with
+        if (!mouseReady) {
+            $("#scrub-actual").show();
+            $("#scrub-friends").show();
+            mouseReady = true;
+        }
 
         // check mouse
         var pointInQuestion = int(map(mouseX, width, 0, 0, numPoints));
@@ -199,7 +202,7 @@ function mouseMoved() {
         var y = gp[pointInQuestion].y + $("#defaultCanvas0").offset().top - 18;
         var x = mouseX + 120;
 
-        $("#stats-line").css("left", x + "px");
+        $("#scrub-line").css("left", x + "px");
 
         $("#stats-date").text(gp[pointInQuestion].label);
         $("#scrub-actual").offset({ top: y, left: x });
@@ -418,6 +421,17 @@ function pullData() {
 
             $("#yaxis-label-top").text(l1);
             $("#yaxis-label-bottom").text(l2);
+
+            // individual stats
+            // var raised = (currentWindow.initialXMR * stats[0].ticker.price).toFixed(2);
+
+            // var date = new Date(currentWindow.installedTimestamp * 1000);
+            // var month = date.getMonth();
+            // var day = date.getDate();
+            // var formattedTime = monthNames[month] + ' ' + day;
+
+            // $("#individual-raised").text(raised);
+            // $("#individual-date").text(formattedTime);
 
         }
     });
