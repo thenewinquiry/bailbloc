@@ -12,10 +12,15 @@ body {
     display:flex;
 }
 
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
 /* START PREVIEW BLOCK */
 /* START PREVIEW BLOCK */
 /* START PREVIEW BLOCK */
-body {
+.container {
     display: none;
 }
 
@@ -77,11 +82,6 @@ a:hover {
 
 a.no-hover:hover {
     background: none;
-}
-
-.container {
-    max-width: 800px;
-    margin: auto;
 }
 
 header {
