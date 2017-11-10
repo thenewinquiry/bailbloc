@@ -376,6 +376,10 @@ input[type=number] {
         display: block;
     }
 
+    body {
+        margin-top:4px;
+    }
+
     .margin-right {
         display: none;
     }
