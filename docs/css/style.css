@@ -62,14 +62,21 @@ h2 {
     text-transform: uppercase;
 }
 
-.footer {
+footer {
     margin-top: 60px;
     padding-top: 20px;
     border-top: 1px solid #ccc;
+    text-align: center;
 }
 
-.sub-footer {
-    margin-top: 30px;
+.footnotes ol {
+    margin: 15px 0px 60px;
+    text-align: center;
+}
+
+.footer-nav {
+    margin: 20px 0px 30px;
+    text-align: center;
 }
 
 .section h1:before {
@@ -242,6 +249,13 @@ h2 {
     margin-right: 50px;
     margin-bottom: 50px;
     margin-left: -150px;
+}
+
+input[type=number] {
+    color: red;
+    font-weight: bold;
+    font-family: 'Work Sans', sans-serif;
+    font-size: .8em;
 }
 
 .sim-results, .sim-status {
