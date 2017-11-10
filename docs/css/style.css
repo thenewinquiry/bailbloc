@@ -25,6 +25,11 @@ body {
     display: none;
 }
 
+#walkthru img {
+    width:80%;
+    margin-left:10%;
+}
+
 .preview-form {
     font-family: 'Work Sans', sans-serif;
     font-weight: bold;
