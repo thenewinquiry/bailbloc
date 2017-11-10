@@ -71,10 +71,12 @@ footer {
 
 .footnotes ol {
     margin: 15px 0px 60px;
+    text-align: center;
 }
 
 .footer-nav {
     margin: 20px 0px 30px;
+    text-align: center;
 }
 
 .section h1:before {
