@@ -84,6 +84,7 @@ function setup() {
 
 
     pullData();
+    pullDataFromThisMoment();
 
 }
 
@@ -268,13 +269,6 @@ function redrawGraph(stats, numWorkers) {
     // USD
     var totalUSD = totalXMR * stats[0].ticker.price;
 
-    // people free
-    var peopleFree = (totalUSD / 910).toFixed(0);
-
-    $("#numWorkers").text(numWorkers);
-    $("#totalUSD").text("$" + totalUSD.toFixed(0));
-    $("#peopleFree").text(peopleFree);
-
     // useful intel:
 
     // nuheighter of miners:
@@ -432,6 +426,34 @@ function pullData() {
 
             // $("#individual-raised").text(raised);
             // $("#individual-date").text(formattedTime);
+
+        }
+    });
+}
+
+
+function pullDataFromThisMoment() {
+    $.ajax({
+        url: "https://bb.darkinquiry.com?n=1",
+        type: 'get',
+        cache: false,
+        success: function(stats) {
+            // console.log(stats);
+
+            var numWorkers = Object.keys(stats[0].miners).length - 1;
+
+            // total raised XMR:
+            var totalXMR = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000;
+
+            // USD
+            var totalUSD = totalXMR * stats[0].ticker.price;
+
+            // people free
+            var peopleFree = (totalUSD / 910).toFixed(0);
+
+            $("#numWorkers").text(numWorkers);
+            $("#totalUSD").text("$" + totalUSD.toFixed(0));
+            $("#peopleFree").text(peopleFree);
 
         }
     });
