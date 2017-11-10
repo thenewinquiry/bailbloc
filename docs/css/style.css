@@ -6,10 +6,11 @@
 
 body {
     font: 16px 'Work Sans', sans-serif;
-    margin: 40px 20px;
     color: #333;
     word-break: keep-all;
-    display:flex;
+    margin-top:40px;
+    /*display:flex;
+    margin: 40px 20px;*/
 }
 
 .container {
