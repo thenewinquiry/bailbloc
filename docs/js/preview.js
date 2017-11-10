@@ -23,7 +23,7 @@ console.log("starting preview");
 console.log("yay" === null);
 
 if (readCookie("bbprviewcookie") === "yay") {
-    $('.container').css("display", "flex");
+    $('.container').css("display", "block");
 } else {
     $('body').append( 
         "<div class='preview-form'><div class='preview-instructions'><p class='preview-title'>PROTECTED PAGE</p><p></p></div><form id='preview-form' action='#' method='post'><input id='preview-password' type='password' name='password' placeholder='passphrase'autofocus/><input type='submit' class='preview-submit' value='DECRYPT'/></form></div>"
