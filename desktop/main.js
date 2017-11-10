@@ -244,7 +244,7 @@ app.on('ready', () => {
       click() {
         let aboutWindow = makeWindow('about.html', {
           width: 300,
-          height: 300,
+          height: 284,
           resizable: false,
           minimizable: false,
           maximizable: false
@@ -258,7 +258,7 @@ app.on('ready', () => {
       click() {
         let settingsWin = makeWindow('settings.html', {
           width: 300,
-          height: 314,
+          height: 284,
           resizable: false,
           minimizable: false,
           maximizable: false
@@ -304,7 +304,7 @@ app.on('ready', () => {
       // frame: false,
       // transparent: true,
       width: 400,
-      height: 300
+      height: 350
     });
     let positioner = new Positioner(welcomeWindow);
     positioner.move('center', tray.getBounds());

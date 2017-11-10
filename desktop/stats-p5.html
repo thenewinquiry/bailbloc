@@ -19,11 +19,12 @@
 
 <body>
     <!-- updated -->
+    <!-- <div id="individual">
+        $<div id="individual-raised"></div> has been raised since you joined on <div id="individual-date"></div>
+    </div> -->
     <div id="yaxis-label-top">
-        5.61
     </div>
     <div id="yaxis-label-bottom">
-        0.00
     </div>
     <div id="xaxis-label-actual">
         <img class="graphicon" src="assets/pages/cute-graph.png">
@@ -51,10 +52,6 @@
                 <p><a href="#" onclick="changeMode(2);return false;"><img src="assets/pages/redsquare.png">hashrate</a></p>
                 <p><a href="#" onclick="changeMode(1);return false;"><img src="assets/pages/redsquare.png">people participating</a></p>
             </div>
-            <!-- display as
-            <p>money raised</a>
-            <p>hashrate</a>
-            <p>people participating</a> -->
         </div>
         <div id="invite-friends">
             invite friends
@@ -65,19 +62,13 @@
     </div>
     <div id="stats-date">
     </div>
-    <!-- not updated -->
-    <div id="stats-line">
+    <div id="scrub-line">
     </div>
     <div id="scrub-actual">
     </div>
     <div id="scrub-friends">
     </div>
-    <div id="mouse-info">
-        <div id="val">
-        </div>
-        <div id="date">
-        </div>
-    </div>
+    
     
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="p5.min.js"></script>
@@ -85,7 +76,7 @@
     <script>
     const shell = require('electron').shell;
 
-    // assuming $ is jQuery
+    // make links load in external browser
     $(document).on('click', 'a[href^="http"]', function(event) {
         event.preventDefault();
         shell.openExternal(this.href);
