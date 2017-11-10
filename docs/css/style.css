@@ -62,14 +62,19 @@ h2 {
     text-transform: uppercase;
 }
 
-.footer {
+footer {
     margin-top: 60px;
     padding-top: 20px;
     border-top: 1px solid #ccc;
+    text-align: center;
 }
 
-.sub-footer {
-    margin-top: 30px;
+.footnotes ol {
+    margin: 15px 0px 60px;
+}
+
+.footer-nav {
+    margin: 20px 0px 30px;
 }
 
 .section h1:before {
