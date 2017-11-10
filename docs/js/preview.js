@@ -25,7 +25,7 @@ console.log("yay" === null);
 if (readCookie("bbprviewcookie") === "yay") {
     $('.container').css("display", "flex");
 } else {
-    $('html').append( 
+    $('body').append( 
         "<div class='preview-form'><div class='preview-instructions'><p class='preview-title'>PROTECTED PAGE</p><p></p></div><form id='preview-form' action='#' method='post'><input id='preview-password' type='password' name='password' placeholder='passphrase'autofocus/><input type='submit' class='preview-submit' value='DECRYPT'/></form></div>"
     );
     document.getElementById('preview-form').addEventListener('submit', function(e) {
