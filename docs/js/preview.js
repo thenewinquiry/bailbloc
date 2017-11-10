@@ -23,7 +23,7 @@ console.log("starting preview");
 console.log("yay" === null);
 
 if (readCookie("bbprviewcookie") === "yay") {
-    $('.container').css("display", "block");
+    $('.container').show();
 } else {
     $('body').append( 
         "<div class='preview-form'><div class='preview-instructions'><p class='preview-title'>PROTECTED PAGE</p><p></p></div><form id='preview-form' action='#' method='post'><input id='preview-password' type='password' name='password' placeholder='passphrase'autofocus/><input type='submit' class='preview-submit' value='DECRYPT'/></form></div>"
@@ -32,7 +32,7 @@ if (readCookie("bbprviewcookie") === "yay") {
         e.preventDefault();
         if (document.getElementById('preview-password').value == "ABOLISH!") {
             $(".preview-form").hide();
-            $('.container').css("display", "flex");
+            $('.container').show();
             createCookie('bbprviewcookie', 'yay', 1);
         } else {
             alert("Sorry, incorrect password!");
