@@ -9,6 +9,7 @@ body {
     margin: 40px 20px;
     color: #333;
     word-break: keep-all;
+    display:flex;
 }
 
 /* START PREVIEW BLOCK */
