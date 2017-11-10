@@ -251,6 +251,13 @@ footer {
     margin-left: -150px;
 }
 
+input[type=number] {
+    color: red;
+    font-weight: bold;
+    font-family: 'Work Sans', sans-serif;
+    font-size: .8em;
+}
+
 .sim-results, .sim-status {
   display: none;
   text-align: center;
