@@ -38,7 +38,7 @@
       </div>
     </header>
    <div class="download-area" style="padding-bottom:8px;">
-            <p><a href="join.html" id="download-button" class="big-button">Join the Bloc</a> </p>  
+            <p><a href="join.html" id="download-button" class="big-button">Download The App</a> </p>  
 <p>VOLUNTEER YOUR COMPUTER'S SPARE POWER TO GET PEOPLE OUT OF JAIL</p>
           </div>
 
@@ -78,7 +78,7 @@
       
       <h2>Credits</h2>
 
-      <p>Bail Bloc was created by <span id="credits">Grayson Earle, Maya Binyam, Francis Tseng, JB Rubinovitz, Sam Lavigne, Rachel Rosenfelt, and the <a href="https://thenewinquiry.com/dark-inquiry/">Dark Inquiry</a> collective.</span></p>
+      <p>Bail Bloc was created by <span id="credits">Grayson Earle, Maya Binyam, Francis Tseng, JB Rubinovitz, Sam Lavigne, Devin Kenny and the <a href="https://thenewinquiry.com/dark-inquiry/">Dark Inquiry</a> collective.</span></p>
 
 
     </div>
@@ -92,7 +92,7 @@
         </ol>
       </div>
       <div class="footer-blurb">
-        <p>Bail Bloc is a project of <a href="http://thenewinquiry.com">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/">Bronx Freedom Fund</a> and the <a href="https://brown.columbia.edu/portfolio/dark-inquiry/">The Brown Institute for Media Innovation at the Columbia Graduate School of Journalism</a>.</p>
+        <p>Bail Bloc is a project of <a href="http://thenewinquiry.com">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/">Bronx Freedom Fund</a> and the <a href="https://brown.columbia.edu">The Brown Institute for Media Innovation at the Columbia Graduate School of Journalism</a>.</p>
         <p><a href="https://thenewinquiry.com/bundle/bail-bloc/">Read TNI's work on policing and mass incarceration here.</a></p>
       </div>
       <div class="footer-nav">
@@ -107,28 +107,7 @@
     </footer>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script>
-      var names = ["Grayson Earle", "JB Rubinovitz", "Maya Binyam", "Francis Tseng", "Sam Lavigne"];
-
-      function shuffle(array) {
-        var currentIndex = array.length,
-          temporaryValue, randomIndex;
-
-        while (0 !== currentIndex) {
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
-        }
-        return array;
-      }
-
-      names = shuffle(names);
-
-      $('#credits').text(names.join(', '));
-    </script>
+    <script src="js/main.js"></script>
 
 </body>
 
