@@ -379,6 +379,7 @@ input[type=number] {
 @media only screen and (max-width: 654px) {
     header {
         display: block;
+        overflow-wrap: break-word;
     }
 
     body {
