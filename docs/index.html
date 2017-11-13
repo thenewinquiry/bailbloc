@@ -77,6 +77,36 @@
       </div>
     </footer>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+        var worker;
+        $('#sim-start').on('click', function() {
+            if (worker) {
+                worker.terminate();
+            }
+            $('.sim-status').show();
+            $('.sim-results').hide();
+            worker = new Worker('js/sim.js');
+            worker.onmessage = function(m) {
+                var results = m.data;
+                $('#sim-raised').text(results.raised.toLocaleString());
+                $('#sim-released').text(results.released.toLocaleString());
+                $('#sim-reduced').text(results.reduced.toLocaleString());
+                $('.sim-results').show();
+                $('.sim-status').hide();
+            };
+            worker.postMessage({
+                nMonths: $('input[name=months]').val(),
+                nMiners: $('input[name=users]').val()
+            });
+        });
+        $('input').on('keydown', function(ev) {
+            if (ev.keyCode == 13) {
+                $('#sim-start').click();
+            }
+        });
+        </script>
 </body>
 <script src="js/preview.js"></script>
+
 </html>
