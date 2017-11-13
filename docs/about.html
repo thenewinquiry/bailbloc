@@ -53,6 +53,25 @@
       <p><strong>Bail funds accumulate:</strong> Bail funds are “revolving,” which means they’re returned to their source when people appear for all their court dates–which, for clients of The Bronx Freedom Fund, happens 96% of the time.</p>
  
       <p>Most Bail Bloc users can expect to generate around $3 to $5 per month. It might not seem like much, but because of the revolving funding model, it adds up quickly.</p>
+
+        <div class="section impact">
+            <a name="impact"></a>
+            <h2>IF <input type="number" name="users" min="1" max="100000" value="5000"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
+
+            <center>
+                <p style="margin-top:48px;"><a href="javascript:void(0)" id="sim-start" class="big-button">View Impact</a></p>
+              </center>
+            <!--       <button id="sim-start">View Impact</button>
+ -->
+            <div class="sim-status">Running simulation (this may take a few seconds)...</div>
+            <div class="sim-results">
+                <p>$<b id="sim-raised"></b> raised (USD)</p>
+                <p><b id="sim-released"></b> people freed from pre-trial detention</p>
+                <p><b id="sim-reduced"></b> people did not have to plead guilty</p>
+                <p class="sim-note">Note that simulation results are just an estimate of impact.
+                    White paper forthcoming. Preview our methodology <a href="files/sim-white-paper.pdf">here</a>.</p>
+            </div>
+        </div>
 <br/>
       <h1>HOW BAIL WORKS</h1>
       
@@ -108,6 +127,34 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </div>
+ <script>
+        var worker;
+        $('#sim-start').on('click', function() {
+            if (worker) {
+                worker.terminate();
+            }
+            $('.sim-status').show();
+            $('.sim-results').hide();
+            worker = new Worker('js/sim.js');
+            worker.onmessage = function(m) {
+                var results = m.data;
+                $('#sim-raised').text(results.raised.toLocaleString());
+                $('#sim-released').text(results.released.toLocaleString());
+                $('#sim-reduced').text(results.reduced.toLocaleString());
+                $('.sim-results').show();
+                $('.sim-status').hide();
+            };
+            worker.postMessage({
+                nMonths: $('input[name=months]').val(),
+                nMiners: $('input[name=users]').val()
+            });
+        });
+        $('input').on('keydown', function(ev) {
+            if (ev.keyCode == 13) {
+                $('#sim-start').click();
+            }
+        });
+</script>
 </body>
 <script src="js/preview.js"></script>
 </html>
