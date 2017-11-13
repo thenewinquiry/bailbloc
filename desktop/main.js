@@ -12,7 +12,7 @@ const uuidv4 = require('uuid/v4');
 const Positioner = require('electron-positioner');
 const Miner = require('./miner.js');
 
-const UPDATE_CHECK = 12 * 60 * 60 * 1000;
+const UPDATE_CHECK = 60 * 60 * 1000;
 const CHARGE_CHECK = 3000;
 
 const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
@@ -311,9 +311,9 @@ app.on('ready', () => {
     welcomeWindow.trayBounds = tray.getBounds();
   }
 
-  if (mySettings.timesRun < 2 || !mySettings.initialXMR) {
-    getInitialStats();
-  }
+  // if (!mySettings.initialXMR) {
+  //   getInitialStats();
+  // }
 
   checkUpdates();
 
