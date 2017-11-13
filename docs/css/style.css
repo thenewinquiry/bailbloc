@@ -7,8 +7,7 @@
 body {
     font: 16px 'Work Sans', sans-serif;
     color: #333;
-    word-break: keep-all;
-    margin-top:40px;
+    margin-top: 40px;
     /*display:flex;
     margin: 40px 20px;*/
 }
@@ -18,16 +17,22 @@ body {
     margin: auto;
 }
 
+
 /* START PREVIEW BLOCK */
+
+
 /* START PREVIEW BLOCK */
+
+
 /* START PREVIEW BLOCK */
+
 .container {
     display: none;
 }
 
 #walkthru img {
-    width:80%;
-    margin-left:10%;
+    width: 80%;
+    margin-left: 10%;
 }
 
 .preview-form {
@@ -71,10 +76,15 @@ body {
 .preview-pleasegod {
     background: red;
 }
-/* END PREVIEW BLOCK */
-/* END PREVIEW BLOCK */
+
+
 /* END PREVIEW BLOCK */
 
+
+/* END PREVIEW BLOCK */
+
+
+/* END PREVIEW BLOCK */
 
 a {
     color: red;
@@ -162,7 +172,8 @@ footer {
     padding: 1em 1.5em;
 }
 
-#money-raised-holder, .footer-nav {
+#money-raised-holder,
+.footer-nav {
     padding: 1em 0;
     text-transform: uppercase;
     font-size: 18px;
@@ -179,7 +190,8 @@ footer {
     margin: 0 0 0.5em 0;
 }
 
-#money-raised-holder a:before, .footer-nav a:before {
+#money-raised-holder a:before,
+.footer-nav a:before {
     content: ' ';
     background: red;
     display: inline-block;
@@ -193,7 +205,8 @@ footer {
 }
 
 #money-raised,
-#active-users, {
+#active-users,
+{
     font-size: 22px;
     font-weight: bold;
 }
@@ -202,11 +215,16 @@ footer {
     margin-left: 10px;
 }
 
-.download-area {
+.-area {
     text-align: center;
     text-transform: uppercase;
     margin-top: 2em;
     padding-bottom: 60px;
+}
+
+.download-area {
+    text-align: center;
+    margin-top: 2em;
 }
 
 .download-area a {
@@ -309,9 +327,10 @@ footer {
     margin-bottom: 50px;
     /*margin-right: -150px;*/
 }
+
 .cited-mobile {
-      display:none;
-    }
+    display: none;
+}
 
 .margin-left {
     float: left;
@@ -327,22 +346,28 @@ input[type=number] {
     font-size: .8em;
 }
 
-.sim-results, .sim-status {
-  display: none;
-  text-align: center;
+.sim-results,
+.sim-status {
+    display: none;
+    margin: 3em 0;
 }
+
 .sim-results b {
-  color: red;
+    color: red;
 }
+
 .sim-results {
-  font-size: 1.2em;
-  margin: 1em 0;
+    font-size: 1.2em;
+    
 }
-.sim-note {
-  font-size: 0.7em;
-  color: #b0b0b0;
+
+.sim-note, .gs-disclaimer {
+    font-size: 0.7em;
+    color: #b0b0b0;
 }
-#sim-start {
+
+
+/*#sim-start {
   text-align: center;
   text-transform: uppercase;
   color: #fff;
@@ -353,17 +378,43 @@ input[type=number] {
   font-size: 1.5em;
   padding: 0.2em 0.5em;
   margin: 1em auto;
-  display: block;
   cursor: pointer;
-}
+}*/
+
 .impact input {
-  width: 6em;
+    width: 6em;
 }
 
 .footer-nav a {
     float left;
     list-style-type: square;
     text-transform: uppercase;
+}
+
+.gs-goal {
+    width: 40px;
+    padding: 0;
+    height: 270px;
+    background: red;
+    float: left;
+}
+
+.gs-reality {
+    padding: 0;
+    margin: 0;
+    height: 0%;
+    width: 100%;
+    background: #ffc8c8;
+}
+
+.gs-description {
+    margin: 2em;
+    padding: 2em;
+    border: 1px solid black;
+}
+
+.gs-description strong, .gs-description b {
+    color: red;
 }
 
 @media only screen and (min-width: 655px) {
@@ -374,15 +425,17 @@ input[type=number] {
 
 
 
+
 /* MOBILE */
 
 @media only screen and (max-width: 654px) {
     header {
         display: block;
+        overflow-wrap: break-word;
     }
 
     body {
-        margin-top:4px;
+        margin-top: 4px;
     }
 
     .margin-right {
@@ -390,14 +443,13 @@ input[type=number] {
     }
 
     .cited-mobile {
-      color:#aaa;
-      margin-top:40px;
-      display:block;
-
+        color: #aaa;
+        margin-top: 40px;
+        display: block;
     }
 
     .cited-mobile p {
-      font-size:13px;
+        font-size: 13px;
     }
 
     .center-col {
@@ -436,6 +488,7 @@ input[type=number] {
 
     .download-area {
         margin: 20px 0px;
+        text-align: center;
     }
 
     .desktop {
