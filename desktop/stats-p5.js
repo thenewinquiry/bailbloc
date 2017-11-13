@@ -63,6 +63,7 @@ function setup() {
 
 
 
+
     // put setup code here
     createCanvas(588, 305);
     // createCanvas(windowWidth, windowHeight);
@@ -84,6 +85,7 @@ function setup() {
 
 
     pullData();
+    pullDataFromThisMoment();
 
 }
 
@@ -271,7 +273,6 @@ function redrawGraph(stats, numWorkers) {
     // people free
     var peopleFree = (totalUSD / 910).toFixed(0);
 
-    $("#numWorkers").text(numWorkers);
     $("#totalUSD").text("$" + totalUSD.toFixed(0));
     $("#peopleFree").text(peopleFree);
 
@@ -432,6 +433,24 @@ function pullData() {
 
             // $("#individual-raised").text(raised);
             // $("#individual-date").text(formattedTime);
+
+        }
+    });
+}
+
+
+function pullDataFromThisMoment() {
+    $.ajax({
+        url: "https://bb.darkinquiry.com?n=1",
+        type: 'get',
+        cache: false,
+        success: function(stats) {
+            // console.log(stats);
+
+            // want # of workers to be up to the minute
+            var numWorkers = Object.keys(stats[0].miners).length - 1;
+            $("#numWorkers").text(numWorkers);
+
 
         }
     });
