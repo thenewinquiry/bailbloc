@@ -7,7 +7,6 @@
 body {
     font: 16px 'Work Sans', sans-serif;
     color: #333;
-    word-break: keep-all;
     margin-top: 40px;
     /*display:flex;
     margin: 40px 20px;*/
@@ -362,7 +361,7 @@ input[type=number] {
     
 }
 
-.sim-note {
+.sim-note, .gs-disclaimer {
     font-size: 0.7em;
     color: #b0b0b0;
 }
@@ -390,6 +389,32 @@ input[type=number] {
     float left;
     list-style-type: square;
     text-transform: uppercase;
+}
+
+.gs-goal {
+    width: 40px;
+    padding: 0;
+    height: 270px;
+    background: red;
+    float: left;
+}
+
+.gs-reality {
+    padding: 0;
+    margin: 0;
+    height: 0%;
+    width: 100%;
+    background: #ffc8c8;
+}
+
+.gs-description {
+    margin: 2em;
+    padding: 2em;
+    border: 1px solid black;
+}
+
+.gs-description strong, .gs-description b {
+    color: red;
 }
 
 @media only screen and (min-width: 655px) {
