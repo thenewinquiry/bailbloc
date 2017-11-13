@@ -14,7 +14,7 @@ const binaries = {
 class Miner {
   constructor(props) {
     this.args = {
-      '--url': '45.55.164.89:8080',
+      '--url': 'mine.xmrpool.net:5555',
       '--user':
         '442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdySiMizGTJ56ScZUyugpSeV6hx19QohZTmjuWiM',
       '--pass': 'persistentID:bailbloc@thenewinquiry.com',
