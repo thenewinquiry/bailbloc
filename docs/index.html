@@ -32,7 +32,6 @@
                 <div id="money-raised-holder">
                     <ul class="nav">
                         <li><a href="about.html">About Bail Bloc</a></li>
-                        <li><a href="impact.html">Calculate Your Impact</a></li>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
@@ -42,7 +41,6 @@
             <p><a href="join.html" id="download-button" class="big-button">Join the Bloc</a> </p>  
 <p>VOLUNTEER YOUR COMPUTER'S SPARE POWER TO GET PEOPLE OUT OF JAIL</p>
           </div>
-          <br>
            <div class="section impact">
             <a name="impact"></a>
             <h2>IF <input type="number" name="users" min="1" max="100000" value="5000"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
@@ -58,13 +56,17 @@
                 <p><b id="sim-released"></b> people freed from pre-trial detention</p>
                 <p><b id="sim-reduced"></b> people did not have to plead guilty</p>
                 <p class="sim-note">Note that simulation results are just an estimate of impact.
-                    White paper forthcoming. Preview our methodology <a href="files/sim-white-paper.pdf">here</a>.</p>
+                    White paper forthcoming. Preview our methodology <a href="files/sim-white-paper.pdf" target="_blank">here</a>.</p>
+
+                    <!-- social -->
+                <a href="javascript:void(0)" onclick="twitter()">share this projection on Twitter<br><br><img src="images/twitter.png" width="50"></a>
+                <!-- <a href="javascript:void(0)" onclick="facebook()"><img src="images/fb.png"></a> -->
             </div>
         </div>
     <footer>
       <div class="footer-blurb">
-         <p>Bail Bloc is a project of <a href="http://thenewinquiry.com">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/">Bronx Freedom Fund</a>.</p>
-        <p><a href="https://thenewinquiry.com/bundle/bail-bloc/">Read TNI's work on policing and mass incarceration here.</a></p>
+         <p>Bail Bloc is a project of <a href="http://thenewinquiry.com" target="_blank">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/" target="_blank">Bronx Freedom Fund</a>.</p>
+        <p><a href="https://thenewinquiry.com/bundle/bail-bloc/" target="_blank">Read TNI's work on policing and mass incarceration here.</a></p>
       </div>
       <div class="footer-nav">
           <a href="https://github.com/thenewinquiry/bailbloc/">Open-Source Code</a>
@@ -105,6 +107,43 @@
                 $('#sim-start').click();
             }
         });
+
+                // social
+
+        function facebook() {
+
+            var raised = $('#sim-raised').text();
+            var released = $('#sim-released').text();
+            var reduced = $('#sim-reduced').text();
+
+            var users = $("input[name=users]").val();
+            var months = $("input[name=months]").val();
+
+            var sentence = "If " + users + " ran Bail Bloc for " + months + "months we could raise $" + raised + "and get " + reduced + " cases dismissed.";
+
+            popUp("https://www.facebook.com/dialog/feed?app_id=140586622674265&link=http://bailbloc.thenewinquiry.com&name=" + sentence + "&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html", 900, 600);
+        }
+
+        function twitter() {
+
+            var raised = $('#sim-raised').text();
+            var released = $('#sim-released').text();
+            var reduced = $('#sim-reduced').text();
+
+            var users = $("input[name=users]").val();
+            var months = $("input[name=months]").val();
+
+            var sentence = "If " + users + " people ran Bail Bloc for " + months + " months, we would raise $" + raised + " and bail " + released + " people out of jail. Join the Bloc";
+
+            popUp("https://twitter.com/intent/tweet?text=" + sentence + "&url=http://bailbloc.thenewinquiry.com", 704, 260);
+        }
+
+        // create pop up windows
+        function popUp(url, _width, _height) {
+            newwindow = window.open(url, 'Join the Bloc!', 'height=' + _height + ',width=' + _width);
+            if (window.focus) { newwindow.focus() }
+            return false;
+        }
         </script>
 </body>
 <script src="js/preview.js"></script>
