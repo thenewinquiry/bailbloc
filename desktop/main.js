@@ -166,13 +166,13 @@ function makeWindow(filename, extraParams) {
     })
   );
 
-  windows[filename].on('close', e => {
-    if (!app.isQuiting) {
-      e.preventDefault();
-      windows[filename].hide();
-    }
-    return false;
-  });
+  // windows[filename].on('close', e => {
+    // if (!app.isQuiting) {
+    //   e.preventDefault();
+    //   windows[filename].hide();
+    // }
+    // return false;
+  // });
 
   windows[filename].on('closed', e => {
     windows[filename] = null;
@@ -331,6 +331,10 @@ app.on('ready', () => {
 app.on('quit', () => {
   miner.stop();
 });
+
+app.on('window-all-closed', () => {
+  return false;
+})
 
 ipcMain.on('changeSettings', (event, arg) => {
   updateSettings(arg);
