@@ -5,8 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "icons":
-      "nicns --in build/logo.png --out build/icon.icns;convert -resize 256x256 build/logo.png build/icon.ico",
+    "icons": "nicns --in build/logo.png --out build/icon.icns;convert -resize 256x256 build/logo.png build/icon.ico",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "buildall": "electron-builder -mw",
@@ -21,6 +20,7 @@
     "node-icns": "0.0.4"
   },
   "dependencies": {
+    "7zip-bin-linux": "^1.1.0",
     "battery-level": "^2.0.1",
     "electron-log": "^2.2.7",
     "electron-positioner": "^3.0.0",
