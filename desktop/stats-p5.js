@@ -451,5 +451,5 @@ function pullDataFromThisMoment() {
     });
 }
 
-// Pull data every 5 seconds
-setInterval(pullData, 5 * 1000)
+// Pull data every so often
+// setInterval(pullData, 240 * 1000)
