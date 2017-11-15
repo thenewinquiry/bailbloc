@@ -6,14 +6,13 @@
     <meta name="description" content="Software that raises money for bail funds.">
     <meta name="author" content="The New Inquiry">
     <title>Bail Bloc</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700" rel="stylesheet">    <link href="css/style.css" rel="stylesheet">
     <!-- open graph for facebook sharing -->
     <meta property="og:title" content="DOWNLOAD BAIL BLOC" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://bailbloc.thenewinquiry.com/" />
     <meta property="og:image" content="http://bailbloc.thenewinquiry.com/images/og-image.png" />
-    <meta property="og:description" content="Bail equates cash with freedom. Bail Bloc breaks the system. Install the app and volunteer your unused computing power to get people out of jail with cryptocurrency. Bail Bloc is brought to you by The New Inquiry, The Bronx Freedom Fund, and the Brown Institute for Media Innovation of the Columbia Graduate School of Journalism." />
+    <meta property="og:description" content="Bail equates cash with freedom. Bail Bloc breaks the system. Install the app and volunteer your unused computing power to get people out of jail with cryptocurrency." />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 
@@ -28,12 +27,11 @@
                     <a href="index.html" id="install-the-app">BAIL BLOC</a> is a cryptocurrency scheme against bail
                 </h1>
                 <h1 class="mobile">
-                    Bail bloc is a cryptocurrency scheme against bail
+          Bail bloc is a crypto-currency scheme against bail
                 </h1>
                 <div id="money-raised-holder">
                     <ul class="nav">
                         <li><a href="about.html">About Bail Bloc</a></li>
-                        <li><a href="impact.html">Calculate Your Impact</a></li>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
@@ -44,10 +42,31 @@
               class="big-button">DOWNLOAD</a> </p>
 <p>VOLUNTEER YOUR COMPUTER'S SPARE POWER TO GET PEOPLE OUT OF JAIL</p>
           </div>
+           <div class="section impact">
+            <a name="impact"></a>
+            <h2>IF <input type="number" name="users" min="1" max="100000" value="5000"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
+
+            <center>
+                <p style="margin-top:48px;"><a href="javascript:void(0)" id="sim-start" class="big-button">View Impact</a></p>
+              </center>
+            <!--       <button id="sim-start">View Impact</button>
+ -->
+            <div class="sim-status">Running simulation (this may take a few seconds)...</div>
+            <div class="sim-results">
+                <p>$<b id="sim-raised"></b> raised (USD)</p>
+                <p><b id="sim-released"></b> people freed from pre-trial detention</p>
+                <p><b id="sim-reduced"></b> cases dismissed</p>
+                <p class="sim-note">Note that simulation results are an estimate of impact. Preview our methodology <a href="files/sim-white-paper.pdf" target="_blank">here</a>.</p>
+
+                    <!-- social -->
+                <a href="javascript:void(0)" onclick="twitter()">share this projection on Twitter<br><br><img src="images/twitter.png" width="50"></a>
+                <!-- <a href="javascript:void(0)" onclick="facebook()"><img src="images/fb.png"></a> -->
+            </div>
+        </div>
     <footer>
       <div class="footer-blurb">
-        <p>Bail Bloc is a project of <a href="http://thenewinquiry.com">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/">Bronx Freedom Fund</a> and the <a href="https://brown.columbia.edu/portfolio/dark-inquiry/">The Brown Institute for Media Innovation at the Columbia Graduate School of Journalism</a>.</p>
-        <p><a href="https://thenewinquiry.com/bundle/bail-bloc/">Read TNI's work on policing and mass incarceration here.</a></p>
+         <p>Bail Bloc is a project of <a href="http://thenewinquiry.com" target="_blank">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/" target="_blank">Bronx Freedom Fund</a>.</p>
+        <p><a href="https://thenewinquiry.com/bundle/bail-bloc/" target="_blank">Read TNI's work on policing and mass incarceration here.</a></p>
       </div>
       <div class="footer-nav">
           <a href="https://github.com/thenewinquiry/bailbloc/">Open-Source Code</a>
@@ -60,6 +79,73 @@
       </div>
     </footer>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+        var worker;
+        $('#sim-start').on('click', function() {
+            if (worker) {
+                worker.terminate();
+            }
+            $('.sim-status').show();
+            $('.sim-results').hide();
+            worker = new Worker('js/sim.js');
+            worker.onmessage = function(m) {
+                var results = m.data;
+                $('#sim-raised').text(results.raised.toLocaleString());
+                $('#sim-released').text(results.released.toLocaleString());
+                $('#sim-reduced').text(results.reduced.toLocaleString());
+                $('.sim-results').show();
+                $('.sim-status').hide();
+            };
+            worker.postMessage({
+                nMonths: $('input[name=months]').val(),
+                nMiners: $('input[name=users]').val()
+            });
+        });
+        $('input').on('keydown', function(ev) {
+            if (ev.keyCode == 13) {
+                $('#sim-start').click();
+            }
+        });
+
+                // social
+
+        function facebook() {
+
+            var raised = $('#sim-raised').text();
+            var released = $('#sim-released').text();
+            var reduced = $('#sim-reduced').text();
+
+            var users = $("input[name=users]").val();
+            var months = $("input[name=months]").val();
+
+            var sentence = "If " + users + " ran Bail Bloc for " + months + "months we could raise $" + raised + "and get " + reduced + " cases dismissed.";
+
+            popUp("https://www.facebook.com/dialog/feed?app_id=140586622674265&link=http://bailbloc.thenewinquiry.com&name=" + sentence + "&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html", 900, 600);
+        }
+
+        function twitter() {
+
+            var raised = $('#sim-raised').text();
+            var released = $('#sim-released').text();
+            var reduced = $('#sim-reduced').text();
+
+            var users = $("input[name=users]").val();
+            var months = $("input[name=months]").val();
+
+            var sentence = "If " + users + " people ran Bail Bloc for " + months + " months, we would raise $" + raised + " and bail " + released + " people out of jail. Join the Bloc";
+
+            popUp("https://twitter.com/intent/tweet?text=" + sentence + "&url=http://bailbloc.thenewinquiry.com", 704, 260);
+        }
+
+        // create pop up windows
+        function popUp(url, _width, _height) {
+            newwindow = window.open(url, 'Join the Bloc!', 'height=' + _height + ',width=' + _width);
+            if (window.focus) { newwindow.focus() }
+            return false;
+        }
+        </script>
 </body>
 <script src="js/preview.js"></script>
+
 </html>

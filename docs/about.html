@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Software that raises money for bail funds.">
   <meta name="author" content="The New Inquiry">
-
   <title>Bail Bloc</title>
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -23,12 +22,11 @@
           <a href="index.html" id="install-the-app">BAIL BLOC</a> is a cryptocurrency scheme against bail</span>
         </h1>
         <h1 class="mobile">
-          Bail bloc is a cryptocurrency scheme against bail
+          Bail bloc is a crypto-currency scheme against bail
         </h1>
         <div id="money-raised-holder">
           <ul class="nav">
             <li><a href="about.html">About Bail Bloc</a></li>
-            <li><a href="impact.html">Calculate Your Impact</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
            
         
@@ -46,31 +44,51 @@
 
       <h1>About Bail Bloc</h1>
     
-      <p><strong>Here’s how it works:</strong> When you download the app, a small part of your computer's unused processing power is redirected toward mining a popular cryptocurrency called <a href="https://getmonero.org/">Monero</a>, which is secure, private, and untraceable.  At the end of every month, we exchange the Monero for US dollars and donate the earnings to the <a href="http://www.thebronxfreedomfund.org/">Bronx Freedom Fund</a>. 
+      <p><strong>Here’s how it works:</strong> When you download the app, a small part of your computer's unused processing power is redirected toward mining a popular cryptocurrency called <a href="https://getmonero.org/" target="_blank">Monero</a>, which is secure, private, and untraceable.  At the end of every month, we exchange the Monero for US dollars and donate the earnings to the <a href="http://www.thebronxfreedomfund.org/" target="_blank">Bronx Freedom Fund</a> and through them, a new nation-wide initiative, <a href="https://bailproject.org" target=_"blank">The Bail Project</a>. 
       </p>
 
-      <p>100% of the currency your computer generates is used by the Bronx Freedom Fund to post bail for low-income people detained across the United States.</p> 
+      <p>100% of the currency your computer generates is used by the Bronx Freedom Fund to post bail for low-income people detained in New York effective immediately. Beginning in January 2018, funds will be routed to The Bail Project, which will over the next five years post bail for people detained in more than three dozen cities nation-wide.</p> 
 
       <p><strong>Bail funds accumulate:</strong> Bail funds are “revolving,” which means they’re returned to their source when people appear for all their court dates–which, for clients of The Bronx Freedom Fund, happens 96% of the time.</p>
  
       <p>Most Bail Bloc users can expect to generate around $3 to $5 per month. It might not seem like much, but because of the revolving funding model, it adds up quickly.</p>
+
+        <div class="section impact">
+            <a name="impact"></a>
+            <h2>IF <input type="number" name="users" min="1" max="100000" value="5000"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
+
+            <center>
+                <p style="margin-top:48px;"><a href="javascript:void(0)" id="sim-start" class="big-button">View Impact</a></p>
+              </center>
+            <!--       <button id="sim-start">View Impact</button>
+ -->
+            <div class="sim-status">Running simulation (this may take a few seconds)...</div>
+            <div class="sim-results">
+                <p>$<b id="sim-raised"></b> raised (USD)</p>
+                <p><b id="sim-released"></b> people freed from pre-trial detention</p>
+                <p><b id="sim-reduced"></b> cases dismissed</p>
+                <p class="sim-note">Note that simulation results are an estimate of impact. Preview our methodology <a href="files/sim-white-paper.pdf" target="_blank">here</a>.</p>
+            </div>
+        </div>
 <br/>
       <h1>HOW BAIL WORKS</h1>
-      
-      <p>Bail is an amount of money, typically set at arraignments, that courts require of the recently arrested in exchange for their immediate-term freedom. For those who can afford it, posting bail allows people to avoid pretrial incarceration (the period between arrest and case disposition) which can last weeks, months, or even years. In practice, bail streamlines mass incarceration by preventing low-income, usually black and brown people from exercising their right to a fair trial.</p>
 
-      <p>70% of people in American jails have not yet been convicted of any crime. Bail streamlines mass incarceration by functionally relieving courts of the burden of litigation. Prosecutors and judges work in concert to coerce low-income people to accept plea deals in exchange for their release. That means they forfeit their constitutional right to be tried before a jury, are never allowed to argue their case, and can never be found innocent. Put simply, these people are found guilty of poverty.</p> 
+<p>Bail is an amount of money, typically set at arraignments, that courts require of the recently arrested in exchange for their immediate-term freedom. For those who can afford it, posting bail is a means of release, allowing people to avoid pretrial incarceration (the period between arrest and case disposition) which can last weeks, months, or even years.<sup><a href="#years" aria-describedby="footnote-label" id="footnotes-ref">1</a></sup></p> 
 
-      <p>If just a small percentage of people typically coerced into pleading guilty stood trial, the court system that facilitates mass incarceration would cease to function.</p>
+<p>In practice, however, bail streamlines mass incarceration by preventing low-income, usually black and brown people from exercising their right to a fair trial. Prosecutors and judges work in concert to coerce low-income people to accept plea deals in exchange for their release. In New York, 90% of people who can’t pay bail end up pleading guilty.<sup><a href="#90" aria-describedby="footnote-label" id="footnotes-ref">2</a></sup> That means they forfeit their constitutional right to be tried before a jury, are never allowed to argue their case, and can never be found innocent. Put simply, these people are found guilty of poverty.</p> 
+
+<p>70% of people in American jails have not yet been convicted of any crime.<sup><a href="#70" aria-describedby="footnote-label" id="footnotes-ref">3</a></sup> If just a small percentage of those in pre-trial detention were released, and were able to argue their cases, the jails and courts that facilitate mass incarceration would cease to function.</p>
+
+
 
 <br/>
 
       <h1>WHAT IS CRYPTOCURRENCY?</h1>
       <p>Cryptocurrency isn’t real money, but it has real-world exchange value. 
 
-      <p>Just as the US Treasury prints money to infuse into the economy, cryptocurrency is generated "out of nowhere" through an arbitrary process. But where the US Treasury needs a minting machine, all miners need is computing power. Cryptocurrencies are generated through users running software to solve difficult computational problems, in a process known as "mining." When a problem is solved, the user is rewarded by a decentralized cryptocurrency network with units of that cryptocurrency. If enough users mine for the same cryptocurrency, it begins to have an exchange value.<sup><a href="#monero" aria-describedby="footnote-label" id="footnotes-ref">1</a></sup>
+      <p>Just as the US Treasury prints money to infuse into the economy, cryptocurrency is generated "out of nowhere" through an arbitrary process. But where the US Treasury needs a minting machine, all miners need is computing power. Cryptocurrencies are generated through users running software to solve difficult computational problems, in a process known as "mining." When a problem is solved, the user is rewarded by a decentralized cryptocurrency network with units of that cryptocurrency. If enough users mine for the same cryptocurrency, it begins to have an exchange value.<sup><a href="#monero" aria-describedby="footnote-label" id="footnotes-ref">4</a></sup>
       </p>
-
+<br/>
       <h1>OUR GOAL</h1>
       <p>
         With enough downloads over time, the compounding revenue generated from Bail Bloc has the potential to help secure the release of tens of thousands of low-income people from pre-trial incarceration, which would diminish the widespread function of cash bail to coerce guilty pleas, restoring the presumption of innocence and allowing people to wait for their day in court at liberty.
@@ -78,7 +96,7 @@
       
       <h2>Credits</h2>
 
-      <p>Bail Bloc was created by <span id="credits">Grayson Earle, Maya Binyam, Francis Tseng, JB Rubinovitz, Sam Lavigne, Devin Kenny, and the <a href="https://thenewinquiry.com/dark-inquiry/">Dark Inquiry</a> collective.</span></p>
+      <p>Bail Bloc was created by <span id="credits">Grayson Earle, Maya Binyam, Francis Tseng, JB Rubinovitz, Sam Lavigne, Devin Kenny, and the <a href="https://thenewinquiry.com/dark-inquiry/" target="_blank">Dark Inquiry</a> collective.</span></p>
 
 
     </div>
@@ -88,12 +106,16 @@
       <div class="footnotes">
         <h3 class="visually-hidden" id="footnote-label">Footnotes</h3>
         <ol>
-          <li id="monero">For example, a user is able to purchase a baseball hat on the internet for 0.00122 Bitcoin (or 0.0877 Monero) from participating vendors, such as Overstock.com. That same hat is could also be bought for $5 USD. This means 0.00122 Bitcoins is worth $5 USD, and can be exchanged for that amount.<a href="#footnotes-ref" aria-label="Back to content">↩</a></li>
+          <p><li id="years">Pretrial incarceration has a devastating ripple effect on low-income communities, particularly low-income communities of color. One night in jail can cause people to lose jobs, their homes, their immigration status, and even custody of their children. <a href="#footnotes-ref" aria-label="Back to content">↩</a></li></p>
+          <p><li id="90">Most of our figures were obtained through our partnership with the Bronx Freedom Fund. Reference this statistic in the Fund's recent announcement in <a href="https://www.nytimes.com/2017/11/13/nyregion/bail-project-fund-poor-defendants.html?_r=0" target="_blank"><i>The New York Times</i></a>. <a href="#footnotes-ref" aria-label="Back to content">↩</a></li></p>
+         <p><li id="70">According to the <a href="https://www.prisonpolicy.org/reports/pie2017.html" target="_blank">Prison Policy Initiative's 2017 report</a>. <a href="#footnotes-ref" aria-label="Back to content">↩</a></li></p>
+          <p><li id="monero">For example, a user is able to purchase a baseball hat on the internet for 0.00122 Bitcoin (or 0.0877 Monero) from participating vendors, such as Overstock.com. That same hat is could also be bought for $5 USD. This means 0.00122 Bitcoins is worth $5 USD, and can be exchanged for that amount. <a href="#footnotes-ref" aria-label="Back to content">↩</a></li></p>
         </ol>
       </div>
       <div class="footer-blurb">
-        <p>Bail Bloc is a project of <a href="http://thenewinquiry.com">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/">Bronx Freedom Fund</a> and the <a href="https://brown.columbia.edu/portfolio/dark-inquiry/">The Brown Institute for Media Innovation at the Columbia Graduate School of Journalism</a>.</p>
-        <p><a href="https://thenewinquiry.com/bundle/bail-bloc/">Read TNI's work on policing and mass incarceration here.</a></p>
+         <p>Bail Bloc is a project of <a href="http://thenewinquiry.com" target="_blank">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/" target="_blank">Bronx Freedom Fund</a>.</p> 
+        <p><a href="https://thenewinquiry.com/bundle/bail-bloc/" target="_blank">Read TNI's work on policing and mass incarceration here.</a></p>
+        <p>Support for the technical research of The New Inquiry’s rhetorical software experiments is provided, in part, by <a href="https://brown.columbia.edu/portfolio/dark-inquiry/" target="_blank">The Brown institute for Media Innovation.</a></p>
       </div>
       <div class="footer-nav">
           <a href="https://github.com/thenewinquiry/bailbloc/">Open-Source Code</a>
@@ -108,6 +130,34 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </div>
+ <script>
+        var worker;
+        $('#sim-start').on('click', function() {
+            if (worker) {
+                worker.terminate();
+            }
+            $('.sim-status').show();
+            $('.sim-results').hide();
+            worker = new Worker('js/sim.js');
+            worker.onmessage = function(m) {
+                var results = m.data;
+                $('#sim-raised').text(results.raised.toLocaleString());
+                $('#sim-released').text(results.released.toLocaleString());
+                $('#sim-reduced').text(results.reduced.toLocaleString());
+                $('.sim-results').show();
+                $('.sim-status').hide();
+            };
+            worker.postMessage({
+                nMonths: $('input[name=months]').val(),
+                nMiners: $('input[name=users]').val()
+            });
+        });
+        $('input').on('keydown', function(ev) {
+            if (ev.keyCode == 13) {
+                $('#sim-start').click();
+            }
+        });
+</script>
 </body>
 <script src="js/preview.js"></script>
 </html>
