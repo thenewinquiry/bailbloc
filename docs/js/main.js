@@ -48,9 +48,9 @@
         var userAgent = navigator.userAgent;
 
         if (/Mac/.test(userAgent)) {
-            $('#download-button').text('Download The App For Mac');
+            $('#download-button').text('Download For Mac');
         } else if (/Windows/.test(userAgent)) {
-            $('#download-button').text('Download The App For Windows');
+            $('#download-button').text('Download For Windows');
         }
 
         $.getJSON(apiURL, function(release) {
