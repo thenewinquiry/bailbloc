@@ -211,6 +211,7 @@ autoUpdater.on('download-progress', (ev, progressObj) => {
 });
 
 autoUpdater.on('update-downloaded', (ev, info) => {
+  app.isQuiting = true;
   autoUpdater.quitAndInstall();
 });
 
