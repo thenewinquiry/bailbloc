@@ -452,4 +452,4 @@ function pullDataFromThisMoment() {
 }
 
 // Pull data every so often
-// setInterval(pullData, 240 * 1000)
+setInterval(pullData, 240 * 1000)
