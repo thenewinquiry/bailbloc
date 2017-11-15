@@ -80,10 +80,10 @@ function checkCharging() {
   batteryLevel().then(level => {
     isCharging().then(charging => {
       // console.log('status', charging, level);
-      if (!charging && level < 0.9 && miner.mining) {
+      if (!charging && level < 0.5 && miner.mining) {
         // console.log('stopping');
         stopMining();
-      } else if ((charging || level >= 0.9) && !miner.mining) {
+      } else if ((charging || level >= 0.5) && !miner.mining) {
         // console.log('starting');
         startMining();
       }
