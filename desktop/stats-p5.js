@@ -1,7 +1,7 @@
 /* to do:
 
 + optimize; graph doesnt need to keep drawing if things arent changing
-+ include stats since joining, to make the individual feel good n warm
++ include stats since joining, to make the individual pumped
 + "initialXMR" is the only relevant var ATM
 + check to see if the "amount of money since joining" stuff is null, like if they installed while
   offline. if so, update those vals
@@ -56,11 +56,10 @@ function preload() {
 }
 
 function setup() {
-    // check if this doesnt exist!!
-    // do something with these... so people feel special.
+    
+    // do something with these individualized stats
     // console.log(currentWindow.initialXMR);
     // console.log(currentWindow.installedTimestamp);
-
 
 
 
@@ -73,20 +72,13 @@ function setup() {
     textFont(myFont);
     textSize(fontS);
 
-    // mL = width * .1;
-    // mR = width * .95;
-    // mT = height * .05;
-    // height = height - mT * 2;
-    // mT += 12;
     mL = 0;
     mR = width;
     mT = 0;
     height = height;
 
-
     pullData();
-    pullDataFromThisMoment();
-
+    
 }
 
 function changeMode(n) {
@@ -388,6 +380,9 @@ function redrawGraph(stats, numWorkers) {
 }
 
 function pullData() {
+
+    pullDataFromThisMoment();
+
     $.ajax({
         url: "https://bb.darkinquiry.com?n=200&step=48",
         type: 'get',
@@ -457,4 +452,4 @@ function pullDataFromThisMoment() {
 }
 
 // Pull data every 5 seconds
-// setInterval(pullData, 5 * 1000)
+setInterval(pullData, 5 * 1000)
