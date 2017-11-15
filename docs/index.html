@@ -6,7 +6,8 @@
     <meta name="description" content="Software that raises money for bail funds.">
     <meta name="author" content="The New Inquiry">
     <title>Bail Bloc</title>
-<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700" rel="stylesheet">    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <!-- open graph for facebook sharing -->
     <meta property="og:title" content="DOWNLOAD BAIL BLOC" />
     <meta property="og:type" content="article" />
@@ -38,17 +39,15 @@
             </div>
         </header>
         <div class="download-area" style="padding-bottom:8px;">
-            <p><a href="join.html" id="download-button"
-              class="biggest-button">Download Bail Bloc</a> </p>
-<p>VOLUNTEER YOUR COMPUTER'S SPARE POWER TO GET PEOPLE OUT OF JAIL</p>
-          </div>
-           <div class="section impact">
+            <p><a href="join.html" id="download-button" class="biggest-button">Download Bail Bloc</a> </p>
+            <p>VOLUNTEER YOUR COMPUTER'S SPARE POWER TO GET PEOPLE OUT OF JAIL</p>
+        </div>
+        <div class="section impact">
             <a name="impact"></a>
             <h2>IF <input type="number" name="users" min="1" max="100000" value="5000"> PEOPLE RAN BAIL BLOC FOR <input type="number" name="months" min="1" max="60" value="12"> MONTHS... </h2>
-
             <center>
                 <p style="margin-top:48px;"><a href="javascript:void(0)" id="sim-start" class="big-button">View Impact</a></p>
-              </center>
+            </center>
             <!--       <button id="sim-start">View Impact</button>
  -->
             <div class="sim-status">Running simulation (this may take a few seconds)...</div>
@@ -57,29 +56,28 @@
                 <p><b id="sim-released"></b> people freed from pre-trial detention</p>
                 <p><b id="sim-reduced"></b> cases dismissed</p>
                 <p class="sim-note">Note that simulation results are an estimate of impact. Preview our methodology <a href="files/sim-white-paper.pdf" target="_blank">here</a>.</p>
-
-                    <!-- social -->
+                <!-- social -->
                 <a href="javascript:void(0)" onclick="twitter()">share this projection on Twitter<br><br><img src="images/twitter.png" width="50"></a>
                 <!-- <a href="javascript:void(0)" onclick="facebook()"><img src="images/fb.png"></a> -->
             </div>
         </div>
-    <footer>
-      <div class="footer-blurb">
-         <p>Bail Bloc is a project of <a href="http://thenewinquiry.com" target="_blank">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/" target="_blank">Bronx Freedom Fund</a>.</p>
-        <p><a href="https://thenewinquiry.com/bundle/bail-bloc/" target="_blank">Read TNI's work on policing and mass incarceration here.</a></p>
-      </div>
-      <div class="footer-nav">
-          <a href="https://github.com/thenewinquiry/bailbloc/">Open-Source Code</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="mailto:bailbloc@thenewinquiry.com">Contact Us</a>
-      </div>
-      <div class="social-area">
-        <a class="no-hover" href="https://www.facebook.com/dialog/feed?app_id=140586622674265&link=https://bailbloc.thenewinquiry.com&name=BAIL%20BLOC&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html" target="_blank"><img src="images/fb.png"></a>
-        <a class="no-hover" href="https://twitter.com/intent/tweet?text=Bail people out of jail with a computer program %23BAILBLOC&url=https://bailbloc.thenewinquiry.com" target="_blank"><img src="images/twitter.png"></a>
-      </div>
-    </footer>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <footer>
+            <div class="footer-blurb">
+                <p>Bail Bloc is a project of <a href="http://thenewinquiry.com" target="_blank">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/" target="_blank">Bronx Freedom Fund</a>.</p>
+                <p><a href="https://thenewinquiry.com/bundle/bail-bloc/" target="_blank">Read TNI's work on policing and mass incarceration here.</a></p>
+            </div>
+            <div class="footer-nav">
+                <a href="https://github.com/thenewinquiry/bailbloc/">Open-Source Code</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="mailto:bailbloc@thenewinquiry.com">Contact Us</a>
+            </div>
+            <div class="social-area">
+                <a class="no-hover" href="https://www.facebook.com/dialog/feed?app_id=140586622674265&link=https://bailbloc.thenewinquiry.com&name=BAIL%20BLOC&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html" target="_blank"><img src="images/fb.png"></a>
+                <a class="no-hover" href="https://twitter.com/intent/tweet?text=Bail people out of jail with a computer program %23BAILBLOC&url=https://bailbloc.thenewinquiry.com" target="_blank"><img src="images/twitter.png"></a>
+            </div>
+        </footer>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>
         var worker;
         $('#sim-start').on('click', function() {
@@ -108,7 +106,7 @@
             }
         });
 
-                // social
+        // social
 
         function facebook() {
 
@@ -145,5 +143,16 @@
             return false;
         }
         </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109714345-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-109714345-1');
+        </script>
 </body>
+
 </html>
