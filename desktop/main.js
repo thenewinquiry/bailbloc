@@ -187,11 +187,11 @@ autoUpdater.on('checking-for-update', () => {
 
 autoUpdater.on('update-available', (ev, info) => {
   // log.warn('Update available.');
-  if (!windows['update.html']) {
-    let updateWin = makeWindow('update.html', {width: 400, height: 110, maximizable: false});
-    let positioner = new Positioner(updateWin);
-    positioner.move('trayCenter', tray.getBounds());
-  }
+  // if (!windows['update.html']) {
+  //   let updateWin = makeWindow('update.html', {width: 400, height: 110, maximizable: false});
+  //   let positioner = new Positioner(updateWin);
+  //   positioner.move('trayCenter', tray.getBounds());
+  // }
 });
 
 autoUpdater.on('update-not-available', (ev, info) => {
