@@ -17,6 +17,11 @@ body {
     margin: auto;
 }
 
+#walkthru img {
+    width: 80%;
+    margin-left: 10%;
+}
+
 a {
     color: red;
     text-decoration: none;
