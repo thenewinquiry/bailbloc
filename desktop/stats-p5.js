@@ -49,14 +49,14 @@ var friendsMultiplier = 3;
 
 var numPoints = 0;
 
-
+var totalXMR, totalUSD, peopleFree;
 
 function preload() {
     myFont = loadFont('assets/Lato-Regular.ttf');
 }
 
 function setup() {
-    
+
     // do something with these individualized stats
     // console.log(currentWindow.initialXMR);
     // console.log(currentWindow.installedTimestamp);
@@ -78,7 +78,7 @@ function setup() {
     height = height;
 
     pullData();
-    
+
 }
 
 function changeMode(n) {
@@ -256,17 +256,7 @@ function redrawGraph(stats, numWorkers) {
 
     // new p5js stuff
 
-    // total raised XMR:
-    var totalXMR = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000;
 
-    // USD
-    var totalUSD = totalXMR * stats[0].ticker.price;
-
-    // people free
-    var peopleFree = (totalUSD / 910).toFixed(0);
-
-    $("#totalUSD").text("$" + totalUSD.toFixed(0));
-    $("#peopleFree").text(peopleFree);
 
     // useful intel:
 
@@ -392,7 +382,6 @@ function pullData() {
 
             var numWorkers = Object.keys(stats[0].miners).length - 1;
 
-            exchangeRate = stats[0].ticker.price;
 
             redrawGraph(stats, numWorkers);
 
@@ -446,6 +435,20 @@ function pullDataFromThisMoment() {
             var numWorkers = Object.keys(stats[0].miners).length - 1;
             $("#numWorkers").text(numWorkers);
 
+            exchangeRate = stats[0].ticker.price;
+
+            // total raised XMR:
+            totalXMR = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000;
+
+            // USD
+            totalUSD = totalXMR * stats[0].ticker.price;
+
+            // people free
+            peopleFree = (totalUSD / 910).toFixed(0);
+
+            $("#totalUSD").text("$" + totalUSD.toFixed(0));
+            $("#peopleFree").text(peopleFree);
+
 
         }
     });
@@ -454,16 +457,16 @@ function pullDataFromThisMoment() {
 
 // subtract 4 hrs 9 minutes
 function convertTimestamp(timestamp) {
-  var d = new Date((timestamp - 14940) * 1000),   // Convert the passed timestamp to milliseconds
+    var d = new Date((timestamp - 14940) * 1000), // Convert the passed timestamp to milliseconds
         yyyy = d.getFullYear(),
-        mm = ('0' + (d.getMonth() + 1)).slice(-2),  // Months are zero based. Add leading 0.
-        dd = ('0' + d.getDate()).slice(-2),         // Add leading 0.
+        mm = ('0' + (d.getMonth() + 1)).slice(-2), // Months are zero based. Add leading 0.
+        dd = ('0' + d.getDate()).slice(-2), // Add leading 0.
         hh = d.getHours(),
         h = hh,
-        min = ('0' + d.getMinutes()).slice(-2),     // Add leading 0.
+        min = ('0' + d.getMinutes()).slice(-2), // Add leading 0.
         ampm = 'AM',
         time;
-            
+
     if (hh > 12) {
         h = hh - 12;
         ampm = 'PM';
@@ -473,10 +476,10 @@ function convertTimestamp(timestamp) {
     } else if (hh == 0) {
         h = 12;
     }
-    
+
     // ie: 2013-02-18, 8:35 AM  
     time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
-        
+
     return time;
 }
 
