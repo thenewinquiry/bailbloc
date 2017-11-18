@@ -1,22 +1,4 @@
-/* to do:
 
-+ optimize; graph doesnt need to keep drawing if things arent changing
-+ include stats since joining, to make the individual pumped
-+ "initialXMR" is the only relevant var ATM
-+ check to see if the "amount of money since joining" stuff is null, like if they installed while
-  offline. if so, update those vals
-  update() {
-                ipcRenderer.send('changeSettings', {
-                    whateverVal : 12
-                });
-            }
-
-*/
-
-const { ipcRenderer, remote } = require('electron');
-let currentWindow = remote.getCurrentWindow();
-
-const $ = require('./jquery.min.js');
 var walletAddress = "442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdySiMizGTJ56ScZUyugpSeV6hx19QohZTmjuWiM";
 
 var gp = [];
@@ -65,6 +47,7 @@ function setup() {
 
     // put setup code here
     createCanvas(588, 305);
+    
     // createCanvas(windowWidth, windowHeight);
     background(255);
     strokeWeight(3);
