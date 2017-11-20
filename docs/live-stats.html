@@ -1,0 +1,73 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700" rel="stylesheet">
+    <link href="css/graph.css" rel="stylesheet">
+
+    <style type="text/css">
+        
+        body {
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- graph things -->
+    <div style="position:absolute;width:100%;bottom:10px;text-align:center;color:#aaa;font-size:10px">note that mining rewards are distributed approximately every 48 hours, so please check back soon</div>
+    <div id="yaxis-label-top">
+    </div>
+    <div id="yaxis-label-bottom">
+    </div>
+    <div id="xaxis-label-actual">
+        <img class="graphicon" src="images/cute-graph.png">
+        <div>MONEY RAISED TO DATE (USD)</div>
+    </div>
+    <div id="xaxis-label-friends">
+        <img class="graphicon" src="images/cute-graph-pink.png">
+        <div>if everyone invited 3 friends</div>
+        <a href="https://www.facebook.com/dialog/feed?app_id=140586622674265&link=https://bailbloc.thenewinquiry.com&name=BAIL%20BLOC&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html" target="_blank"><img src="images/fb.png"></a>
+        <a href="https://twitter.com/intent/tweet?text=Bail%20people%20out%20of%20jail%20with%20a%20computer%20program%20%23BAILBLOC&url=https://bailbloc.thenewinquiry.com" target="_blank"><img src="images/twitter.png"></a>
+    </div>
+    <div id="topbox">
+        <div id="general-stats">
+            <span>currently</span>
+            <div id="stats-text">
+                <p><span id="numWorkers">0</span> people using Bail Bloc</p>
+                <p><span id="totalUSD">$0</span> raised so far</p>
+                <p>enough to bail out <span id="peopleFree">0</span> people</p>
+            </div>
+        </div>
+        <div id="stats-modes">
+            display as
+            <div id="stats-text">
+                <p><a href="#" onclick="changeMode(0);return false;"><img src="images/redsquare.png">money raised</a></p>
+                <p><a href="#" onclick="changeMode(2);return false;"><img src="images/redsquare.png">hashrate</a></p>
+                <p><a href="#" onclick="changeMode(1);return false;"><img src="images/redsquare.png">people participating</a></p>
+            </div>
+        </div>
+        <div id="invite-friends">
+            invite friends
+            <a href="https://www.facebook.com/dialog/feed?app_id=140586622674265&link=https://bailbloc.thenewinquiry.com&name=BAIL%20BLOC&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html" target="_blank"><img src="images/fb.png"></a>
+            <a href="https://twitter.com/intent/tweet?text=Bail%20people%20out%20of%20jail%20with%20a%20computer%20program%20%23BAILBLOC&url=https://bailbloc.thenewinquiry.com" target="_blank"><img src="images/twitter.png"></a>
+        </div>
+    </div>
+    <div id="stats-date">
+    </div>
+    <div id="scrub-line">
+    </div>
+    <div id="scrub-actual">
+    </div>
+    <div id="scrub-friends">
+    </div>
+    <!-- end graph things -->
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/p5.min.js"></script>
+    <script src="js/stats-p5.js"></script>
+</body>
+
+</html>
