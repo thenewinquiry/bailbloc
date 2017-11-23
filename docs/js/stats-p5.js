@@ -271,11 +271,12 @@ function redrawGraph(stats, numWorkers) {
 
     yMin = 999999.0;
     yMax = 0.0;
-
+    
+    
     // find Y max first
     if (graphMode != TOTALRAISED) {
         for (var i = stats.length - 1; i >= 0; i--) {
-
+            var numMiners = stats[i].miners;
             var compare = 0.0;
 
             switch (graphMode) {
@@ -283,7 +284,7 @@ function redrawGraph(stats, numWorkers) {
                     compare = stats[i].stats.hash / 1000.0;
                     break;
                 case PEOPLEMINING:
-                    compare = Object.keys(stats[i].miners).length - 1;
+                    compare = Object.keys(numMiners).length - 1;
                     break;
             }
 
@@ -320,7 +321,7 @@ function redrawGraph(stats, numWorkers) {
         var hours = date.getHours();
         var minutes = "0" + date.getMinutes();
         var formattedTime = monthNames[month] + ' ' + day + ' @ ' + hours + ':' + minutes.substr(-2);
-
+        var numMiners = stats[i].miners;
         switch (graphMode) {
             case HASHRATE:
                 // want it in kHash
@@ -328,7 +329,7 @@ function redrawGraph(stats, numWorkers) {
                 y = map(val, yMin, yMax, height, 0);
                 break;
             case PEOPLEMINING:
-                val = Object.keys(stats[i].miners).length - 1;
+                val = Object.keys(numMiners).length - 1;
                 y = map(val, yMin, yMax, height, 0);
                 break;
             case TOTALRAISED:
