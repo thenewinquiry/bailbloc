@@ -25,7 +25,7 @@
     "electron-log": "^2.2.7",
     "electron-positioner": "^3.0.0",
     "electron-settings": "^3.1.1",
-    "electron-updater": "^2.8.7",
+    "electron-updater": "^2.16.1",
     "is-charging": "^1.2.0",
     "strip-ansi": "^4.0.0",
     "uuid": "^3.1.0"
