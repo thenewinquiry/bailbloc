@@ -5,6 +5,7 @@
 1. clone the repo
 2. cd into the `desktop` folder
 3. install packages with `npm install`
+4. (Optional) globally install platform-specific 7zip-bin package with `npm install -g 7zip-bin`
 
 ## Run the app
 
