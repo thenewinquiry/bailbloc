@@ -5,12 +5,11 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "icons":
-      "nicns --in build/logo.png --out build/icon.icns;convert -resize 256x256 build/logo.png build/icon.ico",
+    "icons": "nicns --in build/logo.png --out build/icon.icns;convert -resize 256x256 build/logo.png build/icon.ico",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "buildall": "electron-builder -mw",
-    "publish": "electron-builder -mw -p always",
+    "buildall": "electron-builder -mwl",
+    "publish": "electron-builder -mwl -p always",
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "The New Inquiry",
@@ -18,7 +17,8 @@
   "devDependencies": {
     "electron": "^1.6.11",
     "electron-builder": "^19.22.1",
-    "node-icns": "0.0.4"
+    "node-icns": "0.0.4",
+    "7zip-bin-linux": "^1.2.0"
   },
   "dependencies": {
     "battery-level": "^2.0.1",
