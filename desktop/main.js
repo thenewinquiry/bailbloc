@@ -46,6 +46,9 @@ if (platform === 'darwin') {
 } else if (platform === 'win32') {
   activeTrayImage = path.join(__dirname, 'assets', 'win-icon.png');
   passiveTrayImage = path.join(__dirname, 'assets', 'win-fade_icon.png');
+} else if (platform === 'linux') { // monkey patch
+  activeTrayImage = path.join(__dirname, 'assets', 'mac-icon.png');
+  passiveTrayImage = path.join(__dirname, 'assets', 'mac-fade_icon.png');
 }
 
 function toggleMiner(e) {
