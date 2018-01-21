@@ -12,8 +12,17 @@ const uuidv4 = require('uuid/v4');
 const Positioner = require('electron-positioner');
 const Miner = require('./miner.js');
 
+const MODE = process.env.NODE_ENV;
 const UPDATE_CHECK = 30 * 60 * 1000;
 const CHARGE_CHECK = 3000;
+
+if (MODE == 'development') { 
+    log.transports.console.level = 'debug';
+    log.transports.console.format = '{h}:{i}:{s}:{ms} {text}';
+}
+
+log.debug('running in mode:');
+log.debug(MODE);
 
 const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
   //this callback executes when someone tries to run a second instance of the app.
@@ -53,8 +62,10 @@ if (platform === 'darwin') {
 
 function toggleMiner(e) {
   if (miner.mining) {
+    log.debug('stopping mining...');
     stopMining();
   } else {
+    log.debug('starting mining...');
     startMining();
   }
 }
@@ -85,9 +96,13 @@ function checkCharging() {
       // console.log('status', charging, level);
       if (!charging && level < 0.5 && miner.mining) {
         // console.log('stopping');
+        
+        log.debug('stopping mining... (battery related)')
         stopMining();
       } else if ((charging || level >= 0.5) && !miner.mining) {
         // console.log('starting');
+        
+        log.debug('starting mining... (battery related)')
         startMining();
       }
     });
