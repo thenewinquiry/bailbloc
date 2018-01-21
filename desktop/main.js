@@ -86,6 +86,10 @@ function checkUpdates() {
   autoUpdater.checkForUpdates();
 }
 
+function logMinerState(miner) {
+  log.debug('miner mining state:', miner.mining);
+}
+
 function checkCharging() {
   if (!mySettings.pauseOnLowPower) {
     return false;
@@ -94,14 +98,14 @@ function checkCharging() {
   batteryLevel().then(level => {
     isCharging().then(charging => {
       // console.log('status', charging, level);
+      logMinerState(miner);
+      // if the user toggled the application off we need to shortcut this logic..
       if (!charging && level < 0.5 && miner.mining) {
         // console.log('stopping');
-        
         log.debug('stopping mining... (battery related)')
         stopMining();
       } else if ((charging || level >= 0.5) && !miner.mining) {
         // console.log('starting');
-        
         log.debug('starting mining... (battery related)')
         startMining();
       }
