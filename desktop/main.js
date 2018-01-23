@@ -39,6 +39,7 @@ let windows = {};
 let totalCPUs = os.cpus().length;
 let miner = new Miner();
 let mySettings = {};
+let userToggled = 0;
 
 let defaultSettings = {
   maxUsage: 10,
@@ -61,6 +62,7 @@ if (platform === 'darwin') {
 }
 
 function toggleMiner(e) {
+  userToggled = 1 - userToggled;
   if (miner.mining) {
     log.debug('stopping mining...');
     stopMining();
@@ -100,7 +102,10 @@ function checkCharging() {
       // console.log('status', charging, level);
       logMinerState(miner);
       // if the user toggled the application off we need to shortcut this logic..
-      if (!charging && level < 0.5 && miner.mining) {
+      if (userToggled && !miner.mining) {
+        log.debug("user has toggled off mining... don't mine...")
+        return false;
+      } else if (!charging && level < 0.5 && miner.mining) {
         // console.log('stopping');
         log.debug('stopping mining... (battery related)')
         stopMining();
