@@ -356,6 +356,7 @@ function redrawGraph(stats, numWorkers) {
 
         // if this is the first load, add new objects, otherwise just update
         if (firstLoad) {
+
             gp.push(new GP(x, y, val, formattedTime));
 
             numPoints = gp.length;
@@ -375,14 +376,16 @@ function pullData() {
 
     $.ajax({
 
-        url: "https://bb.darkinquiry.com/?step=4&n=140",
+        url: "https://bb.darkinquiry.com/?step=40&n=140",
         type: 'get',
         cache: false,
         success: function(stats) {
             // console.log(stats);
 
-            var numWorkers = Object.keys(stats[0].miners).length - 1;
+            // no long using the key length like so:
+            //var numWorkers = Object.keys(stats[0].miners).length - 1;
 
+            var numWorkers = stats[0].n_miners;
 
             redrawGraph(stats, numWorkers);
 

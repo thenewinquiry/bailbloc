@@ -1,6 +1,6 @@
 {
   "name": "bailbloc",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "converts computational cycles in bail funds",
   "main": "main.js",
   "scripts": {
