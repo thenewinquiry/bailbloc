@@ -17,8 +17,7 @@
   "devDependencies": {
     "electron": "^1.6.11",
     "electron-builder": "^19.22.1",
-    "node-icns": "0.0.4",
-    "7zip-bin-linux": "^1.2.0"
+    "node-icns": "0.0.4"
   },
   "dependencies": {
     "battery-level": "^2.0.1",
