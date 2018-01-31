@@ -372,6 +372,22 @@ input[type=number] {
     color: red;
 }
 
+.presslogos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.presslogos img {
+    margin: 1em;
+}
+
+.presslogos a:hover {
+    background: none;
+}
+
+
 @media only screen and (min-width: 655px) {
     .mobile {
         display: none;
