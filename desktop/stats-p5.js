@@ -436,7 +436,7 @@ function pullDataFromThisMoment() {
             // console.log(stats);
 
             // want # of workers to be up to the minute
-            var numWorkers = Object.keys(stats[0].miners).length - 1;
+            var numWorkers = stats[0].n_miners;
             $("#numWorkers").text(numWorkers);
 
             exchangeRate = stats[0].ticker.price;
