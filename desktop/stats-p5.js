@@ -283,13 +283,13 @@ function redrawGraph(stats, numWorkers) {
         for (var i = stats.length - 1; i >= 0; i--) {
 
             var compare = 0.0;
-
+            var numMiners = stats[i].miners;
             switch (graphMode) {
                 case HASHRATE:
                     compare = stats[i].stats.hash / 1000.0;
                     break;
                 case PEOPLEMINING:
-                    compare = Object.keys(stats[i].miners).length - 1;
+                    compare = Object.keys(numMiners).length - 1;
                     break;
             }
 
@@ -326,6 +326,7 @@ function redrawGraph(stats, numWorkers) {
         var hours = date.getHours();
         var minutes = "0" + date.getMinutes();
         var formattedTime = monthNames[month] + ' ' + day + ' @ ' + hours + ':' + minutes.substr(-2);
+        var numMiners = stats[i].miners;
 
         switch (graphMode) {
             case HASHRATE:
@@ -334,7 +335,7 @@ function redrawGraph(stats, numWorkers) {
                 y = map(val, yMin, yMax, height, 0);
                 break;
             case PEOPLEMINING:
-                val = Object.keys(stats[i].miners).length - 1;
+                val = Object.keys(numMiners).length - 1;
                 y = map(val, yMin, yMax, height, 0);
                 break;
             case TOTALRAISED:
