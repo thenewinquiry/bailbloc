@@ -17,7 +17,6 @@ const { ipcRenderer, remote } = require('electron');
 let currentWindow = remote.getCurrentWindow();
 
 const $ = require('./jquery.min.js');
-var walletAddress = "442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdySiMizGTJ56ScZUyugpSeV6hx19QohZTmjuWiM";
 
 var gp = [];
 var statsReady = false;
@@ -51,6 +50,11 @@ var numPoints = 0;
 
 var totalXMR, totalUSD, peopleFree;
 
+var payouts;    // json object to store payout data
+var payoutIndex = 0;
+var paidUSD = 0.0;
+var exchangedXMR = 0;
+
 function preload() {
     myFont = loadFont('assets/Lato-Regular.ttf');
 }
@@ -75,7 +79,7 @@ function setup() {
     mL = 0;
     mR = width;
     mT = 0;
-    height = height;
+    mB = height;
 
     pullData();
 
@@ -100,13 +104,13 @@ function draw() {
 
             //var mappedY = map(gp[0].val * friendsMultiplier, yMin, yMax, height, 0);
 
-            vertex(mR, height);
+            vertex(mL, height);
 
             if (graphMode == TOTALRAISED) {
-                vertex(mR, height);
+                vertex(mL, height);
                 vertex(gp[0].x, mappedY);
             } else {
-                curveVertex(mR, height);
+                curveVertex(mL, height);
                 curveVertex(gp[0].x, mappedY);
             }
 
@@ -120,11 +124,11 @@ function draw() {
             }
 
             if (graphMode == TOTALRAISED)
-                vertex(mL, height);
+                vertex(mR, height);
             else
-                curveVertex(mL, height);
+                curveVertex(mR, height);
 
-            vertex(mL, height);
+            vertex(mR, height);
 
             endShape();
 
@@ -136,14 +140,14 @@ function draw() {
 
         beginShape();
 
-        vertex(mR, height);
+        vertex(mL, height);
 
         if (graphMode == TOTALRAISED) {
-            vertex(mR, height);
+            vertex(mL, height);
             vertex(gp[0].x, gp[0].y);
         } else {
 
-            curveVertex(mR, height);
+            curveVertex(mL, height);
             curveVertex(gp[0].x, gp[0].y);
         }
 
@@ -154,10 +158,10 @@ function draw() {
                 curveVertex(gp[i].x, gp[i].y);
         }
         if (graphMode == TOTALRAISED)
-            vertex(mL, height);
+            vertex(mR, height);
         else
-            curveVertex(mL, height);
-        vertex(mL, height);
+            curveVertex(mR, height);
+        vertex(mR, height);
 
         endShape();
 
@@ -168,6 +172,10 @@ function draw() {
                 gp[i].getIntoPosition();
             }
         }
+
+
+        // draw payouts
+
     }
 }
 
@@ -184,7 +192,7 @@ function mouseMoved() {
         }
 
         // check mouse
-        var pointInQuestion = int(map(mouseX, width, 0, 0, numPoints));
+        var pointInQuestion = int(map(mouseX, 0, width, 0, numPoints));
         pointInQuestion = constrain(pointInQuestion, 0, numPoints - 1);
 
         //console.log(pointInQuestion);
@@ -205,7 +213,7 @@ function mouseMoved() {
         y = height - (height - gp[pointInQuestion].y) * friendsMultiplier;
         //y = map(gp[pointInQuestion].val * friendsMultiplier, yMin, yMax, height, 0);
         y += $("#defaultCanvas0").offset().top - 18;
-        y = constrain(y, 40, height);
+        y = constrain(y, 150, height);
         $("#scrub-friends").offset({ top: y, left: x });
         valToPrint *= friendsMultiplier;
 
@@ -254,26 +262,12 @@ function GP(x, y, val, label) {
 
 function redrawGraph(stats, numWorkers) {
 
-    // new p5js stuff
-
-
-
-    // useful intel:
-
-    // nuheighter of miners:
-    // Object.keys(stats[i].miners).length - 1
-
-    // amount due:
-    // stats[i].stats.amtDue / 1000000000000).toFixed(4)
-
-    // amount paid:
-    // stats[i].stats.amtPaid / 1000000000000).toFixed(4)
-
-    // hash rate:
-    // stats[i].stats.hash
-
-    // stats returns 167 member JSON array, 0 is the newest
-
+    // reset the already paid stuff
+    payoutIndex = 0;
+    paidUSD = 0.0;
+    exchangedXMR = 0.0;
+    // and the icons
+    $("div.payouticon").remove();
 
     yMin = 999999.0;
     yMax = 0.0;
@@ -289,7 +283,7 @@ function redrawGraph(stats, numWorkers) {
                     compare = stats[i].stats.hash / 1000.0;
                     break;
                 case PEOPLEMINING:
-                    compare = Object.keys(stats[i].miners).length - 1;
+                    compare = stats[0].n_miners;
                     break;
             }
 
@@ -314,9 +308,10 @@ function redrawGraph(stats, numWorkers) {
     yMin = 0;
 
     // add points to array
-    //for (var i = stats.length - 1; i >= 0; i--) {
-    for (var i = 0; i < stats.length; i++) {
-        var x = map(i, stats.length - 1, 0, mL, mR);
+    for (var i = stats.length - 1; i >= 0; i--) {
+    //for (var i = 0; i < stats.length; i++) {
+        var x = map(i, 0, stats.length - 1, mR, mL);
+        //var x = map(i, stats.length - 1, 0, mL, mR);
         var y = 0.0;
         var val = 0.0;
 
@@ -334,21 +329,56 @@ function redrawGraph(stats, numWorkers) {
                 y = map(val, yMin, yMax, height, 0);
                 break;
             case PEOPLEMINING:
-                val = Object.keys(stats[i].miners).length - 1;
+                val = stats[i].n_miners;
                 y = map(val, yMin, yMax, height, 0);
                 break;
             case TOTALRAISED:
                 // total raised is what we've been paid out already plus what we are owed
-                val = (stats[i].stats.amtDue + stats[i].stats.amtPaid) / 1000000000000;
-                val = val * stats[0].ticker.price; // get USD
-                y = map(val, yMin, yMax, height, 0);
-                //console.log(y,val,yMin,yMax,height,0);
+                // this is complicated as we must take into account the checks we have already written
+                // which are referred to here as payouts
 
-                // var range = yMax - yMin;
-                // var p = val / range;
-                // y = map(p, 0,1,height,0);
-                // y = height - (val / (yMax-yMin) * height);
+
+
+                val = (stats[i].stats.amtDue + stats[i].stats.amtPaid) / 1000000000000;
+                
+
+                // subtract that which we have already exchanged
+                val -= exchangedXMR;
+                
+                val = val * stats[i].ticker.price; // get USD
+                
+                // add total amount of money paid out in checks so far
+                val += paidUSD;
+
+                totalUSD = val;
+
+                y = map(val, yMin, yMax, height, 0);
+
                 val = val.toFixed(0);
+
+
+                // if the timestamp of the current data point is greater than an unused payout data point
+                if(Object.keys(payouts).length > payoutIndex) {
+                    if(stats[i].timestamp > payouts[payoutIndex].timestamp) {
+                        
+                        // add the check amount to running total
+                        paidUSD += payouts[payoutIndex].donation_amount_usd;
+                        exchangedXMR += payouts[payoutIndex].amount_xmr;
+
+                        // note it in graph
+                        $('body').append(
+                            $('<a href="http://google.com"><div/></a>')
+                            .attr("id", "payout" + payoutIndex)
+                            .addClass("payouticon")
+                            .css("left", x + $("#defaultCanvas0").offset().left - 10)
+                            .css("top", y + $("#defaultCanvas0").offset().top - 10)
+                        );              
+
+                        payoutIndex++;
+
+                        console.log("payout calculated: " + paidUSD);
+                    }
+                }
 
                 break;
         }
@@ -363,29 +393,48 @@ function redrawGraph(stats, numWorkers) {
 
         } else {
 
-            gp[i].setup(x, y, val, formattedTime);
+            gp[stats.length - i - 1].setup(x, y, val, formattedTime);
         }
     }
+
+
+    // people free
+    peopleFree = (totalUSD / 910).toFixed(0);
+
+    $("#totalUSD").text("$" + totalUSD.toFixed(0));
+    $("#peopleFree").text(peopleFree);
+
+
     firstLoad = false;
     statsReady = true;
 }
 
 function pullData() {
 
-    pullDataFromThisMoment();
+     pullPayoutData();
 
+    // get all the bb. server data
     $.ajax({
 
-        url: "https://bb.darkinquiry.com/?step=40&n=140",
+        url: "https://bb.darkinquiry.com/?step=50&n=140",
         type: 'get',
         cache: false,
         success: function(stats) {
             // console.log(stats);
 
-            // no long using the key length like so:
-            //var numWorkers = Object.keys(stats[0].miners).length - 1;
-
+            // current stats are in 0
             var numWorkers = stats[0].n_miners;
+            $("#numWorkers").text(numWorkers);
+
+            exchangeRate = stats[0].ticker.price;
+
+            // total raised XMR:
+            totalXMR = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000;
+
+            // USD ... this one will be inaccurate but we can use it as a starting point
+            // and change it out later once we've sifted all the data
+            totalUSD = totalXMR * stats[0].ticker.price;
+
 
             redrawGraph(stats, numWorkers);
 
@@ -426,36 +475,26 @@ function pullData() {
     });
 }
 
-
-function pullDataFromThisMoment() {
+function pullPayoutData() {
+    // get all the cashout entries
     $.ajax({
-        url: "https://bb.darkinquiry.com?n=1",
+
+        url: "https://bailbloc.thenewinquiry.com/payouts.json",
         type: 'get',
         cache: false,
         success: function(stats) {
-            // console.log(stats);
+            
+            payouts = stats;
 
-            // want # of workers to be up to the minute
-            var numWorkers = stats[0].n_miners;
-            $("#numWorkers").text(numWorkers);
-
-            exchangeRate = stats[0].ticker.price;
-
-            // total raised XMR:
-            totalXMR = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000;
-
-            // USD
-            totalUSD = totalXMR * stats[0].ticker.price;
-
-            // people free
-            peopleFree = (totalUSD / 910).toFixed(0);
-
-            $("#totalUSD").text("$" + totalUSD.toFixed(0));
-            $("#peopleFree").text(peopleFree);
-
+            // establish a flag to use freeze data
+            for(var i = 0; i < payouts.length; i++) {
+                payouts[i].used = false;
+            }
 
         }
     });
+
+
 }
 
 

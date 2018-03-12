@@ -6,6 +6,7 @@
     <title>Stats</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stats.css">
     <style>
     html,
     body {
@@ -28,6 +29,11 @@
         <img class="graphicon" src="assets/pages/cute-graph.png">
         <div>MONEY RAISED TO DATE (USD)</div>
     </div>
+    <div id="label-payouts">
+        <img class="graphicon" src="assets/payout.png">
+        <div>CHECK CUT TO BAIL FUND</div>
+    </div>
+    
     <div id="xaxis-label-friends">
         <img class="graphicon" src="assets/pages/cute-graph-pink.png">
         <div>if everyone invited 3 friends</div>
@@ -54,8 +60,7 @@
         <div id="invite-friends">
             invite friends
             <a href="https://www.facebook.com/dialog/feed?app_id=140586622674265&link=https://bailbloc.thenewinquiry.com&name=BAIL%20BLOC&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html" target="_blank"><img src="assets/social/fb.png"></a>
-        <a href="https://twitter.com/intent/tweet?text=Bail%20people%20out%20of%20jail%20with%20a%20computer%20program%20%23BAILBLOC&url=https://bailbloc.thenewinquiry.com" target="_blank"><img src="assets/social/twitter.png"></a>
-
+            <a href="https://twitter.com/intent/tweet?text=Bail%20people%20out%20of%20jail%20with%20a%20computer%20program%20%23BAILBLOC&url=https://bailbloc.thenewinquiry.com" target="_blank"><img src="assets/social/twitter.png"></a>
         </div>
     </div>
     <div id="stats-date">
@@ -66,11 +71,9 @@
     </div>
     <div id="scrub-friends">
     </div>
-    
-    
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="p5.min.js"></script>
-    <script src="stats-p5.js"></script>
+    <script src="stats.js"></script>
     <script>
     const shell = require('electron').shell;
 
@@ -80,7 +83,7 @@
         shell.openExternal(this.href);
     });
 
-
+    
     </script>
 </body>
 
