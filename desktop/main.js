@@ -231,7 +231,7 @@ app.on('ready', () => {
     {
       label: 'Stats',
       click() {
-        let statsWindow = makeWindow('stats-p5.html', {
+        let statsWindow = makeWindow('stats.html', {
           width: 800,
           height: 582,
           resizable: false,
