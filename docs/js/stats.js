@@ -13,11 +13,6 @@
 
 */
 
-const { ipcRenderer, remote } = require('electron');
-let currentWindow = remote.getCurrentWindow();
-
-const $ = require('./jquery.min.js');
-
 var gp = [];
 var statsReady = false;
 
