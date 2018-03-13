@@ -370,7 +370,7 @@ function redrawGraph(stats, numWorkers) {
 
                         // note it in graph
                         $('body').append(
-                            $('<a href="http://google.com"><div/></a>')
+                            $('<a href="https://bailbloc.thenewinquiry.com/payouts.html"><div/></a>')
                             .attr("id", "payout" + payoutIndex)
                             .addClass("payouticon")
                             .css("left", x + $("#defaultCanvas0").offset().left - 10)
@@ -442,7 +442,7 @@ function pullData() {
     // get all the bb. server data
     $.ajax({
 
-        url: "https://bb.darkinquiry.com/?step=50&n=140",
+        url: "https://bb.darkinquiry.com/?step=80&n=140",
         type: 'get',
         cache: false,
         success: function(stats) {
