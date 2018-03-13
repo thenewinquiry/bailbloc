@@ -15,6 +15,17 @@
         width: 100%;
         height: 100%;
     }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        font-family: 'Work Sans', sans-serif;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 600;
+        overflow: hidden;
+    }
     </style>
 </head>
 
@@ -33,7 +44,6 @@
         <img class="graphicon" src="assets/payout.png">
         <div>CHECK CUT TO BAIL FUND</div>
     </div>
-    
     <div id="xaxis-label-friends">
         <img class="graphicon" src="assets/pages/cute-graph-pink.png">
         <div>if everyone invited 3 friends</div>
@@ -44,7 +54,6 @@
         <img class="graphicon" src="assets/donation.png">
         <div>DONATION RECEIVED</div>
     </div>
-
     <div id="topbox">
         <div id="general-stats">
             <span>currently</span>
@@ -80,14 +89,11 @@
     <script src="js/p5.min.js"></script>
     <script src="js/stats.js"></script>
     <script>
-
     // make links load in external browser
     $(document).on('click', 'a[href^="http"]', function(event) {
         event.preventDefault();
         shell.openExternal(this.href);
     });
-
-    
     </script>
 </body>
 
