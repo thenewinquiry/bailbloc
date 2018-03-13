@@ -19,7 +19,6 @@
 
     body {
         margin: 0;
-        padding: 20px;
         color: #333;
         font-family: 'Work Sans', sans-serif;
         text-transform: uppercase;
@@ -30,12 +29,14 @@
 
     #stats-container {
         width: 800px;
-        height: 582px;
+        height: 560px;
+        position: absolute;
     }
     </style>
 </head>
 
 <body>
+    <base target="_parent">
     <div id="stats-container">
         <div id="yaxis-label-top">
         </div>
@@ -93,13 +94,7 @@
     </div>
     <script src="js/p5.min.js"></script>
     <script src="js/stats.js"></script>
-    <script>
-    // make links load in external browser
-    $(document).on('click', 'a[href^="http"]', function(event) {
-        event.preventDefault();
-        shell.openExternal(this.href);
-    });
-    </script>
+    
 </body>
 
 </html>
