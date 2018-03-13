@@ -90,14 +90,14 @@
     position: absolute;
     width: 18px;
     height: 18px;
-    background-image: url(assets/payout.png);
+    background-image: url(../assets/payout.png);
     background-repeat: no-repeat;
     background-size: 100%;
     z-index:98;
 }
 
 .donationicon {
-    background-image: url(assets/donation.png);
+    background-image: url(../assets/donation.png);
 }
 
 #xaxis-label-friends a img, #label-donations a img {
