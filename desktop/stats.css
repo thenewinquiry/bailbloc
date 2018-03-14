@@ -56,18 +56,23 @@
     bottom: 54px;
 }
 
-#label-payouts {
+#label-payouts, #label-donations {
     position:absolute;
     bottom:38px;
 }
 
+#label-donations {
+    left:432px;
+}
+
 #xaxis-label-actual div,
 #xaxis-label-friends div,
-#label-payouts div {
+#label-payouts div,
+#label-donations div {
     display: inline;
 }
 
-#xaxis-label-friends div {
+#xaxis-label-friends div, #label-donations div {
     margin-right: 2px;
 }
 
@@ -77,11 +82,11 @@
     width: 11px;
 }
 
-.payouticon:hover {
+.payouticon:hover, .donationicon:hover {
     background-color: transparent;
 }
 
-.payouticon {
+.payouticon, .donationicon {
     position: absolute;
     width: 18px;
     height: 18px;
@@ -91,7 +96,11 @@
     z-index:98;
 }
 
-#xaxis-label-friends a img {
+.donationicon {
+    background-image: url(assets/donation.png);
+}
+
+#xaxis-label-friends a img, #label-donations a img {
     position: relative;
     top: 4px;
     width: 18px;
@@ -101,7 +110,7 @@
     left: 122px;
 }
 
-#xaxis-label-friends {
+#xaxis-label-friends, #label-donations {
     right: 94px;
 }
 
