@@ -1,6 +1,6 @@
 {
   "name": "bailbloc",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "converts computational cycles in bail funds",
   "main": "main.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "author": "The New Inquiry",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^1.6.11",
+    "electron": "^1.8.3",
     "electron-builder": "^19.22.1",
     "node-icns": "0.0.4"
   },
