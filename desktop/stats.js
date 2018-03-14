@@ -50,10 +50,15 @@ var numPoints = 0;
 
 var totalXMR, totalUSD, peopleFree;
 
-var payouts;    // json object to store payout data
+var payouts; // json object to store payout data
 var payoutIndex = 0;
 var paidUSD = 0.0;
 var exchangedXMR = 0;
+
+var donations; // like above but to store donations (in xmr)
+var donationIndex = 0;
+var donatedXMR = 0;
+
 
 function preload() {
     myFont = loadFont('assets/Lato-Regular.ttf');
@@ -64,8 +69,6 @@ function setup() {
     // do something with these individualized stats
     // console.log(currentWindow.initialXMR);
     // console.log(currentWindow.installedTimestamp);
-
-
 
     // put setup code here
     createCanvas(588, 305);
@@ -81,13 +84,13 @@ function setup() {
     mT = 0;
     mB = height;
 
-    pullData();
+    pullPayoutData();
 
 }
 
 function changeMode(n) {
     graphMode = n;
-    pullData();
+    pullPayoutData();
 }
 
 function draw() {
@@ -266,8 +269,10 @@ function redrawGraph(stats, numWorkers) {
     payoutIndex = 0;
     paidUSD = 0.0;
     exchangedXMR = 0.0;
+    donatedXMR = 0.0;
     // and the icons
-    $("div.payouticon").remove();
+    $(".payouticon").remove();
+    $(".donationicon").remove();
 
     yMin = 999999.0;
     yMax = 0.0;
@@ -309,7 +314,7 @@ function redrawGraph(stats, numWorkers) {
 
     // add points to array
     for (var i = stats.length - 1; i >= 0; i--) {
-    //for (var i = 0; i < stats.length; i++) {
+        //for (var i = 0; i < stats.length; i++) {
         var x = map(i, 0, stats.length - 1, mR, mL);
         //var x = map(i, stats.length - 1, 0, mL, mR);
         var y = 0.0;
@@ -340,13 +345,16 @@ function redrawGraph(stats, numWorkers) {
 
 
                 val = (stats[i].stats.amtDue + stats[i].stats.amtPaid) / 1000000000000;
-                
+
+                // add donations running total
+                val += donatedXMR;
+
 
                 // subtract that which we have already exchanged
                 val -= exchangedXMR;
-                
+
                 val = val * stats[i].ticker.price; // get USD
-                
+
                 // add total amount of money paid out in checks so far
                 val += paidUSD;
 
@@ -358,25 +366,54 @@ function redrawGraph(stats, numWorkers) {
 
 
                 // if the timestamp of the current data point is greater than an unused payout data point
-                if(Object.keys(payouts).length > payoutIndex) {
-                    if(stats[i].timestamp > payouts[payoutIndex].timestamp) {
-                        
+                if (Object.keys(payouts).length > payoutIndex) {
+                    if (stats[i].timestamp > payouts[payoutIndex].timestamp) {
+
                         // add the check amount to running total
-                        paidUSD += payouts[payoutIndex].donation_amount_usd;
+                        paidUSD += payouts[payoutIndex].check_amount_usd;
                         exchangedXMR += payouts[payoutIndex].amount_xmr;
 
                         // note it in graph
-                        $('body').append(
-                            $('<a href="http://google.com"><div/></a>')
-                            .attr("id", "payout" + payoutIndex)
-                            .addClass("payouticon")
-                            .css("left", x + $("#defaultCanvas0").offset().left - 10)
-                            .css("top", y + $("#defaultCanvas0").offset().top - 10)
-                        );              
+                        // but only show the icon if its not too old to be seen
+                        if (stats[stats.length - 1].timestamp < payouts[payoutIndex].timestamp) {
+                            $('body').append(
+                                $('<a href="https://bailbloc.thenewinquiry.com/payouts.html"><div/></a>')
+                                .attr("id", "payout" + payoutIndex)
+                                .addClass("payouticon")
+                                .css("left", x + $("#defaultCanvas0").offset().left - 10)
+                                .css("top", y + $("#defaultCanvas0").offset().top - 10)
+                            );
+                        }
 
                         payoutIndex++;
 
-                        console.log("payout calculated: " + paidUSD);
+                        //console.log("payout calculated: " + paidUSD);
+
+                    }
+                }
+
+
+                // donations
+
+                if (Object.keys(donations).length > donationIndex) {
+                    if (stats[i].timestamp > donations[donationIndex].timestamp) {
+
+                        // add the check amount to running total
+                        donatedXMR += donations[donationIndex].amount_xmr;
+
+                        // note it in graph
+                        // but only show the icon if its not too old to be seen
+                        if (stats[stats.length - 1].timestamp < donations[donationIndex].timestamp) {
+                            $('body').append(
+                                $('<a href="https://bailbloc.thenewinquiry.com/payouts.html"><div/></a>')
+                                .attr("id", "donation" + donationIndex)
+                                .addClass("donationicon")
+                                .css("left", x + $("#defaultCanvas0").offset().left - 10)
+                                .css("top", y + $("#defaultCanvas0").offset().top - 10)
+                            );
+                        }
+
+                        donationIndex++;
                     }
                 }
 
@@ -409,14 +446,57 @@ function redrawGraph(stats, numWorkers) {
     statsReady = true;
 }
 
-function pullData() {
 
-     pullPayoutData();
+
+function pullPayoutData() {
+    // get all the cashout entries
+    $.ajax({
+
+        url: "https://bailbloc.thenewinquiry.com/payouts.json",
+        type: 'get',
+        cache: false,
+        success: function(stats) {
+
+            payouts = stats;
+
+            // establish a flag to use freeze data
+            for (var i = 0; i < payouts.length; i++) {
+                payouts[i].used = false;
+            }
+
+            pullDonationData();
+        }
+    });
+}
+
+function pullDonationData() {
+    // get all the donation entries
+    $.ajax({
+
+        url: "https://bailbloc.thenewinquiry.com/donations.json",
+        type: 'get',
+        cache: false,
+        success: function(stats) {
+
+            donations = stats;
+
+            // establish a flag to use freeze data
+            for (var i = 0; i < donations.length; i++) {
+                donations[i].used = false;
+            }
+
+            pullStatsData();
+        }
+    });
+}
+
+
+function pullStatsData() {
 
     // get all the bb. server data
     $.ajax({
 
-        url: "https://bb.darkinquiry.com/?step=50&n=140",
+        url: "https://bb.darkinquiry.com/?step=65&n=120",
         type: 'get',
         cache: false,
         success: function(stats) {
@@ -459,42 +539,8 @@ function pullData() {
 
             $("#yaxis-label-top").text(l1);
             $("#yaxis-label-bottom").text(l2);
-
-            // individual stats
-            // var raised = (currentWindow.initialXMR * stats[0].ticker.price).toFixed(2);
-
-            // var date = new Date(currentWindow.installedTimestamp * 1000);
-            // var month = date.getMonth();
-            // var day = date.getDate();
-            // var formattedTime = monthNames[month] + ' ' + day;
-
-            // $("#individual-raised").text(raised);
-            // $("#individual-date").text(formattedTime);
-
         }
     });
-}
-
-function pullPayoutData() {
-    // get all the cashout entries
-    $.ajax({
-
-        url: "https://bailbloc.thenewinquiry.com/payouts.json",
-        type: 'get',
-        cache: false,
-        success: function(stats) {
-            
-            payouts = stats;
-
-            // establish a flag to use freeze data
-            for(var i = 0; i < payouts.length; i++) {
-                payouts[i].used = false;
-            }
-
-        }
-    });
-
-
 }
 
 
@@ -528,4 +574,4 @@ function convertTimestamp(timestamp) {
 
 
 // Pull data every so often
-setInterval(pullData, 5 * 60 * 1000);
+// setInterval(pullData, 5 * 60 * 1000);
