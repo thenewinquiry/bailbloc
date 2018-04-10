@@ -12,8 +12,17 @@ const uuidv4 = require('uuid/v4');
 const Positioner = require('electron-positioner');
 const Miner = require('./miner.js');
 
+const MODE = process.env.NODE_ENV;
 const UPDATE_CHECK = 30 * 60 * 1000;
 const CHARGE_CHECK = 3000;
+
+if (MODE == 'development') { 
+    log.transports.console.level = 'debug';
+    log.transports.console.format = '{h}:{i}:{s}:{ms} {text}';
+}
+
+log.debug('running in mode:');
+log.debug(MODE);
 
 const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
   //this callback executes when someone tries to run a second instance of the app.
@@ -30,6 +39,7 @@ let windows = {};
 let totalCPUs = os.cpus().length;
 let miner = new Miner();
 let mySettings = {};
+let userToggled = 0;
 
 let defaultSettings = {
   maxUsage: 10,
@@ -52,9 +62,12 @@ if (platform === 'darwin') {
 }
 
 function toggleMiner(e) {
+  userToggled = 1 - userToggled;
   if (miner.mining) {
+    log.debug('stopping mining...');
     stopMining();
   } else {
+    log.debug('starting mining...');
     startMining();
   }
 }
@@ -75,6 +88,10 @@ function checkUpdates() {
   autoUpdater.checkForUpdates();
 }
 
+function logMinerState(miner) {
+  log.debug('miner mining state:', miner.mining);
+}
+
 function checkCharging() {
   if (!mySettings.pauseOnLowPower) {
     return false;
@@ -83,11 +100,18 @@ function checkCharging() {
   batteryLevel().then(level => {
     isCharging().then(charging => {
       // console.log('status', charging, level);
-      if (!charging && level < 0.5 && miner.mining) {
+      logMinerState(miner);
+      // if the user toggled the application off we need to shortcut this logic..
+      if (userToggled && !miner.mining) {
+        log.debug("user has toggled off mining... don't mine...")
+        return false;
+      } else if (!charging && level < 0.5 && miner.mining) {
         // console.log('stopping');
+        log.debug('stopping mining... (battery related)')
         stopMining();
       } else if ((charging || level >= 0.5) && !miner.mining) {
         // console.log('starting');
+        log.debug('starting mining... (battery related)')
         startMining();
       }
     });
