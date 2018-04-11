@@ -16,7 +16,7 @@ npm start
 ## Create a binary
 
 ```
-npm run pack
+npm run buildall
 ```
 
 or 
