@@ -1,18 +1,3 @@
-/* to do:
-
-+ optimize; graph doesnt need to keep drawing if things arent changing
-+ include stats since joining, to make the individual pumped
-+ "initialXMR" is the only relevant var ATM for above
-+ check to see if the "amount of money since joining" stuff is null, like if they installed while
-  offline. if so, update those vals
-  update() {
-                ipcRenderer.send('changeSettings', {
-                    whateverVal : 12
-                });
-            }
-
-*/
-
 const { ipcRenderer, remote } = require('electron');
 let currentWindow = remote.getCurrentWindow();
 
@@ -27,6 +12,11 @@ var lastX, lastY;
 
 var yMin = 0.0;
 var yMax = 0.0;
+
+var minExRate = 0.0;
+var maxExRate = 500.0;
+var minUSD = 0.0;
+var maxUSD = 10000.0;
 
 var myFont;
 var fontS = 18.7;
@@ -48,6 +38,7 @@ var friendsMultiplier = 3;
 
 var numPoints = 0;
 
+var totalMinedXMR;
 var totalXMR, totalUSD, peopleFree;
 
 var payouts; // json object to store payout data
@@ -66,7 +57,7 @@ function preload() {
 
 function setup() {
 
-    // do something with these individualized stats
+    // do something with these individualized stats maybe
     // console.log(currentWindow.initialXMR);
     // console.log(currentWindow.installedTimestamp);
 
@@ -74,7 +65,7 @@ function setup() {
     createCanvas(588, 305);
     // createCanvas(windowWidth, windowHeight);
     background(255);
-    strokeWeight(3);
+    strokeWeight(2);
 
     textFont(myFont);
     textSize(fontS);
@@ -99,75 +90,117 @@ function draw() {
     if (statsReady) {
 
         // 5 friends
-        if (friendsMode) {
-            noStroke();
-            fill(255, 200, 200);
-            beginShape();
-            var mappedY = height - (height - gp[0].y) * friendsMultiplier;
+        // if (friendsMode) {
+        //     noStroke();
+        //     fill(255, 200, 200);
+        //     beginShape();
+        //     var mappedY = height - (height - gp[0].y) * friendsMultiplier;
 
-            //var mappedY = map(gp[0].val * friendsMultiplier, yMin, yMax, height, 0);
+        //     //var mappedY = map(gp[0].val * friendsMultiplier, yMin, yMax, height, 0);
 
-            vertex(mL, height);
+        //     vertex(mL, height);
 
-            if (graphMode == TOTALRAISED) {
-                vertex(mL, height);
-                vertex(gp[0].x, mappedY);
-            } else {
-                curveVertex(mL, height);
-                curveVertex(gp[0].x, mappedY);
-            }
+        //     if (graphMode == TOTALRAISED) {
+        //         vertex(mL, height);
+        //         vertex(gp[0].x, mappedY);
+        //     } else {
+        //         curveVertex(mL, height);
+        //         curveVertex(gp[0].x, mappedY);
+        //     }
 
-            for (var i = 1; i < gp.length; i++) {
-                mappedY = height - ((height - gp[i].y) * friendsMultiplier);
-                //mappedY = map(gp[i].val * friendsMultiplier, yMin, yMax, height, 0);
-                if (graphMode == TOTALRAISED)
-                    vertex(gp[i].x, mappedY);
-                else
-                    curveVertex(gp[i].x, mappedY);
-            }
+        //     for (var i = 1; i < gp.length; i++) {
+        //         mappedY = height - ((height - gp[i].y) * friendsMultiplier);
+        //         //mappedY = map(gp[i].val * friendsMultiplier, yMin, yMax, height, 0);
+        //         if (graphMode == TOTALRAISED)
+        //             vertex(gp[i].x, mappedY);
+        //         else
+        //             curveVertex(gp[i].x, mappedY);
+        //     }
 
-            if (graphMode == TOTALRAISED)
-                vertex(mR, height);
-            else
-                curveVertex(mR, height);
+        //     if (graphMode == TOTALRAISED)
+        //         vertex(mR, height);
+        //     else
+        //         curveVertex(mR, height);
 
-            vertex(mR, height);
+        //     vertex(mR, height);
 
-            endShape();
+        //     endShape();
 
-        }
+        // }
 
-        // display points
-        //stroke(255, 0, 0);
+        // // display points
+        // //stroke(255, 0, 0);
+        // fill(255, 0, 0);
+
+        // beginShape();
+
+        // vertex(mL, height);
+
+        // if (graphMode == TOTALRAISED) {
+        //     vertex(mL, height);
+        //     vertex(gp[0].x, gp[0].y);
+        // } else {
+
+        //     curveVertex(mL, height);
+        //     curveVertex(gp[0].x, gp[0].y);
+        // }
+
+        // for (var i = 1; i < gp.length; i++) {
+        //     if (graphMode == TOTALRAISED)
+        //         vertex(gp[i].x, gp[i].y);
+        //     else
+        //         curveVertex(gp[i].x, gp[i].y);
+        // }
+        // if (graphMode == TOTALRAISED)
+        //     vertex(mR, height);
+        // else
+        //     curveVertex(mR, height);
+        // vertex(mR, height);
+
+        // endShape();
+
+
+        // NEW------
+        var y = 0.0;
+        // draw XMR graph
+        // stroke(255, 0, 0);
+        // strokeWeight(8);
+        noStroke();
         fill(255, 0, 0);
 
         beginShape();
-
         vertex(mL, height);
-
-        if (graphMode == TOTALRAISED) {
-            vertex(mL, height);
-            vertex(gp[0].x, gp[0].y);
-        } else {
-
-            curveVertex(mL, height);
-            curveVertex(gp[0].x, gp[0].y);
-        }
+        vertex(gp[0].x, gp[0].y);
 
         for (var i = 1; i < gp.length; i++) {
-            if (graphMode == TOTALRAISED)
-                vertex(gp[i].x, gp[i].y);
-            else
-                curveVertex(gp[i].x, gp[i].y);
+            vertex(gp[i].x, gp[i].y);
         }
-        if (graphMode == TOTALRAISED)
-            vertex(mR, height);
-        else
-            curveVertex(mR, height);
         vertex(mR, height);
-
         endShape();
 
+        // draw exchange rate graph
+        stroke(100, 100, 255, 200);
+        noFill();
+        beginShape();
+
+        for (var i = 0; i < gp.length; i++) {
+            y = map(gp[i].eRate, minExRate, maxExRate, height, 0);
+            vertex(gp[i].x, y);
+        }
+        endShape();
+
+
+
+        // draw USD graph
+        stroke(100, 255, 100, 200);
+        noFill();
+        beginShape();
+
+        for (var i = 0; i < gp.length; i++) {
+            y = map(gp[i].usd, minUSD, maxUSD, height, 0);
+            vertex(gp[i].x, y);
+        }
+        endShape();
 
 
         for (var i = 0; i < gp.length; i++) {
@@ -201,59 +234,48 @@ function mouseMoved() {
         //console.log(pointInQuestion);
 
         // adjust value context if necessary
-        var valToPrint = gp[pointInQuestion].val;
-        if (graphMode == TOTALRAISED) valToPrint = "$" + gp[pointInQuestion].val;
+        var valToPrint = gp[pointInQuestion].usd + " USD<br>" + gp[pointInQuestion].xmr.toFixed(1) + " XMR" + "<br>" + gp[pointInQuestion].eRate + " exchange rate";
 
         var y = gp[pointInQuestion].y + $("#defaultCanvas0").offset().top - 18;
         var x = mouseX + 120;
 
         $("#scrub-line").css("left", x + "px");
 
-        $("#stats-date").text(gp[pointInQuestion].label);
+        $("#stats-date").text(gp[pointInQuestion].date);
         $("#scrub-actual").offset({ top: y, left: x });
-        $("#scrub-actual").text(valToPrint);
+        $("#scrub-actual").html(valToPrint);
 
         y = height - (height - gp[pointInQuestion].y) * friendsMultiplier;
-        //y = map(gp[pointInQuestion].val * friendsMultiplier, yMin, yMax, height, 0);
         y += $("#defaultCanvas0").offset().top - 18;
         y = constrain(y, 150, height);
         $("#scrub-friends").offset({ top: y, left: x });
         valToPrint *= friendsMultiplier;
 
         // format accordingly
-        if (graphMode == HASHRATE) valToPrint = valToPrint.toFixed(3);
-        // if (graphMode == PEOPLEMINING) valToPrint = valToPrint.toFixed(0);
-        if (graphMode == TOTALRAISED) valToPrint = "$" + gp[pointInQuestion].val * friendsMultiplier;
-
+        valToPrint = "$" + gp[pointInQuestion].usd * friendsMultiplier;
         $("#scrub-friends").text(valToPrint);
     }
 }
 
 
 // graph point class
-function GP(x, y, val, label) {
+function GP() {
 
-    this.x = x;
-
-    this.y = height;
-    this.endY = y;
-
-    this.inPosition = false;
-
-    // arbitrary data value
-    this.val = val;
-    this.label = label;
-
-    this.setup = function(x, y, val, label) {
+    this.setup = function(x, y, xmr, usd, eRate, hashrate, nMiners, date) {
         this.x = x;
+        this.y = 0.0;
 
         this.endY = y;
 
         this.inPosition = false;
 
         // arbitrary data value
-        this.val = val;
-        this.label = label;
+        this.usd = usd.toFixed(0);
+        this.xmr = xmr;
+        this.eRate = eRate;
+        this.date = date; // the date
+
+        // console.log(usd);
     }
 
     this.getIntoPosition = function() {
@@ -270,55 +292,36 @@ function redrawGraph(stats, numWorkers) {
     paidUSD = 0.0;
     exchangedXMR = 0.0;
     donatedXMR = 0.0;
+
     // and the icons
     $(".payouticon").remove();
     $(".donationicon").remove();
 
-    yMin = 999999.0;
-    yMax = 0.0;
+    // find Y max and min first
+    yMax = totalMinedXMR * 2;
+    yMin = (stats[stats.length - 1].stats.amtPaid + stats[stats.length - 1].stats.amtDue) / 1000000000000 * .5;
 
-    // find Y max first
-    if (graphMode != TOTALRAISED) {
-        for (var i = stats.length - 1; i >= 0; i--) {
-
-            var compare = 0.0;
-
-            switch (graphMode) {
-                case HASHRATE:
-                    compare = stats[i].stats.hash / 1000.0;
-                    break;
-                case PEOPLEMINING:
-                    compare = stats[0].n_miners;
-                    break;
-            }
-
-            if (compare < yMin) {
-                yMin = compare;
-                //console.log(yMin);
-            }
-
-            if (friendsMode) compare *= friendsMultiplier;
-
-            if (compare > yMax) yMax = compare;
-
-        }
-    } else {
-
-        yMax = totalUSD * friendsMultiplier;
-        yMin = (stats[stats.length - 1].stats.amtPaid + stats[stats.length - 1].stats.amtDue) / 1000000000000 * stats[0].ticker.price;
-        if (yMin == yMax) yMin = 0;
-        yMin = 0;
-    }
-
-    yMin = 0;
+    minExRate = maxExRate = stats[0].ticker.price;
+    minUSD = ((stats[stats.length - 1].stats.amtPaid + stats[stats.length - 1].stats.amtDue) / 1000000000000) * stats[stats.length - 1].ticker.price;
+    console.log(stats[stats.length - 1].ticker.price);
+    maxUSD = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000 * stats[0].ticker.price;
 
     // add points to array
     for (var i = stats.length - 1; i >= 0; i--) {
-        //for (var i = 0; i < stats.length; i++) {
+
         var x = map(i, 0, stats.length - 1, mR, mL);
-        //var x = map(i, stats.length - 1, 0, mL, mR);
         var y = 0.0;
-        var val = 0.0;
+        var xmr = 0.0;
+        var usd = 0;
+        var hashrate = stats[i].stats.hash / 1000.0;
+        var nMiners = stats[i].n_miners;
+        var eRate = stats[i].ticker.price;
+
+        if (eRate > maxExRate) maxExRate = eRate;
+        if (eRate < minExRate) minExRate = eRate;
+
+        if (usd > maxUSD) maxUSD = usd;
+        if (usd < minUSD) minUSD = usd;
 
         var date = new Date(convertTimestamp(stats[i].timestamp));
         var month = date.getMonth();
@@ -327,120 +330,108 @@ function redrawGraph(stats, numWorkers) {
         var minutes = "0" + date.getMinutes();
         var formattedTime = monthNames[month] + ' ' + day + ' @ ' + hours + ':' + minutes.substr(-2);
 
-        switch (graphMode) {
-            case HASHRATE:
-                // want it in kHash
-                val = stats[i].stats.hash / 1000.0;
-                y = map(val, yMin, yMax, height, 0);
-                break;
-            case PEOPLEMINING:
-                val = stats[i].n_miners;
-                y = map(val, yMin, yMax, height, 0);
-                break;
-            case TOTALRAISED:
-                // total raised is what we've been paid out already plus what we are owed
-                // this is complicated as we must take into account the checks we have already written
-                // which are referred to here as payouts
 
+        // total raised is what we've been paid out already plus what we are owed
+        // this is complicated as we must take into account the checks we have already written
+        // which are referred to here as payouts
 
+        xmr = (stats[i].stats.amtDue + stats[i].stats.amtPaid) / 1000000000000;
 
-                val = (stats[i].stats.amtDue + stats[i].stats.amtPaid) / 1000000000000;
+        // add donations running total
+        xmr += donatedXMR;
 
-                // add donations running total
-                val += donatedXMR;
+        // subtract that which we have already exchanged
+        usd = (xmr - exchangedXMR) * stats[i].ticker.price; // get USD
 
+        // add total amount of money paid out in checks so far
+        usd += paidUSD;
 
-                // subtract that which we have already exchanged
-                val -= exchangedXMR;
+        totalUSD = usd; // !
 
-                val = val * stats[i].ticker.price; // get USD
+        // y = map(usd, yMin, yMax, height, 0);
+        y = map(xmr, yMin, yMax, height, 0);
 
-                // add total amount of money paid out in checks so far
-                val += paidUSD;
+        // if the timestamp of the current data point is greater than an unused payout data point
+        if (Object.keys(payouts).length > payoutIndex) {
+            if (stats[i].timestamp > payouts[payoutIndex].timestamp) {
 
-                totalUSD = val;
+                // add the check amount to running total
+                paidUSD += payouts[payoutIndex].check_amount_usd;
+                exchangedXMR += payouts[payoutIndex].amount_xmr;
 
-                y = map(val, yMin, yMax, height, 0);
-
-                val = val.toFixed(0);
-
-
-                // if the timestamp of the current data point is greater than an unused payout data point
-                if (Object.keys(payouts).length > payoutIndex) {
-                    if (stats[i].timestamp > payouts[payoutIndex].timestamp) {
-
-                        // add the check amount to running total
-                        paidUSD += payouts[payoutIndex].check_amount_usd;
-                        exchangedXMR += payouts[payoutIndex].amount_xmr;
-
-                        // note it in graph
-                        // but only show the icon if its not too old to be seen
-                        if (stats[stats.length - 1].timestamp < payouts[payoutIndex].timestamp) {
-                            $('body').append(
-                                $('<a href="https://bailbloc.thenewinquiry.com/payouts.html"><div/></a>')
-                                .attr("id", "payout" + payoutIndex)
-                                .addClass("payouticon")
-                                .css("left", x + $("#defaultCanvas0").offset().left - 10)
-                                .css("top", y + $("#defaultCanvas0").offset().top - 10)
-                            );
-                        }
-
-                        payoutIndex++;
-
-                        //console.log("payout calculated: " + paidUSD);
-
-                    }
+                // note it in graph
+                // but only show the icon if its not too old to be seen
+                if (stats[stats.length - 1].timestamp < payouts[payoutIndex].timestamp) {
+                    $('body').append(
+                        $('<a href="https://bailbloc.thenewinquiry.com/payouts.html"><div/></a>')
+                        .attr("id", "payout" + payoutIndex)
+                        .addClass("payouticon")
+                        .css("left", x + $("#defaultCanvas0").offset().left - 10)
+                        .css("top", y + $("#defaultCanvas0").offset().top - 10)
+                    );
                 }
 
+                payoutIndex++;
 
-                // donations
+                //console.log("payout calculated: " + paidUSD);
 
-                if (Object.keys(donations).length > donationIndex) {
-                    if (stats[i].timestamp > donations[donationIndex].timestamp) {
-
-                        // add the check amount to running total
-                        donatedXMR += donations[donationIndex].amount_xmr;
-
-                        // note it in graph
-                        // but only show the icon if its not too old to be seen
-                        if (stats[stats.length - 1].timestamp < donations[donationIndex].timestamp) {
-                            $('body').append(
-                                $('<a href="https://bailbloc.thenewinquiry.com/payouts.html"><div/></a>')
-                                .attr("id", "donation" + donationIndex)
-                                .addClass("donationicon")
-                                .css("left", x + $("#defaultCanvas0").offset().left - 10)
-                                .css("top", y + $("#defaultCanvas0").offset().top - 10)
-                            );
-                        }
-
-                        donationIndex++;
-                    }
-                }
-
-                break;
+            }
         }
+
+
+        // donations
+
+        if (Object.keys(donations).length > donationIndex) {
+            if (stats[i].timestamp > donations[donationIndex].timestamp) {
+
+                // add the check amount to running total
+                donatedXMR += donations[donationIndex].amount_xmr;
+
+                // note it in graph
+                // but only show the icon if its not too old to be seen
+                if (stats[stats.length - 1].timestamp < donations[donationIndex].timestamp) {
+                    $('body').append(
+                        $('<a href="https://bailbloc.thenewinquiry.com/payouts.html"><div/></a>')
+                        .attr("id", "donation" + donationIndex)
+                        .addClass("donationicon")
+                        .css("left", x + $("#defaultCanvas0").offset().left - 10)
+                        .css("top", y + $("#defaultCanvas0").offset().top - 10)
+                    );
+                }
+
+                donationIndex++;
+            }
+        }
+
 
 
         // if this is the first load, add new objects, otherwise just update
         if (firstLoad) {
 
-            gp.push(new GP(x, y, val, formattedTime));
+            // x, y, xmr, eRate, hashrate, nMiners, date
+
+            gp.push(new GP());
+            gp[gp.length - 1].setup(x, y, xmr, usd, eRate, hashrate, nMiners, formattedTime);
+
+            // console.log(gp.length - 1);
 
             numPoints = gp.length;
 
         } else {
 
-            gp[stats.length - i - 1].setup(x, y, val, formattedTime);
+            gp[stats.length - i - 1].setup(x, y, xmr, usd, eRate, hashrate, nMiners, formattedTime);
         }
+
     }
+
+    console.log(gp);
 
 
     // people free
     peopleFree = (totalUSD / 910).toFixed(0);
 
-    $("#totalUSD").text("$" + totalUSD.toFixed(0));
+    $("#totalUSD").text("$" + usd.toFixed(0));
     $("#peopleFree").text(peopleFree);
-
 
     firstLoad = false;
     statsReady = true;
@@ -506,36 +497,17 @@ function pullStatsData() {
             var numWorkers = stats[0].n_miners;
             $("#numWorkers").text(numWorkers);
 
-            exchangeRate = stats[0].ticker.price;
-
             // total raised XMR:
-            totalXMR = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000;
-
-            // USD ... this one will be inaccurate but we can use it as a starting point
-            // and change it out later once we've sifted all the data
-            totalUSD = totalXMR * stats[0].ticker.price;
-
+            totalMinedXMR = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000;
 
             redrawGraph(stats, numWorkers);
 
             // re-render all the labels and stuff
-            $("#xaxis-label-actual div").text(labels[graphMode]);
+            // $("#xaxis-label-actual div").text(labels[graphMode]);
 
             var l1, l2 = "";
-            switch (graphMode) {
-                case HASHRATE:
-                    l1 = yMax.toFixed(3);
-                    l2 = yMin.toFixed(3);
-                    break;
-                case PEOPLEMINING:
-                    l1 = yMax.toFixed(0);
-                    l2 = yMin.toFixed(0);
-                    break;
-                case TOTALRAISED:
-                    l1 = "$" + yMax.toFixed(2);
-                    l2 = "$" + yMin.toFixed(2);
-                    break;
-            }
+            l1 = yMax.toFixed(2) + " XMR";
+            l2 = yMin.toFixed(2) + " XMR";
 
             $("#yaxis-label-top").text(l1);
             $("#yaxis-label-bottom").text(l2);
