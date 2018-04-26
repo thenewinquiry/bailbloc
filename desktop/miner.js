@@ -21,6 +21,7 @@ class Miner {
       '--keepalive': '',
       '--no-color': '',
       '--max-cpu-usage': '25',
+      '--cpu-priority': '0',
       '--print-time': '4'
     };
 
