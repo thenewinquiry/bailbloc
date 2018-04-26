@@ -16,7 +16,7 @@ var yMax = 0.0;
 var minExRate = 0.0;
 var maxExRate = 500.0;
 var minUSD = 0.0;
-var maxUSD = 10000.0;
+var maxUSD = 1000.0;
 
 var myFont;
 var fontS = 18.7;
@@ -162,45 +162,77 @@ function draw() {
 
         // NEW------
         var y = 0.0;
-        // draw XMR graph
-        // stroke(255, 0, 0);
-        // strokeWeight(8);
-        noStroke();
-        fill(255, 0, 0);
+        // // draw XMR graph
+        // // stroke(255, 0, 0);
+        // // strokeWeight(8);
+        // noStroke();
+        // fill(255, 0, 0);
 
-        beginShape();
-        vertex(mL, height);
-        vertex(gp[0].x, gp[0].y);
+        // beginShape();
+        // vertex(mL, height);
+        // vertex(gp[0].x, gp[0].y);
 
-        for (var i = 1; i < gp.length; i++) {
-            vertex(gp[i].x, gp[i].y);
-        }
-        vertex(mR, height);
-        endShape();
+        // for (var i = 1; i < gp.length; i++) {
+        //     vertex(gp[i].x, gp[i].y);
+        // }
+        // vertex(mR, height);
+        // endShape();
 
-        // draw exchange rate graph
-        stroke(100, 100, 255, 200);
-        noFill();
-        beginShape();
-
-        for (var i = 0; i < gp.length; i++) {
-            y = map(gp[i].eRate, minExRate, maxExRate, height, 0);
-            vertex(gp[i].x, y);
-        }
-        endShape();
-
-
-
-        // draw USD graph
-        stroke(100, 255, 100, 200);
-        noFill();
-        beginShape();
-
+        // USD as vertical bars
+        strokeWeight(4);
+        stroke(100,255,100);
         for (var i = 0; i < gp.length; i++) {
             y = map(gp[i].usd, minUSD, maxUSD, height, 0);
-            vertex(gp[i].x, y);
+            line(gp[i].x - 1, height, gp[i].x - 1, y);
         }
-        endShape();
+
+        // XMR as vertical bars
+        stroke(255,80,80);
+        for (var i = 0; i < gp.length; i++) {
+            line(gp[i].x - 1, height, gp[i].x - 1, gp[i].y);
+        }
+
+        // turn nearest bar to mouse yellow
+        var nearestBar = int(map(mouseX,0,width,0,gp.length-1));
+        nearestBar = constrain(nearestBar,0,gp.length-1);
+        stroke(255,255,100);
+        // usd
+        y = map(gp[nearestBar].usd, minUSD, maxUSD, height, 0);
+        line(gp[nearestBar].x - 1, height, gp[nearestBar].x - 1, y);
+        // xmr
+        line(gp[nearestBar].x - 1, height, gp[nearestBar].x - 1, gp[nearestBar].y);
+
+        // clean lines between
+        // stroke(255);
+        // strokeWeight(1);
+        // for (var i = 0; i < gp.length; i++) {
+        //     line(gp[i].x + 2, height, gp[i].x + 2, 0);
+        // }
+
+        // // draw exchange rate graph
+        // stroke(100, 100, 255, 200);
+        // noFill();
+        // beginShape();
+
+        // for (var i = 0; i < gp.length; i++) {
+        //     y = map(gp[i].eRate, minExRate, maxExRate, height, 0);
+        //     vertex(gp[i].x, y);
+        // }
+        // endShape();
+
+
+
+        // // draw USD graph
+        // stroke(100, 255, 100, 200);
+        // noFill();
+        // beginShape();
+
+        // for (var i = 0; i < gp.length; i++) {
+        //     y = map(gp[i].usd, minUSD, maxUSD, height, 0);
+        //     vertex(gp[i].x, y);
+        // }
+        // endShape();
+
 
 
         for (var i = 0; i < gp.length; i++) {
@@ -227,9 +259,9 @@ function mouseMoved() {
             mouseReady = true;
         }
 
-        // check mouse
-        var pointInQuestion = int(map(mouseX, 0, width, 0, numPoints));
-        pointInQuestion = constrain(pointInQuestion, 0, numPoints - 1);
+        // check mouse (4 pixel offset helps)
+        var pointInQuestion = int(map(mouseX, 0, width + 4, 0, gp.length));
+        // pointInQuestion = constrain(pointInQuestion, 0, gp.length - 1);
 
         //console.log(pointInQuestion);
 
@@ -244,6 +276,12 @@ function mouseMoved() {
         $("#stats-date").text(gp[pointInQuestion].date);
         $("#scrub-actual").offset({ top: y, left: x });
         $("#scrub-actual").html(valToPrint);
+
+        $("#scrub-date").html(gp[pointInQuestion].date);
+        $("#scrub-usd").html(gp[pointInQuestion].usd);
+        $("#scrub-xmr").html(gp[pointInQuestion].xmr.toFixed(1));
+        $("#scrub-exrate").html(gp[pointInQuestion].eRate.toFixed(0));
+
 
         y = height - (height - gp[pointInQuestion].y) * friendsMultiplier;
         y += $("#defaultCanvas0").offset().top - 18;
@@ -304,7 +342,7 @@ function redrawGraph(stats, numWorkers) {
     minExRate = maxExRate = stats[0].ticker.price;
     minUSD = ((stats[stats.length - 1].stats.amtPaid + stats[stats.length - 1].stats.amtDue) / 1000000000000) * stats[stats.length - 1].ticker.price;
     console.log(stats[stats.length - 1].ticker.price);
-    maxUSD = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000 * stats[0].ticker.price;
+    // maxUSD = (stats[0].stats.amtPaid + stats[0].stats.amtDue) / 1000000000000 * stats[0].ticker.price;
 
     // add points to array
     for (var i = stats.length - 1; i >= 0; i--) {
@@ -315,13 +353,12 @@ function redrawGraph(stats, numWorkers) {
         var usd = 0;
         var hashrate = stats[i].stats.hash / 1000.0;
         var nMiners = stats[i].n_miners;
-        var eRate = stats[i].ticker.price;
+        var eRate = parseFloat(stats[i].ticker.price);
 
         if (eRate > maxExRate) maxExRate = eRate;
         if (eRate < minExRate) minExRate = eRate;
 
-        if (usd > maxUSD) maxUSD = usd;
-        if (usd < minUSD) minUSD = usd;
+
 
         var date = new Date(convertTimestamp(stats[i].timestamp));
         var month = date.getMonth();
@@ -347,6 +384,10 @@ function redrawGraph(stats, numWorkers) {
         usd += paidUSD;
 
         totalUSD = usd; // !
+
+        // use for min/max graph stuff
+        if (usd > maxUSD) maxUSD = usd;
+        if (usd < minUSD) minUSD = usd;
 
         // y = map(usd, yMin, yMax, height, 0);
         y = map(xmr, yMin, yMax, height, 0);
@@ -486,8 +527,8 @@ function pullStatsData() {
 
     // get all the bb. server data
     $.ajax({
-
-        url: "https://bb.darkinquiry.com/?step=65&n=120",
+        // was step=65, n=120
+        url: "https://bb.darkinquiry.com/?step=130&n=80",
         type: 'get',
         cache: false,
         success: function(stats) {
