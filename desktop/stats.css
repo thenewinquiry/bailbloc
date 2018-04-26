@@ -42,11 +42,11 @@
 
 #yaxis-label-bottom {
     position: absolute;
-    width: 50px;
+    width: 80px;
     bottom: 82px;
     text-align: right;
     border-bottom: red solid 2px;
-    left: 70px;
+    left: 40px;
     padding-right: 4px;
 }
 
