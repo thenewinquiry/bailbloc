@@ -55,7 +55,6 @@ $('#sim-start').on('click', function() {
         var results = m.data;
         $('#sim-raised').text(results.raised.toLocaleString());
         $('#sim-released').text(results.released.toLocaleString());
-        $('#sim-reduced').text(results.reduced.toLocaleString());
         $('.sim-results').show();
         $('.sim-status').hide();
     };
@@ -77,12 +76,11 @@ function facebook() {
 
     var raised = $('#sim-raised').text();
     var released = $('#sim-released').text();
-    var reduced = $('#sim-reduced').text();
 
     var users = $("input[name=users]").val();
     var months = $("input[name=months]").val();
 
-    var sentence = "If " + users + " ran Bail Bloc for " + months + "months we could raise $" + raised + "and get " + reduced + " cases dismissed.";
+    var sentence = "If " + users + " ran Bail Bloc for " + months + "months we could raise $" + raised + "and get " + released + " people released from immigration detention.";
 
     popUp("https://www.facebook.com/dialog/feed?app_id=140586622674265&link=http://bailbloc.thenewinquiry.com&name=" + sentence + "&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html", 900, 600);
 }
@@ -91,12 +89,11 @@ function twitter() {
 
     var raised = $('#sim-raised').text();
     var released = $('#sim-released').text();
-    var reduced = $('#sim-reduced').text();
 
     var users = $("input[name=users]").val();
     var months = $("input[name=months]").val();
 
-    var sentence = "If " + users + " ran Bail Bloc for " + months + " months we could raise $" + raised + " and get " + reduced + " cases dismissed. Join the Bloc %23BAILBLOC";
+    var sentence = "If " + users + " ran Bail Bloc for " + months + " months we could raise $" + raised + " and get " + released + " people released from immigration detention. Join the Bloc %23BAILBLOC";
 
     popUp("https://twitter.com/intent/tweet?text=" + sentence + "&url=http://bailbloc.thenewinquiry.com", 704, 260);
 }
