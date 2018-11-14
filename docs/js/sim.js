@@ -8,8 +8,11 @@ importScripts('discrete.js', '//cdnjs.cloudflare.com/ajax/libs/chance/1.0.12/cha
 
 const N_RUNS = 50;
 
-const XMR_CHANGE = [0.95, 1.05];
-const MONTHLY_USD_PER_MINER = [1, 4];
+const XMR_CHANGE = {
+  mean: 0.0017,
+  dev: 0.066
+};
+const MONTHLY_USD_PER_MINER = [0.8, 2];
 
 // Using data from Table 2 of:
 // <http://trac.syr.edu/immigration/reports/519/>
@@ -98,8 +101,17 @@ function genPop() {
   // compute how many don't make bail
   var notMade = {};
   Object.keys(counts).map(idx => {
-    var p = BAIL_MADE,
-        n = counts[idx],
+    var range = BAIL_RANGES[idx];
+    var p;
+
+    // If the bail range is [0,0],
+    // they 100% make bail
+    if (range[0] == 0 && range[1] == 0) {
+      p = 1.;
+    } else {
+      p = BAIL_MADE;
+    }
+    var n = counts[idx],
         dist = SJS.Binomial(n, p),
         nMade = dist.draw(),
         nNotMade = n - nMade;
@@ -131,7 +143,7 @@ function run(miners, months) {
               MONTHLY_USD_PER_MINER[1]*miners];
 
   for (var i=0; i<months; i++) {
-    priceChange *= uniform(XMR_CHANGE);
+    priceChange *= (1 + chance.normal(XMR_CHANGE));
     var pop = genPop();
     var mined = uniform(usd_per_miner) * priceChange;
     bailFund += mined;
