@@ -8,69 +8,73 @@ importScripts('discrete.js', '//cdnjs.cloudflare.com/ajax/libs/chance/1.0.12/cha
 
 const N_RUNS = 50;
 
-// see `../params.py` for
-// annotations about these data
-const XMR_CHANGE = [0.95, 1.05];
-const POP_SIZE = 52465;
-const MONTHLY_POP = Math.round(POP_SIZE/12);
-const ADJUSTED_FTA = 0.07;
-const MONTHLY_USD_PER_MINER = [1, 4];
+const XMR_CHANGE = {
+  mean: 0.0017,
+  dev: 0.066
+};
+const MONTHLY_USD_PER_MINER = [0.8, 2];
+
+// Using data from Table 2 of:
+// <http://trac.syr.edu/immigration/reports/519/>
+// Number of granted bond decisions, across all
+// immigration courts, for first 8 months of FY 2018
+const POP_SIZE = 23577;
+const MONTHLY_POP = Math.round(POP_SIZE/8);
+
+// Using data from:
+// <http://trac.syr.edu/immigration/reports/438/>
+// which states that for FY 2015, 14% failed to appear
+const FTA = 0.14;
+
+// Using data from Table 1 of:
+// <http://trac.syr.edu/immigration/reports/519/>
+// Distribution of bond amounts across all
+// immigration courts, for first 8 months of FY 2018.
+// No immigration bond bail set to less than $1,500,
+// according to Nat'l Bail Fund Network.
+// We include bond of 0 for release rate
 const BAIL_RANGES = [
-  [1, 25],
-  [25, 499],
-  [500, 500],
-  [501, 999],
-  [1000, 1000],
-  [1001, 2499],
-  [2500, 2500],
-  [2501, 4999],
-  [5000, 10000]
+  [0, 0],
+  [1500, 2499],
+  [2500, 4999],
+  [5000, 7499],
+  [7500, 9999],
+  [10000, 12499],
+  [12500, 17499],
+  [17500, 24999],
+  [25000, 35000] // last range is unbounded, but bounded here out of necessity
 ];
 const BAIL_PROBS = [
-  0.09,
-  0.02,
-  0.27,
-  0.09,
-  0.29,
+  0.01,
+  0.053,
   0.14,
-  0.06,
-  0.02,
-  0.02
-];
-const BAIL_MADE = [
-  1.0,
-  0.26,
-  0.21,
-  0.16,
-  0.16,
-  0.14,
-  0.11,
-  0.09,
-  0.07,
-  0.04,
+  0.233,
+  0.178,
+  0.17,
+  0.108,
+  0.062,
+  0.046
 ];
 
-// Probability a detained person
-// pleads guilty, from [1]
-const P_PLEAD = 0.92;
+// Had difficulty finding specific numbers
+// on how often bond was successfully posted.
+// Based on this report:
+// <http://trac.syr.edu/immigration/reports/438/>
+// about 1/5 do not post bond.
+const BAIL_MADE = 4/5;
 
-// Probability a case is dismissed.
-// Based on 2017 figures from BFF
-const P_DISMISSED = 0.67;
+// TODO
+// DETENTION RANGES
 
-const N = 5138;
-const DETENTION_RANGES = [
-  [0, 1],
-  [1, 7],
-  [8, 60],
-  [60, 200] // NOTE: 200 chosen as an arbitrary upper bound
-]
-const DETENTION_PROBS = [
-    1479/N,
-    1853/N,
-    1491/N,
-    315/N
-];
+// Using data from Table 1 of:
+// <http://trac.syr.edu/immigration/reports/405/>
+// which is from August 2015.
+// The backlog reported there has only gotten worse:
+// <http://trac.syr.edu/immigration/reports/536/>
+// (more than doubled)
+// This report also has detention data, but from 2012:
+// <http://trac.syr.edu/immigration/reports/321/>
+const DETENTION_RANGES = [24, 2401];
 
 function sum(arr) {
   return arr.reduce((acc, v) => acc + v);
@@ -97,8 +101,17 @@ function genPop() {
   // compute how many don't make bail
   var notMade = {};
   Object.keys(counts).map(idx => {
-    var p = BAIL_MADE[idx],
-        n = counts[idx],
+    var range = BAIL_RANGES[idx];
+    var p;
+
+    // If the bail range is [0,0],
+    // they 100% make bail
+    if (range[0] == 0 && range[1] == 0) {
+      p = 1.;
+    } else {
+      p = BAIL_MADE;
+    }
+    var n = counts[idx],
         dist = SJS.Binomial(n, p),
         nMade = dist.draw(),
         nNotMade = n - nMade;
@@ -111,8 +124,7 @@ function genPop() {
   Object.keys(notMade).map(idx => {
     var s = Array.from(Array(notMade[idx]), () => ({
       amount: uniform(BAIL_RANGES[idx]),
-      duration: uniform(DETENTION_RANGES[chance.weighted(durationIdxs, DETENTION_PROBS)]),
-      plead: Math.random() < P_PLEAD
+      duration: uniform(DETENTION_RANGES)
     }));
     Array.prototype.push.apply(sample, s);
   });
@@ -123,9 +135,6 @@ function run(miners, months) {
   var bailFund = 0,
       raised = 0,
       released = 0,
-      plead = 0,
-      wouldHavePlead = 0,
-      dismissed = 0,
       priceChange = 1,
       awaitingTrial = [],
       popSizes = [],
@@ -134,22 +143,18 @@ function run(miners, months) {
               MONTHLY_USD_PER_MINER[1]*miners];
 
   for (var i=0; i<months; i++) {
-    priceChange *= uniform(XMR_CHANGE);
+    priceChange *= (1 + chance.normal(XMR_CHANGE));
     var pop = genPop();
     var mined = uniform(usd_per_miner) * priceChange;
     bailFund += mined;
     raised += mined;
-    plead += sum(pop.map(p => p.plead ? 1 : 0 ));
     popSizes.push(pop.length);
 
     // get reclaimed bail
     awaitingTrial = awaitingTrial.filter(c => {
       c.duration -= 30;
-      if (c.duration <= 0 && Math.random() > ADJUSTED_FTA) {
+      if (c.duration <= 0 && Math.random() > FTA) {
         bailFund += c.amount;
-
-        // check results of case
-        dismissed += Math.random() < P_DISMISSED ? 1 : 0;
         return false;
       }
       return true;
@@ -162,9 +167,6 @@ function run(miners, months) {
         released += 1;
         bailFund -= c.amount;
         awaitingTrial.push(c);
-        if (c.plead) {
-          wouldHavePlead += 1;
-        }
       } else {
         break;
       }
@@ -173,10 +175,7 @@ function run(miners, months) {
   return {
     raised: raised,
     released: released,
-    plead: plead,
-    dismissed: dismissed,
     pop: sum(popSizes),
-    wouldHavePlead: wouldHavePlead
   }
 }
 
@@ -190,9 +189,6 @@ onmessage = function(m) {
   var results = {
     released: mean(runs, 'released'),
     raised: mean(runs, 'raised'),
-    plead: mean(runs, 'plead'),
-    dismissed: mean(runs, 'dismissed'),
-    reduced: mean(runs, 'wouldHavePlead')
   }
   postMessage(results);
 }
