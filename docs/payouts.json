@@ -5,5 +5,12 @@
 		"exchange_rate": 353.07,
 		"check_amount_usd": 3333.77,
 		"details": "used coinbase"
+	},
+	{
+		"timestamp": 1541014743,
+		"amount_xmr": 28.26,
+		"exchange_rate": 121.663,
+		"check_amount_usd": 3433.26,
+		"details": "exchanged via lbc"
 	}
 ]
