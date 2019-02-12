@@ -1,0 +1,28 @@
+10/27
+
+12:40pm sent .064295 BTC to LocalBitcoins
+
+12:53pm sent 2XMR to Shapeshift.io, fee .00012837XMR, rate 1 XMR = 0.0160947 BTC
+
+12:57 received .0319394 BTC
+
+1:02 sent .0319394BTC to LocalBitcoins
+
+10/29
+
+12:16pm sent 8XMR via Shapeshift.io, fee .0004322XMR, rate 1 XMR = 0.01602714 BTC
+
+12:24pm sent .127913 BTC (including fee) to LocalBitcoins
+
+10/30
+11:03 Put 0.22299949 BTC in escrow to trade for 1,411.56 USD
+
+1:06pm released Bitcoins
+
+10/31
+
+11:02am sent 10XMR to LBC wallet
+
+11:25am initiated trade of 0.16396178 BTC for 1,030 USD
+
+(20XMR for this donation in total, 2,441.56 USD)
