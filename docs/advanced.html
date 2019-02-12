@@ -2,7 +2,6 @@
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Software that raises money for bail funds.">
@@ -18,7 +17,6 @@
     <meta name="twitter:title" content="Bail Bloc">
     <meta name="twitter:description" content="The New Inquiry is pleased to announce the launch of Bail Bloc, a desktop app that gets people out of jail.">
     <meta name="twitter:image" content="https://bailbloc.thenewinquiry.com/images/og-image.png">
-
     <meta property="og:title" content="Bail Bloc" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://bailbloc.thenewinquiry.com/" />
@@ -28,7 +26,6 @@
 </head>
 
 <body class="text-center">
-
     <nav class="navbar navbar-custom navbar-expand-md navbar-light fixed-top">
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,57 +69,33 @@
     </nav>
     <!-- Page Content -->
     <div class="container" style="padding-top: 5em;">
-        <!-- ABOUT -->
-
+        <!-- advanced -->
         <div class="row">
             <div class="col-lg-1 text-left mt-5"></div>
             <div class="col-lg-10 text-left mt-5">
-                <h1 class="section">ABOUT</h1>
-                <h3>How Bail Bloc works</h3>
+                <h1 class="section">Advanced Users</h1>
+                <p>pool address is <span>mine.xmrpool.net:5555</span></p>
+            <p>user credentials are <span>workerbee:bailbloc@thenewinquiry.com</span></p>
+            <p>wallet address is <span><span>442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdySiMizGTJ56ScZUyugpSeV6hx19QohZTmjuWiM</span></span></p>
 
-                <p>When you download the app, a small portion of your computer's unused processing power is redirected toward mining a popular cryptocurrency called <a href="https://getmonero.org/" target="_blank">Monero</a>, which is secure, private, and untraceable. At the end of every month, we exchange the Monero for US dollars and donate the earnings to one of the bail funds in the <a href="https://www.communityjusticeexchange.org/nbfn-directory" target="_blank">National Bail Fund Network</a> on a rotational basis. Bail Bloc is currently mining Monero for the <a href="https://www.immigrantbailfund.org/">Immigrant Bail Fund</a> in New Haven, Connecticut, and from November 2017 to November 2018 mined Monero for the <a href="http://www.thebronxfreedomfund.org/" target="_blank">Bronx Freedom Fund</a></p>
-
-                <p>100% of the currency your computer generates is used by the Immigrant Bail Fund to post bond for people in ICE detention, effective immediately. Additionally, between November 15 and December 15, 2018, the New Inquiry will match in dollars the amount of Monero mined by users.</p>
-
-                <p>To donate to the fund directly, visit: <a href="https://www.immigrantbailfund.org/home" target="_blank">https://www.immigrantbailfund.org/home</a></p>
+            <h2>For people with mining rigs already set up</h2>
+            <p>Point your miner to the info above</p>
+            
+            <h2>For people with Gaming PCs/powerful GPUs</h2>
+            
+            <h3>Windows with NVidia GPUs</h3>
+            <p>Download <a href="https://github.com/fireice-uk/xmr-stak/releases">xmr-Stak's Nvidia miner</a> and edit the config.txt file to enter the pool login and password above.</p>
+            <h3>Windows with AMD GPUs</h3>
+            <p>The tool of choice in this scenario is Claymore's miner, which can be found <a href="https://bitcointalk.org/index.php?topic=638915.0">here (yes it's a forum post!)</a> Check out that link for setup instructions.</p>
+            <h3>Linux with NVidia GPUs</h3>
+            <p>Check out <a href="https://github.com/fireice-uk/xmr-stak-nvidia">this xmrMiner repo</a>, install and point it at the address above. This is untested on our end, so let us know if you run into any problems.</p>
+            <h3>Linux with AMD GPUs</h3>
+            <p>Download <a href="https://github.com/fireice-uk/xmr-stak-amd">xmr-Stak's AMD miner</a> and edit the config.txt file to enter the pool login and password above.</p>
+            <h3>Mac OS X with AMD GPUs</h3>
+            <p>Check out <a href="https://github.com/xmrig/xmrig-amd">xmrig-amd</a>, install libmicrohttpd and libuv, build with cmake and make, then run:
+            <br> <span>./xmrig-amd --url mine.xmrpool.net:5555 --user 442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdySiMizGTJ56ScZUyugpSeV6hx19QohZTmjuWiM --pass workerbee:bailbloc@thenewinquiry.com --keepalive --opencl-devices=1 --opencl-launch=256x8</span>
+            </p>
                 
-                <h3>How immigration bond works</h3>
-                <p>Like cash bail, immigration bond is an amount of money that the government requires of the recently arrested in exchange for their immediate-term release. Unlike cash bail, however, immigration bonds are not legally guaranteed. Only 47% of people in ICE detention are given a bond hearing. Those who can’t afford to pay the bond that’s set, or who aren’t granted bond at all, are forced to wait for their day in court while detained, a duration that could last months, and frequently lasts years.</p>
-
-                <p>An estimated 1 in 5 people are in ICE detention because they cannot afford to pay their bond. Bond amounts are set at the discretion of individual judges, and therefore vary drastically, ranging from a minimum of $1,500 to a maximum of more than $100,000. In Connecticut, the median immigration bond is $15,000, nearly double the national average. Like cash bail, immigration bonds punish the poor by forcing those who cannot pay for their freedom to remain in detention until their hearing.</p>
-                
-                <p>ICE detention is notoriously cruel in its methods of enforced and protracted isolation. Immigrants who face deportation are not guaranteed legal counsel, and the private prisons from which ICE contracts detention space often charge people exorbitant amounts to use the phone. Only 14% of people in ICE detention have representation, and 97% of those who are detained without representation are eventually deported.</p>
-
-                <p>Immigration proceedings are divided between two dockets: detained and non-detained. The detained docket is essentially the fast-track to deportation, because cases are heard and ruled on in a matter of months. Bailing someone out from ICE detention removes them from the detained docket, and therefore buys them time to find an attorney, build a legal defense, and return to their communities. Most people who are released prevail in their court proceedings: in 2015, two out of three people who were released on bond won their cases.</p>
-
-                <h3>What is cryptocurrency?</h3>
-                
-                <p>Cryptocurrency isn’t real money, but it has real-world exchange value.</p>
-                
-                <p>
-                    Just as the US Treasury prints money to infuse into the economy, cryptocurrency is generated “out of nowhere” through an arbitrary process. But where the US Treasury needs a minting machine, all miners need is computing power. Cryptocurrencies are generated through users running software to solve difficult computational problems, in a process known as “mining.” When a problem is solved, the user is rewarded by a decentralized cryptocurrency network with units of that cryptocurrency. If enough users mine for the same cryptocurrency, it begins to have an exchange value.<sup><a href="#monero" aria-describedby="footnote-label" id="footnotes-ref">2</a></sup>
-                </p>
-
-                <h3>Our goal</h3>
-                <p>
-                    With enough downloads over time, the compounding revenue generated from Bail Bloc has the potential to help secure the release of thousands of immigrants from ICE detention. The project of abolition extends to all forms of detention: abolish cash bail, abolish prisons, abolish ICE, abolish the militarized border.
-                </p>
-
-                <h3>Questions?</h3>
-                <p>We're addressing questions and concerns on an ongoing basis <a href="https://thenewinquiry.com/bail-bloc/" target="_blank">here</a> at the New Inquiry.</p>
-                <h3>Credits</h3>
-                <p>Bail Bloc was created by <span id="credits">Grayson Earle, Maya Binyam, Francis Tseng, JB Rubinovitz, Sam Lavigne, Rachel Rosenfelt, Madeleine Varner, Dhruv Mehrotra, Devin Kenny, and the <a href="https://thenewinquiry.com/dark-inquiry/" target="_blank">Dark Inquiry</a> collective.</span></p>
-                <div class="footnotes text-left">
-                    <h3>Footnotes</h3>
-                    <ol>
-                        <p>
-                            <li id="trac">All figures are culled from <a href="http://trac.syr.edu/immigration/reports/438/" target="_blank">TRAC Immigration’s 2015 report.</a></li>
-                        </p>
-                        <p>
-                            <li id="monero">For example, a user is able to purchase a baseball hat on the internet for 0.00122 Bitcoin (or 0.0877 Monero) from participating vendors, such as Overstock.com. That same hat is could also be bought for $5 USD. This means 0.00122 Bitcoins is worth $5 USD, and can be exchanged for that amount.<a href="#footnotes-ref" aria-label="Back to content">↩</a></li>
-                        </p>
-                    </ol>
-                </div>
             </div>
             <div class="col-lg-1 text-left mt-5"></div>
         </div>
@@ -130,10 +103,9 @@
         <!-- FOOTER -->
         <footer>
             <div class="footer-blurb">
-                <p>Bail Bloc is a project of <a href="http://thenewinquiry.com" target="_blank">The New Inquiry</a>.</p>
+                <p>Bail Bloc is a project of <a href="http://thenewinquiry.com" target="_blank">The New Inquiry</a> in partnership with the <a href="http://www.thebronxfreedomfund.org/" target="_blank">Bronx Freedom Fund</a>.</p>
                 <p><a href="https://thenewinquiry.com/bundle/bail-bloc/" target="_blank">Read TNI's work on policing and mass incarceration here.</a></p>
             </div>
-
             <div class="social-area mt-1">
                 <a class="no-hover" href="https://www.facebook.com/dialog/feed?app_id=140586622674265&link=https://bailbloc.thenewinquiry.com&name=BAIL%20BLOC&redirect_uri=http%3A%2F%2Fs7.addthis.com%2Fstatic%2Fpostshare%2Fc00.html" target="_blank"><img src="images/fb.png"></a>
                 <a class="no-hover" href="https://twitter.com/intent/tweet?text=Bail people out of jail with a computer program %23BAILBLOC&url=https://bailbloc.thenewinquiry.com" target="_blank"><img src="images/twitter.png"></a>
@@ -152,7 +124,8 @@
     <!-- bootstrap stuff -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109714345-1"></script></body>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109714345-1"></script>
+</body>
 
 </html>
