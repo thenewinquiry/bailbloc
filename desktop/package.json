@@ -1,6 +1,6 @@
 {
   "name": "bailbloc",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "converts computational cycles in bail funds",
   "main": "main.js",
   "scripts": {
@@ -15,9 +15,13 @@
   "author": "The New Inquiry",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.1.6",
+    "electron": "^1.8.3",
     "electron-builder": "^19.22.1",
     "node-icns": "0.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thenewinquiry/bailbloc.git"
   },
   "dependencies": {
     "battery-level": "^2.0.1",
