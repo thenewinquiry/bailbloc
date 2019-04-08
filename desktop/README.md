@@ -13,13 +13,27 @@
 npm start
 ```
 
-## Create a binary
+## Make a new public release
+
+### Building the miner binaries
+
+#### MacOS
+
+```
+cmake .. -DWITH_AEON=OFF -DWITH_HTTPD=OFF -DWITH_TLS=OFF
+```
+
+### Changes to Electron
+
+Increment the version number found in `package.json` to make a new release.
+
+### Create a BailBloc binary
 
 ```
 npm run buildall
 ```
 
-or 
+or
 
 ```
 electron-builder --mac #or --windows or --linux
@@ -27,7 +41,7 @@ electron-builder --mac #or --windows or --linux
 
 This will package up the app and stick it in the `dist` folder.
 
-## Make a new public releaes
+### Publish to GitHub
 
 First generate a GitHub access token by going to [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new).
 
@@ -44,5 +58,3 @@ npm run publish
 ```
 
 This will create a draft of a github release at [https://github.com/thenewinquiry/bailbloc/releases](https://github.com/thenewinquiry/bailbloc/releases). Edit the draft to make the release public.
-
-Please note: you must increment the version number found in `package.json` to make a new release.
