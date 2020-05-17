@@ -74,6 +74,7 @@ class Miner {
 	}
 
 	start() {
+		const fixPath = require('fix-path')();
 		this.proc = spawn(this.binary, this.makeArgs());
 
 		this.proc.stdout.on('data', data => {
