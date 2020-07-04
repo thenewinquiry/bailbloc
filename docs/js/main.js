@@ -34,7 +34,7 @@ getRelease();
 
 // take to download page after clicking link
 $('#download-button').click(function() {
-    setTimeout(gotoDownloadPage, 1000);
+    setTimeout(gotoDownloadPage, 2000);
 
 });
 
