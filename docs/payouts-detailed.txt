@@ -26,3 +26,13 @@
 11:25am initiated trade of 0.16396178 BTC for 1,030 USD
 
 (20XMR for this donation in total, 2,441.56 USD)
+
+## Transaction 3
+
+12 June, timestamp 1591977960
+
+From LocalMonero:
+2020-06-12 16:08		20.482117535844	Monero reserve for trade 66f77d74-fc2e-4a1d-b77d-74fc2e9a1d30
+2020-06-12 16:06	20.700000000000		Received. Monero network transaction ID: 238b6b116f5dc73212019cdecccf564031707f934a7c0012ed8cf1a7bdef9fde
+
+20XMR~ from this check was donated as matching from The New Inquiry. So in effect 20.7XMR came from mining and 20.18 came from TNI resulting in a 3225 USD donation.
