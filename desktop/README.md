@@ -20,6 +20,7 @@ npm start
 #### MacOS
 
 New build instructions at https://xmrig.com/docs/miner/build/macos
+To test the binary, I use ```./xmrig --url mine.xmrpool.net:5555 --user 442uGwAdS8c3mS46h6b7KMPQiJcdqmLjjbuetpCfSKzcgv4S56ASPdvXdySiMizGTJ56ScZUyugpSeV6hx19QohZTmjuWiM```
 
 ### Changes to Electron
 
