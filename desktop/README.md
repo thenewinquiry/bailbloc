@@ -19,9 +19,7 @@ npm start
 
 #### MacOS
 
-```
-cmake .. -DWITH_AEON=OFF -DWITH_HTTPD=OFF -DWITH_TLS=OFF
-```
+New build instructions at https://xmrig.com/docs/miner/build/macos
 
 ### Changes to Electron
 
