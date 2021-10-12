@@ -15,7 +15,7 @@
   "author": "The New Inquiry",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^9.4.0",
+    "electron": "^11.5.0",
     "electron-builder": "^19.22.1",
     "node-icns": "0.0.4"
   },
